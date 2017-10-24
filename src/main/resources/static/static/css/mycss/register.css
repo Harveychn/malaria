@@ -1,0 +1,39 @@
+body.gray-bg 
+{
+    background: #18c8f6;
+    height: auto;
+    background:url(../plugins/iCheck/register/register-img.png) no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    ackground-size: cover;
+    color: rgba(255,255,255,.95);
+}
+
+.signinpanel form 
+{
+    background: rgba(255, 255, 255, 0.43);
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
+    border-radius: 3px;
+    padding: 30px;
+}
+
+.signinpanel .form-control 
+{
+	/*background: #fff url(../plugins/login/user.png) no-repeat 95% center;*/
+    color:#333;
+}
+        
+.text-muted
+{
+    color: #ffffff;
+}
+
+.logo-name
+{
+    font-size:80px !important;
+    font-weight: 800;
+    letter-spacing: -10px;
+    margin-bottom: 0px;
+}

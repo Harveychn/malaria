@@ -1,0 +1,15 @@
+#message
+{
+	font-family: "Microsoft YaHei UI";
+    font-size: 300%;
+    filter: none;
+    height: 123px;
+    left: 50%;
+    margin-left: -214px;
+    argin-top: -61.5px;
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    transition: opacity 0.3s ease-in-out 0s;
+    width: 428px;
+}

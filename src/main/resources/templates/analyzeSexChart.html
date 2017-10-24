@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>数据分析</title>
+		<link rel="shortcut icon" href="../static/pictures/malaria.ico" />
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/animate.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+		<script type="text/javascript" src="../static/js/jquery-3.2.1.js"></script>
+		<script type="text/javascript" src="../static/js/myjs/analyzeSexChart.js"></script>
+		<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../static/js/build/dist/echarts.js"></script>
+	</head>
+	<body>
+		<!--数据来源部分-->
+		<section id="fixDiv" class="floatBox">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div>
+						<h4 style="font-weight: 300;">数据来源（地区）:</h4>
+						<select id="dataSource" class="form-control">
+							<option value="default" selected="selected">默认</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="panel-footer">
+					<div align="center">
+						<button id="searchBtn" class="btn-primary btn-lg">
+							查询
+						</button>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<!--标签页部分-->
+		<section class="wrapper wrapper-content animated fadeIn">
+			<div class="row">
+				<div class="col-sm-1"></div>
+				
+				<div class="col-sm-9">
+					<div class="tabs-container">
+						<ul class="nav nav-tabs" role="tablist" id="myTab"><!--role属性不存在-->
+							<li id="d1" class="col-sm-6 active">
+								<a data-loggle = "tab" href="#tab-1" aria-expanded="true"><!--data-loggle,aria-expanded属性不存在-->
+									<h2 align="center"><strong>恶性疟</strong></h2>
+								</a>
+							</li>
+							
+							<li id="d1" class="col-sm-6">
+								<a data-loggle = "tab" href="#tab-2" aria-expanded="false"><!--data-loggle,aria-expanded属性不存在-->
+									<h2 align="center"><strong>间日疟</strong></h2>
+								</a>
+							</li>
+						</ul>
+						
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane fade in active" role="tabpanel">
+								<div class="panel-body">
+									<div class="col-sm-12">
+										<div id="sexChartTab_1" style="height: 300px;"></div>
+									</div>
+									
+									<div class="col-sm-12">
+										<div id="ageChartTab_1" style="height: 300px;"></div>
+									</div>
+									
+									<div class="col-sm-12">
+										<div id="careerChartTab_1" style="height: 400px;"></div>
+									</div>									
+								</div>
+							</div>
+							
+							<div id="tab-2" class="tab-pane fade active" role="tabpanel">
+								<div class="panel-body">
+									<div class="col-sm-12">
+										<div id="sexChartTab_2" style="height: 300px;"></div>
+									</div>
+									
+									<div class="col-sm-12">
+										<div id="ageChartTab_2" style="height: 300px;"></div>
+									</div>
+									
+									<div class="col-sm-12">
+										<div id="careerChartTab_2" style="height: 400px;"></div>
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
