@@ -23,7 +23,7 @@
         </javaTypeResolver>
 
         <!-- !!!! Model Configurations 生成的pojo文件配置!!!! -->
-        <javaModelGenerator targetPackage="com.edupractice.malaria.modules.common.domain" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+        <javaModelGenerator targetPackage="com.edupractice.malaria.modules.common.pojo" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -34,7 +34,7 @@
         </sqlMapGenerator>
 
         <!-- !!!! Mapper Interface Configurations 数据访问层接口生成位置配置 !!!! -->
-        <javaClientGenerator targetPackage="com.edupractice.malaria.modules.common.domain" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.edupractice.malaria.modules.common.pojo" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 

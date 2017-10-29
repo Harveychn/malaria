@@ -7,7 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class TestController {
-    
+
+
     @GetMapping(value = "/hello")
     public String testFunc()throws Exception{
         return "ok";

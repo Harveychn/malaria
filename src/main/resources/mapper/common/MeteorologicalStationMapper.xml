@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edupractice.malaria.modules.common.dao.MeteorologicalStationMapper" >
+  <resultMap id="BaseResultMap" type="com.edupractice.malaria.modules.common.pojo.MeteorologicalStation" >
+    <constructor >
+      <idArg column="station_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="station_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="provinces" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="lat" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="lng" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="altitude" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="start_year" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="start_month" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="end_year" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="end_month" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="lack_measurement" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    station_id, station_name, provinces, lat, lng, altitude, start_year, start_month, 
+    end_year, end_month, lack_measurement
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from meteorological_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from meteorological_station
+    where station_id = #{stationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from meteorological_station
+    where station_id = #{stationId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStationExample" >
+    delete from meteorological_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStation" >
+    insert into meteorological_station (station_id, station_name, provinces, 
+      lat, lng, altitude, 
+      start_year, start_month, end_year, 
+      end_month, lack_measurement)
+    values (#{stationId,jdbcType=INTEGER}, #{stationName,jdbcType=VARCHAR}, #{provinces,jdbcType=VARCHAR}, 
+      #{lat,jdbcType=INTEGER}, #{lng,jdbcType=INTEGER}, #{altitude,jdbcType=INTEGER}, 
+      #{startYear,jdbcType=INTEGER}, #{startMonth,jdbcType=INTEGER}, #{endYear,jdbcType=INTEGER}, 
+      #{endMonth,jdbcType=INTEGER}, #{lackMeasurement,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStation" >
+    insert into meteorological_station
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stationId != null" >
+        station_id,
+      </if>
+      <if test="stationName != null" >
+        station_name,
+      </if>
+      <if test="provinces != null" >
+        provinces,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="lng != null" >
+        lng,
+      </if>
+      <if test="altitude != null" >
+        altitude,
+      </if>
+      <if test="startYear != null" >
+        start_year,
+      </if>
+      <if test="startMonth != null" >
+        start_month,
+      </if>
+      <if test="endYear != null" >
+        end_year,
+      </if>
+      <if test="endMonth != null" >
+        end_month,
+      </if>
+      <if test="lackMeasurement != null" >
+        lack_measurement,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stationId != null" >
+        #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="stationName != null" >
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinces != null" >
+        #{provinces,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=INTEGER},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=INTEGER},
+      </if>
+      <if test="altitude != null" >
+        #{altitude,jdbcType=INTEGER},
+      </if>
+      <if test="startYear != null" >
+        #{startYear,jdbcType=INTEGER},
+      </if>
+      <if test="startMonth != null" >
+        #{startMonth,jdbcType=INTEGER},
+      </if>
+      <if test="endYear != null" >
+        #{endYear,jdbcType=INTEGER},
+      </if>
+      <if test="endMonth != null" >
+        #{endMonth,jdbcType=INTEGER},
+      </if>
+      <if test="lackMeasurement != null" >
+        #{lackMeasurement,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStationExample" resultType="java.lang.Integer" >
+    select count(*) from meteorological_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update meteorological_station
+    <set >
+      <if test="record.stationId != null" >
+        station_id = #{record.stationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationName != null" >
+        station_name = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinces != null" >
+        provinces = #{record.provinces,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lat != null" >
+        lat = #{record.lat,jdbcType=INTEGER},
+      </if>
+      <if test="record.lng != null" >
+        lng = #{record.lng,jdbcType=INTEGER},
+      </if>
+      <if test="record.altitude != null" >
+        altitude = #{record.altitude,jdbcType=INTEGER},
+      </if>
+      <if test="record.startYear != null" >
+        start_year = #{record.startYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.startMonth != null" >
+        start_month = #{record.startMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.endYear != null" >
+        end_year = #{record.endYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.endMonth != null" >
+        end_month = #{record.endMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.lackMeasurement != null" >
+        lack_measurement = #{record.lackMeasurement,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update meteorological_station
+    set station_id = #{record.stationId,jdbcType=INTEGER},
+      station_name = #{record.stationName,jdbcType=VARCHAR},
+      provinces = #{record.provinces,jdbcType=VARCHAR},
+      lat = #{record.lat,jdbcType=INTEGER},
+      lng = #{record.lng,jdbcType=INTEGER},
+      altitude = #{record.altitude,jdbcType=INTEGER},
+      start_year = #{record.startYear,jdbcType=INTEGER},
+      start_month = #{record.startMonth,jdbcType=INTEGER},
+      end_year = #{record.endYear,jdbcType=INTEGER},
+      end_month = #{record.endMonth,jdbcType=INTEGER},
+      lack_measurement = #{record.lackMeasurement,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStation" >
+    update meteorological_station
+    <set >
+      <if test="stationName != null" >
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinces != null" >
+        provinces = #{provinces,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=INTEGER},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=INTEGER},
+      </if>
+      <if test="altitude != null" >
+        altitude = #{altitude,jdbcType=INTEGER},
+      </if>
+      <if test="startYear != null" >
+        start_year = #{startYear,jdbcType=INTEGER},
+      </if>
+      <if test="startMonth != null" >
+        start_month = #{startMonth,jdbcType=INTEGER},
+      </if>
+      <if test="endYear != null" >
+        end_year = #{endYear,jdbcType=INTEGER},
+      </if>
+      <if test="endMonth != null" >
+        end_month = #{endMonth,jdbcType=INTEGER},
+      </if>
+      <if test="lackMeasurement != null" >
+        lack_measurement = #{lackMeasurement,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where station_id = #{stationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStation" >
+    update meteorological_station
+    set station_name = #{stationName,jdbcType=VARCHAR},
+      provinces = #{provinces,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=INTEGER},
+      lng = #{lng,jdbcType=INTEGER},
+      altitude = #{altitude,jdbcType=INTEGER},
+      start_year = #{startYear,jdbcType=INTEGER},
+      start_month = #{startMonth,jdbcType=INTEGER},
+      end_year = #{endYear,jdbcType=INTEGER},
+      end_month = #{endMonth,jdbcType=INTEGER},
+      lack_measurement = #{lackMeasurement,jdbcType=VARCHAR}
+    where station_id = #{stationId,jdbcType=INTEGER}
+  </update>
+</mapper>

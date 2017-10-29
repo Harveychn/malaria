@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edupractice.malaria.modules.login.dao.UserExpandMapper" >
+    <resultMap id="BaseResultMapExpand" type="com.edupractice.malaria.modules.login.pojo.User" >
+        <constructor >
+            <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="user_name" jdbcType="CHAR" javaType="java.lang.String" />
+            <arg column="user_password" jdbcType="CHAR" javaType="java.lang.String" />
+            <arg column="user_real_name" jdbcType="CHAR" javaType="java.lang.String" />
+            <arg column="user_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="user_phone" jdbcType="CHAR" javaType="java.lang.String" />
+            <arg column="user_unit" jdbcType="CHAR" javaType="java.lang.String" />
+            <arg column="user_role" jdbcType="CHAR" javaType="java.lang.String" />
+            <arg column="is_checked" jdbcType="CHAR" javaType="java.lang.String" />
+            <arg column="join_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+        </constructor>
+    </resultMap>
+
+    <sql id="Base_Column_List_expand" >
+        user_id, user_name, user_password, user_real_name, user_email, user_phone, user_unit,
+        user_role, is_checked, join_date
+    </sql>
+
+    <select id="selectCheckUser" resultMap="BaseResultMapExpand" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List_expand" />
+        from user
+        where is_checked = '0'
+    </select>
+
+    <update id="updateCheckUser">
+        UPDATE user SET is_checked='2',user_role='2' WHERE user_email=#{useremail,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

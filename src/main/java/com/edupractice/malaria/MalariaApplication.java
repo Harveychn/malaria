@@ -18,5 +18,3 @@ public class MalariaApplication {
 		SpringApplication.run(MalariaApplication.class, args);
 	}
 }
-
-

@@ -1,0 +1,60 @@
+.section 
+{
+    text-align: center;
+    font: 50px "Microsoft Yahei";
+    color: #fff;
+}
+
+a:focus, a:hover 
+{
+	color: #FFFFFF
+}
+
+.cd-main-nav
+{
+    margin: 1px;
+}
+
+.cd-main-nav li 
+{
+    display: inline-block;
+    float: left;
+    height: 100%;
+    padding: 1.22em 0.4em;
+}
+
+.my-small-navbar 
+{
+    border-radius: 0px;
+    margin: 0 !important;
+    background-color: rgb(51, 53, 69) !important;
+    border: 0;
+}
+
+.my-fa-bar 
+{
+    width: 44px;
+    height: 40px;
+    line-height: 3;
+}
+
+.myTitle 
+{
+    color: white;
+    font-family: "Adobe 宋体 Std L";
+    font-size: 200%
+}
+
+#content-main 
+{
+    height: calc(100% - 90px);
+    overflow: scroll;
+}
+
+.nav:first-child 
+{
+    list-style: outside none none;
+    margin-bottom: 0;
+    margin-top: 10%;
+    padding-left: 0;
+}

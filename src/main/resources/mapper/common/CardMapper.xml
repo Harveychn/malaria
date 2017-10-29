@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edupractice.malaria.modules.common.dao.CardMapper" >
+  <resultMap id="BaseResultMap" type="com.edupractice.malaria.modules.common.pojo.Card" >
+    <constructor >
+      <idArg column="card_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="card_num" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_status" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="year" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="patient_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="disease_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="category_id1" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="category_id2" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ill_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="confirm_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="death_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="fill_card_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="fill_card_doc_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="report_unit_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="report_input_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="input_user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="county_judge_date" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="local_judge_date" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="province_judge_date" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="judge_status" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="disease_pre_revised" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="revised_report_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="revised_final_judge_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="revised_user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="del_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="del_user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="del_reason" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="notes" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    card_id, card_num, card_status, year, patient_id, disease_id, category_id1, category_id2, 
+    ill_date, confirm_date, death_date, fill_card_date, fill_card_doc_id, report_unit_id, 
+    report_input_date, input_user_id, county_judge_date, local_judge_date, province_judge_date, 
+    judge_status, disease_pre_revised, revised_report_date, revised_final_judge_date, 
+    revised_user_id, del_date, del_user_id, del_reason, notes
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.edupractice.malaria.modules.common.pojo.CardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from card
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from card
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.edupractice.malaria.modules.common.pojo.CardExample" >
+    delete from card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.Card" >
+    insert into card (card_id, card_num, card_status, 
+      year, patient_id, disease_id, 
+      category_id1, category_id2, ill_date, 
+      confirm_date, death_date, fill_card_date, 
+      fill_card_doc_id, report_unit_id, report_input_date, 
+      input_user_id, county_judge_date, local_judge_date, 
+      province_judge_date, judge_status, disease_pre_revised, 
+      revised_report_date, revised_final_judge_date, 
+      revised_user_id, del_date, del_user_id, 
+      del_reason, notes)
+    values (#{cardId,jdbcType=INTEGER}, #{cardNum,jdbcType=VARCHAR}, #{cardStatus,jdbcType=VARCHAR}, 
+      #{year,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, #{diseaseId,jdbcType=INTEGER}, 
+      #{categoryId1,jdbcType=INTEGER}, #{categoryId2,jdbcType=INTEGER}, #{illDate,jdbcType=DATE}, 
+      #{confirmDate,jdbcType=TIMESTAMP}, #{deathDate,jdbcType=TIMESTAMP}, #{fillCardDate,jdbcType=DATE}, 
+      #{fillCardDocId,jdbcType=INTEGER}, #{reportUnitId,jdbcType=INTEGER}, #{reportInputDate,jdbcType=TIMESTAMP}, 
+      #{inputUserId,jdbcType=INTEGER}, #{countyJudgeDate,jdbcType=VARCHAR}, #{localJudgeDate,jdbcType=VARCHAR}, 
+      #{provinceJudgeDate,jdbcType=VARCHAR}, #{judgeStatus,jdbcType=VARCHAR}, #{diseasePreRevised,jdbcType=VARCHAR}, 
+      #{revisedReportDate,jdbcType=TIMESTAMP}, #{revisedFinalJudgeDate,jdbcType=TIMESTAMP}, 
+      #{revisedUserId,jdbcType=INTEGER}, #{delDate,jdbcType=TIMESTAMP}, #{delUserId,jdbcType=INTEGER}, 
+      #{delReason,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.Card" >
+    insert into card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="cardNum != null" >
+        card_num,
+      </if>
+      <if test="cardStatus != null" >
+        card_status,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="diseaseId != null" >
+        disease_id,
+      </if>
+      <if test="categoryId1 != null" >
+        category_id1,
+      </if>
+      <if test="categoryId2 != null" >
+        category_id2,
+      </if>
+      <if test="illDate != null" >
+        ill_date,
+      </if>
+      <if test="confirmDate != null" >
+        confirm_date,
+      </if>
+      <if test="deathDate != null" >
+        death_date,
+      </if>
+      <if test="fillCardDate != null" >
+        fill_card_date,
+      </if>
+      <if test="fillCardDocId != null" >
+        fill_card_doc_id,
+      </if>
+      <if test="reportUnitId != null" >
+        report_unit_id,
+      </if>
+      <if test="reportInputDate != null" >
+        report_input_date,
+      </if>
+      <if test="inputUserId != null" >
+        input_user_id,
+      </if>
+      <if test="countyJudgeDate != null" >
+        county_judge_date,
+      </if>
+      <if test="localJudgeDate != null" >
+        local_judge_date,
+      </if>
+      <if test="provinceJudgeDate != null" >
+        province_judge_date,
+      </if>
+      <if test="judgeStatus != null" >
+        judge_status,
+      </if>
+      <if test="diseasePreRevised != null" >
+        disease_pre_revised,
+      </if>
+      <if test="revisedReportDate != null" >
+        revised_report_date,
+      </if>
+      <if test="revisedFinalJudgeDate != null" >
+        revised_final_judge_date,
+      </if>
+      <if test="revisedUserId != null" >
+        revised_user_id,
+      </if>
+      <if test="delDate != null" >
+        del_date,
+      </if>
+      <if test="delUserId != null" >
+        del_user_id,
+      </if>
+      <if test="delReason != null" >
+        del_reason,
+      </if>
+      <if test="notes != null" >
+        notes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cardId != null" >
+        #{cardId,jdbcType=INTEGER},
+      </if>
+      <if test="cardNum != null" >
+        #{cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cardStatus != null" >
+        #{cardStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseId != null" >
+        #{diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId1 != null" >
+        #{categoryId1,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId2 != null" >
+        #{categoryId2,jdbcType=INTEGER},
+      </if>
+      <if test="illDate != null" >
+        #{illDate,jdbcType=DATE},
+      </if>
+      <if test="confirmDate != null" >
+        #{confirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deathDate != null" >
+        #{deathDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fillCardDate != null" >
+        #{fillCardDate,jdbcType=DATE},
+      </if>
+      <if test="fillCardDocId != null" >
+        #{fillCardDocId,jdbcType=INTEGER},
+      </if>
+      <if test="reportUnitId != null" >
+        #{reportUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="reportInputDate != null" >
+        #{reportInputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputUserId != null" >
+        #{inputUserId,jdbcType=INTEGER},
+      </if>
+      <if test="countyJudgeDate != null" >
+        #{countyJudgeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="localJudgeDate != null" >
+        #{localJudgeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceJudgeDate != null" >
+        #{provinceJudgeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeStatus != null" >
+        #{judgeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasePreRevised != null" >
+        #{diseasePreRevised,jdbcType=VARCHAR},
+      </if>
+      <if test="revisedReportDate != null" >
+        #{revisedReportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revisedFinalJudgeDate != null" >
+        #{revisedFinalJudgeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revisedUserId != null" >
+        #{revisedUserId,jdbcType=INTEGER},
+      </if>
+      <if test="delDate != null" >
+        #{delDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delUserId != null" >
+        #{delUserId,jdbcType=INTEGER},
+      </if>
+      <if test="delReason != null" >
+        #{delReason,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.edupractice.malaria.modules.common.pojo.CardExample" resultType="java.lang.Integer" >
+    select count(*) from card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update card
+    <set >
+      <if test="record.cardId != null" >
+        card_id = #{record.cardId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardNum != null" >
+        card_num = #{record.cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardStatus != null" >
+        card_status = #{record.cardStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientId != null" >
+        patient_id = #{record.patientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.diseaseId != null" >
+        disease_id = #{record.diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId1 != null" >
+        category_id1 = #{record.categoryId1,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId2 != null" >
+        category_id2 = #{record.categoryId2,jdbcType=INTEGER},
+      </if>
+      <if test="record.illDate != null" >
+        ill_date = #{record.illDate,jdbcType=DATE},
+      </if>
+      <if test="record.confirmDate != null" >
+        confirm_date = #{record.confirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deathDate != null" >
+        death_date = #{record.deathDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fillCardDate != null" >
+        fill_card_date = #{record.fillCardDate,jdbcType=DATE},
+      </if>
+      <if test="record.fillCardDocId != null" >
+        fill_card_doc_id = #{record.fillCardDocId,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportUnitId != null" >
+        report_unit_id = #{record.reportUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportInputDate != null" >
+        report_input_date = #{record.reportInputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inputUserId != null" >
+        input_user_id = #{record.inputUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.countyJudgeDate != null" >
+        county_judge_date = #{record.countyJudgeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.localJudgeDate != null" >
+        local_judge_date = #{record.localJudgeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceJudgeDate != null" >
+        province_judge_date = #{record.provinceJudgeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.judgeStatus != null" >
+        judge_status = #{record.judgeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseasePreRevised != null" >
+        disease_pre_revised = #{record.diseasePreRevised,jdbcType=VARCHAR},
+      </if>
+      <if test="record.revisedReportDate != null" >
+        revised_report_date = #{record.revisedReportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.revisedFinalJudgeDate != null" >
+        revised_final_judge_date = #{record.revisedFinalJudgeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.revisedUserId != null" >
+        revised_user_id = #{record.revisedUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.delDate != null" >
+        del_date = #{record.delDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delUserId != null" >
+        del_user_id = #{record.delUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.delReason != null" >
+        del_reason = #{record.delReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notes != null" >
+        notes = #{record.notes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update card
+    set card_id = #{record.cardId,jdbcType=INTEGER},
+      card_num = #{record.cardNum,jdbcType=VARCHAR},
+      card_status = #{record.cardStatus,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=INTEGER},
+      patient_id = #{record.patientId,jdbcType=INTEGER},
+      disease_id = #{record.diseaseId,jdbcType=INTEGER},
+      category_id1 = #{record.categoryId1,jdbcType=INTEGER},
+      category_id2 = #{record.categoryId2,jdbcType=INTEGER},
+      ill_date = #{record.illDate,jdbcType=DATE},
+      confirm_date = #{record.confirmDate,jdbcType=TIMESTAMP},
+      death_date = #{record.deathDate,jdbcType=TIMESTAMP},
+      fill_card_date = #{record.fillCardDate,jdbcType=DATE},
+      fill_card_doc_id = #{record.fillCardDocId,jdbcType=INTEGER},
+      report_unit_id = #{record.reportUnitId,jdbcType=INTEGER},
+      report_input_date = #{record.reportInputDate,jdbcType=TIMESTAMP},
+      input_user_id = #{record.inputUserId,jdbcType=INTEGER},
+      county_judge_date = #{record.countyJudgeDate,jdbcType=VARCHAR},
+      local_judge_date = #{record.localJudgeDate,jdbcType=VARCHAR},
+      province_judge_date = #{record.provinceJudgeDate,jdbcType=VARCHAR},
+      judge_status = #{record.judgeStatus,jdbcType=VARCHAR},
+      disease_pre_revised = #{record.diseasePreRevised,jdbcType=VARCHAR},
+      revised_report_date = #{record.revisedReportDate,jdbcType=TIMESTAMP},
+      revised_final_judge_date = #{record.revisedFinalJudgeDate,jdbcType=TIMESTAMP},
+      revised_user_id = #{record.revisedUserId,jdbcType=INTEGER},
+      del_date = #{record.delDate,jdbcType=TIMESTAMP},
+      del_user_id = #{record.delUserId,jdbcType=INTEGER},
+      del_reason = #{record.delReason,jdbcType=VARCHAR},
+      notes = #{record.notes,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.edupractice.malaria.modules.common.pojo.Card" >
+    update card
+    <set >
+      <if test="cardNum != null" >
+        card_num = #{cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cardStatus != null" >
+        card_status = #{cardStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseId != null" >
+        disease_id = #{diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId1 != null" >
+        category_id1 = #{categoryId1,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId2 != null" >
+        category_id2 = #{categoryId2,jdbcType=INTEGER},
+      </if>
+      <if test="illDate != null" >
+        ill_date = #{illDate,jdbcType=DATE},
+      </if>
+      <if test="confirmDate != null" >
+        confirm_date = #{confirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deathDate != null" >
+        death_date = #{deathDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fillCardDate != null" >
+        fill_card_date = #{fillCardDate,jdbcType=DATE},
+      </if>
+      <if test="fillCardDocId != null" >
+        fill_card_doc_id = #{fillCardDocId,jdbcType=INTEGER},
+      </if>
+      <if test="reportUnitId != null" >
+        report_unit_id = #{reportUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="reportInputDate != null" >
+        report_input_date = #{reportInputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputUserId != null" >
+        input_user_id = #{inputUserId,jdbcType=INTEGER},
+      </if>
+      <if test="countyJudgeDate != null" >
+        county_judge_date = #{countyJudgeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="localJudgeDate != null" >
+        local_judge_date = #{localJudgeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceJudgeDate != null" >
+        province_judge_date = #{provinceJudgeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeStatus != null" >
+        judge_status = #{judgeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasePreRevised != null" >
+        disease_pre_revised = #{diseasePreRevised,jdbcType=VARCHAR},
+      </if>
+      <if test="revisedReportDate != null" >
+        revised_report_date = #{revisedReportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revisedFinalJudgeDate != null" >
+        revised_final_judge_date = #{revisedFinalJudgeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="revisedUserId != null" >
+        revised_user_id = #{revisedUserId,jdbcType=INTEGER},
+      </if>
+      <if test="delDate != null" >
+        del_date = #{delDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delUserId != null" >
+        del_user_id = #{delUserId,jdbcType=INTEGER},
+      </if>
+      <if test="delReason != null" >
+        del_reason = #{delReason,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.edupractice.malaria.modules.common.pojo.Card" >
+    update card
+    set card_num = #{cardNum,jdbcType=VARCHAR},
+      card_status = #{cardStatus,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      patient_id = #{patientId,jdbcType=INTEGER},
+      disease_id = #{diseaseId,jdbcType=INTEGER},
+      category_id1 = #{categoryId1,jdbcType=INTEGER},
+      category_id2 = #{categoryId2,jdbcType=INTEGER},
+      ill_date = #{illDate,jdbcType=DATE},
+      confirm_date = #{confirmDate,jdbcType=TIMESTAMP},
+      death_date = #{deathDate,jdbcType=TIMESTAMP},
+      fill_card_date = #{fillCardDate,jdbcType=DATE},
+      fill_card_doc_id = #{fillCardDocId,jdbcType=INTEGER},
+      report_unit_id = #{reportUnitId,jdbcType=INTEGER},
+      report_input_date = #{reportInputDate,jdbcType=TIMESTAMP},
+      input_user_id = #{inputUserId,jdbcType=INTEGER},
+      county_judge_date = #{countyJudgeDate,jdbcType=VARCHAR},
+      local_judge_date = #{localJudgeDate,jdbcType=VARCHAR},
+      province_judge_date = #{provinceJudgeDate,jdbcType=VARCHAR},
+      judge_status = #{judgeStatus,jdbcType=VARCHAR},
+      disease_pre_revised = #{diseasePreRevised,jdbcType=VARCHAR},
+      revised_report_date = #{revisedReportDate,jdbcType=TIMESTAMP},
+      revised_final_judge_date = #{revisedFinalJudgeDate,jdbcType=TIMESTAMP},
+      revised_user_id = #{revisedUserId,jdbcType=INTEGER},
+      del_date = #{delDate,jdbcType=TIMESTAMP},
+      del_user_id = #{delUserId,jdbcType=INTEGER},
+      del_reason = #{delReason,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR}
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+</mapper>

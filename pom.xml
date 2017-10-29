@@ -25,6 +25,11 @@
 		<java.version>1.8</java.version>
         <fastjson.version>1.2.31</fastjson.version>
         <ehcache.version>2.10.3</ehcache.version>
+
+		<httpclient.version>4.3.3</httpclient.version>
+		<jackson-databind.version>2.4.2</jackson-databind.version>
+		<fastjson.version>1.1.43</fastjson.version>
+		<POI.version>3.14</POI.version>
 	</properties>
 
 	<dependencies>
@@ -80,6 +85,38 @@
             <version>${fastjson.version}</version>
         </dependency>
 
+		<!--POI相关包-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${POI.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-examples</artifactId>
+			<version>${POI.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-excelant</artifactId>
+			<version>${POI.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${POI.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>${POI.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>${POI.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -89,7 +126,17 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-            <!--配置maven打包war插件的相关插件-->
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<configuration>
+					<verbose>true</verbose>
+					<overwrite>true</overwrite>
+				</configuration>
+			</plugin>
+
+			<!--配置maven打包war插件的相关插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
