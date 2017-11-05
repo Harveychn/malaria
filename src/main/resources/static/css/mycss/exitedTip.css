@@ -1,0 +1,38 @@
+body.gray-bg 
+{
+    background: #18c8f6;
+    height: auto;
+    background: url(../plugins/iCheck/register/register-img.png)r no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    ackground-size: cover;
+    color: rgba(255, 255, 255, .95);
+}
+
+.logo-name
+{
+    font-size:40px !important;
+    font-weight: 300;
+    letter-spacing: 10px;
+    margin-bottom: 0px;
+}
+
+
+.backHome
+{
+    font-size:20px !important;
+    font-weight: 300;
+    letter-spacing: 10px;
+    margin-bottom: 0px;
+    color: rgba(243, 219, 239, 0.98);
+}
+
+.backHome:hover
+{
+    font-size:25px !important;
+    font-weight: 300;
+    letter-spacing: 10px;
+    margin-bottom: 0px;
+    color: rgba(243, 231, 229, 0.98);
+}

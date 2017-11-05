@@ -76,12 +76,14 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                     for (int cellNum = 0; cellNum < hssfRow.getLastCellNum(); cellNum++) {
                         cellValues.put(fieldNames.get(cellNum), getExcelValue.getValue(hssfRow.getCell(cellNum)));
                     }
+
                     //根据字段判断上传的文件，同时上传数据到数据库
                     if (switchTable(fieldNames, cellValues, rowNum)) {
                         savedRowsCode.add(rowNum);
                     } else {
                         errorRowsCode.add(rowNum);
                     }
+                    cellValues =null;
                 }
             }
         }
@@ -102,6 +104,7 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                     fieldNames.add(cellNum, getExcelValue.getValue(firstRow.getCell(cellNum)));
                 }
                 //遍历行，此处从第二行开始，第一行为字段名
+                //List<实体类> 保存待存数据 = new ArrayList<>()；
                 for (int rowNum = 1; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
                     XSSFRow xssfRow = xssfSheet.getRow(rowNum);
                     Map<String, String> cellValues = new HashMap<>();

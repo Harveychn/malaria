@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
-	<head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="header">
 		<meta charset="UTF-8" />
 		<title>地址解析</title>
 	</head>
@@ -15,7 +16,7 @@
     	</div>
     	
     	<!--引用js-->
-    	<script type="text/javascript" src="../../../static/js/jquery-3.2.1.js"></script>
-    	<script type="text/javascript" src="../../../static/js/plugins/baiduApi/geoCodingApi.js"></script>
+    	<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+    	<script type="text/javascript" th:src="@{/js/plugins/baiduApi/geoCodingApi.js}"></script>
 	</body>
 </html>

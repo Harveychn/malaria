@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
-	<head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="header">
 		<meta charset="UTF-8" />
 		<title>退出系统</title>
-		<link rel="shortcut icon" href="../../../static/pictures/malaria.ico" />
+		<link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}" />
 		<!--引用css-->
-		<link rel="stylesheet" type="text/css" href="../../../static/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../static/css/animate.css"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>
 		<!--自定义css-->
-		<link rel="stylesheet" type="text/css" href="../../../static/css/mycss/exitedTip.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/exitedTip.css}" />
 	</head>
 	
 	<body class="gray-bg">
@@ -27,7 +28,7 @@
 					
 					<div class="col-sm-4">
 						<div class="btn btn-link btn-large">
-							<a href="" class="backHome">返回游客界面</a>
+							<a href="/" class="backHome">返回游客界面</a>
 						</div>
 					</div>
 				</div>

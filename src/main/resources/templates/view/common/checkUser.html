@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html>
-	<head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="header">
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		
 		<title>审核页面</title>
 		
-		<link rel="shortcut icon" href="../../../static/pictures/malaria.ico" />
+		<link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}" />
 		<!--引用css-->
-		<link rel="stylesheet" type="text/css" href="../../../static/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../static/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../static/css/plugins/footable/footable.core.css" />
-		<link rel="stylesheet" type="text/css" href="../../../static/css/animate.css" />
-		<link rel="stylesheet" type="text/css" href="../../../static/css/style.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/plugins/footable/footable.core.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<!--全局js-->
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/plugins/footable/footable.all.min.js}" ></script>
+		<!--自定义js-->
+		<script type="text/javascript" th:src="@{/js/myjs/checkUser.js}"></script>
 	</head>
 	
 	<body class="gray-bg">
@@ -25,7 +32,7 @@
 						</div>
 						
 						<div class="ibox-content">
-							<table class="footable table table-striped toggle-arrow-tiny" data-page-size="8" = "">
+							<table class="footable table table-striped toggle-arrow-tiny" data-page-size="8">
 								<thead>
 									<tr>
 										<th>用户名</th>
@@ -37,21 +44,19 @@
                                			<th>操作</th>
 									</tr>
 								</thead>
-								
+
 								<tbody>
-									<c:forEach items="" var="checkUser">
-										<tr>
-											<td></td>
-         		                            <td></td>
-                 		                    <td></td>
-                		                    <td></td>
-                        		            <td></td>
-                                		    <td><fmt:formatDate value="" pattern=""/> </td>
-                 		                    <td><a href="#"><i class="fa fa-check text-navy"></i> 通过</a></td>
-                        		            <td><a href="#"><i class="fa fa-close text-navy"></i> 拒绝</a></td>
-										</tr>
-									</c:forEach>
-								</tbody>
+								<tr th:each="checkUser,checkUserStat : ${checkUser}">
+										<td th:text=${checkUser.userName}></td>
+										<td th:text=${checkUser.userRealName}></td>
+										<td th:text=${checkUser.userEmail}></td>
+										<td th:text=${checkUser.userPhone}></td>
+										<td th:text=${checkUser.userUnit}></td>
+										<td th:text=${checkUser.joinDate}></td>
+										<td><a href="#"><i class="fa fa-check text-navy"></i> 通过</a></td>
+										<td><a href="#"><i class="fa fa-close text-navy"></i> 拒绝</a></td>
+									</tr>
+							    </tbody>
 								
 								<tfoot>
 									<tr>
@@ -66,12 +71,6 @@
 				</div>
 			</section>
 		</section>
-		
-		<!--全局js-->
-		<script type="text/javascript" src="../../../static/js/jquery-3.2.1.js"></script>
-		<script type="text/javascript" src="../../../static/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../../../static/js/plugins/footable/footable.all.min.js" ></script>
-		<!--自定义js-->
-		<script type="text/javascript" src="../../../static/js/myjs/checkUser.js"></script>
+
 	</body>
 </html>

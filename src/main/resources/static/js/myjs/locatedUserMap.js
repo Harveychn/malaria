@@ -28,4 +28,6 @@ function addMapControl() {
 	map.addControl(ctrl_sca);
 }
 
-initMap();//创建和初始化地图
+$(document).ready(function () {
+    initMap();
+});

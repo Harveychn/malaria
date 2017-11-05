@@ -11,7 +11,7 @@ spring:
     content-type: text/html
     enabled: true
     encoding: UTF-8
-    mode: HTML5 #指定模板视图为HTML5
+    mode: LEGACYHTML5 #指定模板视图为LEGACYHTML5
     prefix: classpath:/templates/
     suffix: .html
   datasource:

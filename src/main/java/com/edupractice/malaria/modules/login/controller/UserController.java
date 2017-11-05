@@ -2,6 +2,7 @@ package com.edupractice.malaria.modules.login.controller;
 
 import com.edupractice.malaria.modules.login.service.UserService;
 import com.edupractice.malaria.modules.login.pojo.User;
+import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,7 +79,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         if (registerType) {
             userService.saveRegister(user);
-            modelAndView.setViewName("common/login");
+            modelAndView.setViewName("view/common/login");
         }
         return modelAndView;
     }
@@ -88,7 +89,7 @@ public class UserController {
         List<User> User = userService.selectCheckUser();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("checkUser", User);
-        modelAndView.setViewName("common/checkUser");
+        modelAndView.setViewName("view/common/checkUser");
         return modelAndView;
     }
 

@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html>
-	<head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="header">
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>注册</title>
 		<meta name="keywords" content="后台" />
 		<meta name="description" content="技术" />
 		
-		<link rel="shortcut icon" href="../../../static/pictures/malaria.ico" />
+		<link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}" />
 		<!--引用css-->
-		<link rel="stylesheet" type="text/css" href="../../../static/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../static/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../static/css/animate.css" />
-		<link rel="stylesheet" type="text/css" href="../../../static/css/style.css" />
-		<link rel="stylesheet" type="text/css" href="../../../static/css/plugins/iCheck/register/custom.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/plugins/iCheck/register/custom.css}" />
 		<!--自定义css-->
-		<link rel="stylesheet" type="text/css" href="../../../static/css/mycss/register.css" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/register.css}" />
 	</head>
 	
 	<body class="gray-bg">
@@ -29,33 +30,33 @@
 				
 				<p>创建一个新账户</p>
 				
-				<form class="m-t" role="form" action="register.html">
+				<form class="m-t" role="form" action="/user/register">
 					<div class="form-group">
-						<input type="text" name="useremail" class="form-control" placeholder="请输入邮箱" />
+						<input type="text" name="userEmail" class="form-control" placeholder="请输入邮箱" />
 					</div>
 					
 					<div class="form-group">
-						<input type="text" name="username" class="form-control" placeholder="请输入用户名" />
+						<input type="text" name="userName" class="form-control" placeholder="请输入用户名" />
 					</div>
 					
 					<div class="form-group">
-						<input type="password" name="userpassword" class="form-control" placeholder="请输入密码" required=""/>
+						<input type="password" name="userPassword" class="form-control" placeholder="请输入密码" required=""/>
 					</div>
 					
 					<div class="form-group">
-						<input type="password" name="confirmpassword" class="form-control" placeholder="请再次输入密码" required="" />
+						<input type="password" name="confirmPassword" class="form-control" placeholder="请再次输入密码" required="" />
 					</div>
 					
 					<div class="form-group">
-						<input type="text" name="userrealname" class="form-control" placeholder="请输入真实姓名" />
+						<input type="text" name="userRealName" class="form-control" placeholder="请输入真实姓名" />
 					</div>
 					
 					<div class="form-group">
-						<input type="text" name="userphone" class="form-control" placeholder="请输入电话" />
+						<input type="text" name="userPhone" class="form-control" placeholder="请输入电话" />
 					</div>
 					
 					<div class="form-group">
-						<input type="text" name="userunit" class="form-control" placeholder="请输入用户单位" />
+						<input type="text" name="userUnit" class="form-control" placeholder="请输入用户单位" />
 					</div>
 					
 					<div class="form-group text-left">
@@ -72,7 +73,7 @@
 					
 					<p class="text-muted text-center">
 						<small>已经有账户了？</small>
-						<a href="login.html">点此登录</a>
+						<a href="/user/loginView">点此登录</a>
 					</p>
 					
 				</form>
@@ -80,11 +81,11 @@
 		</section>
 		
 		<!-- 全局js -->
-		<script type="text/javascript" src="../../../static/js/jquery.min.js"></script>
-		<script type="text/javascript" src="../../../static/js/bootstrap.min.js"></script>
+		<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 		<!-- iCheck -->
-		<script type="text/javascript" src="../../../static/js/plugins/iCheck/icheck.min.js"></script>
+		<script type="text/javascript" th:src="@{/js/plugins/iCheck/icheck.min.js}"></script>
 		<!--自定义js-->
-		<script type="text/javascript" src="../../../static/js/myjs/register.js"></script>
+		<script type="text/javascript" th:src="@{/js/myjs/register.js}"></script>
 	</body>
 </html>

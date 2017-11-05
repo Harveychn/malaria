@@ -1,0 +1,54 @@
+div .myCol1, .myCol2, .myCol3{
+    border: 1px solid #6c6d6f;
+    border-radius: 9px;
+    height: 380px;
+    width: 290px;
+    margin:15px;
+    float: left;
+    transition-duration: 500ms;
+    background-color: rgba(253, 253, 253, 0.13);
+}
+div .myCol1:hover{
+    border: 4px solid #808483;
+    transition-delay: 400ms;
+    transition-duration: 500ms;
+    transform:scale(1.6);
+    box-shadow:-20px 20px 30px #5e6360;
+    background-color: #fad8ab;
+}
+div .myCol2:hover{
+    border: 4px solid #808483;
+    transition-delay: 400ms;
+    transition-duration: 500ms;
+    transform:scale(1.6);
+    box-shadow:0 30px 30px #5e6360;
+    background-color: #99c48e;
+}
+div .myCol3:hover{
+    border: 4px solid #808483;
+    transition-delay: 400ms;
+    transition-duration: 500ms;
+    transform:scale(1.6);
+    box-shadow:20px 20px 30px #5e6360;
+    background-color: #b4bfae;
+}
+.container{
+    width:1000px;
+    height: 400px;
+    position:absolute;
+    left:0;
+    right:0;
+    top:100px;
+    botttom:0;
+    margin:auto;
+}
+#rowContainer{
+    top: 500px;
+}
+.message{
+
+    font-size: 30px;
+    font-family: "Arial Black";
+    position: relative;
+    top: 45%;
+}
