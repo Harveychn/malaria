@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -19,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,7 +56,6 @@ public class UploadFileController {
         modelAndView.addObject("result", this.result);
         return modelAndView;
     }
-
     /**
      * 上传文件，文件数据保存到数据库
      *
@@ -63,11 +65,11 @@ public class UploadFileController {
      * @throws Exception
      */
 
+
     @RequestMapping(value = "/UploadToDB", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    List<UploadInfo> UploadToDB(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public @ResponseBody List<UploadInfo> UploadToDB(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //上传的多个文件
+        System.out.println("哈哈哈哈哈");
         List<FileListInfo> filesInform = getUploadFilePath(request, response);
         List<UploadInfo> uploadInfos = new ArrayList<>();
         UploadInfo uploadInform = null;
@@ -75,6 +77,7 @@ public class UploadFileController {
             uploadInform = new UploadInfo();
             FileListInfo current = filesInform.get(i);
             uploadInform.setFileName(current.getFileName());
+            System.out.println(uploadInform.getFileName());
             //当前文件是否有错
             if (current.isError()) {
                 //文件类型错误
@@ -118,6 +121,7 @@ public class UploadFileController {
     private List<FileListInfo> getUploadFilePath(HttpServletRequest request, HttpServletResponse response) throws Exception {
         MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
         List<MultipartFile> fileList = mr.getFiles("files[]");
+        System.out.println(fileList);
         List<FileListInfo> fileListInfos = new ArrayList<>();
         FileListInfo fileInform = null;
         for (int i = 0; i < fileList.size(); i++) {
