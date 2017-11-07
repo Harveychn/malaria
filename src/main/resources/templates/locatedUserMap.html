@@ -2,15 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 	<head th:fragment="header">
-		<meta http-equiv="content-type" content="text/html" charset="UTF-8" />
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		
 		<title>百度地图API自定义地图</title>
+		
+		<!--自定义css-->
 		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/locatedUserMap.css}" />
-
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=C1LOVvNRQHK32i52xzOFBkoNPetGDrxy"></script>
-		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
-		<script type="text/javascript" th:src="@{/js/myjs/locatedUserMap.js}"></script>
+		
 	</head>
 	<body>
+		
 		<section style="width: 100%;height: 768px;border: #ccc solid 1px;" id="mapContainer"></section>
+		
+		<!--全局js-->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=C1LOVvNRQHK32i52xzOFBkoNPetGDrxy"></script>
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+		
+		<!--自定义js-->
+		<script type="text/javascript" th:src="@{/js/myjs/locatedUserMap.js}"></script>
+		
 	</body>
 </html>

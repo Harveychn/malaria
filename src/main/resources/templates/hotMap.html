@@ -2,16 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="header">
-		<meta charset="UTF-8" http-equiv="content-type" content="text/html" />
-		<meta name="viewport" content="initial=1.0, user-scalable=no" />
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		
+		<title>热力图功能</title>
+		
+		<!--自定义css-->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/hotMap.css}" />
+		
+	</head>
+	<body>
+		
+		<section id="container"></section>
+		
+		<!--全局js-->
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=C1LOVvNRQHK32i52xzOFBkoNPetGDrxy"></script>
 		<script type="text/javascript" th:src="@{/js/plugins/baiduApi/Heatmap_min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+		
+		<!--自定义js-->
 		<script type="text/javascript" th:src="@{/js/myjs/hotMap.js}"></script>
-		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/hotMap.css}" />
-		<title>热力图功能</title>
-	</head>
-	<body>
-		<section id="container"></section>
 	</body>
 </html>
