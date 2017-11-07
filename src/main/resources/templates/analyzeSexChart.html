@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>数据分析</title>
-		<link rel="shortcut icon" href="../static/pictures/malaria.ico" />
-		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../static/css/animate.css" />
-		<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
-		<script type="text/javascript" src="../static/js/jquery-3.2.1.js"></script>
-		<script type="text/javascript" src="../static/js/myjs/analyzeSexChart.js"></script>
-		<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../static/js/build/dist/echarts.js"></script>
+		<link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+		<script type="text/javascript" th:src="@{/js/myjs/analyzeSexChart.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/build/dist/echarts.js}"></script>
 	</head>
 	<body>
 		<!--数据来源部分-->
@@ -51,7 +53,7 @@
 								</a>
 							</li>
 							
-							<li id="d1" class="col-sm-6">
+							<li id="d2" class="col-sm-6">
 								<a data-loggle = "tab" href="#tab-2" aria-expanded="false"><!--data-loggle,aria-expanded属性不存在-->
 									<h2 align="center"><strong>间日疟</strong></h2>
 								</a>

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
-	<head>
+<head th:fragment="header">
 		<meta charset="UTF-8"/>
 		<title>首页</title>
-		<link rel="shortcut icon" href="pictures/malaria.ico" />
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/animate.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 
 	</head>
 	

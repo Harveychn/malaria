@@ -66,7 +66,7 @@ $('#submitTerm').on('click', function (event) {
         },
         error: function () {
             console.error("'/DownloadDBData/diseaseParams.do' Error");
-            window.open("/error/500.jsp", "_self");
+            window.open("view/error/500.jsp", "_self");
         }
     });
 });

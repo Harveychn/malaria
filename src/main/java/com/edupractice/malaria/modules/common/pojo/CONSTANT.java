@@ -3,7 +3,7 @@ package com.edupractice.malaria.modules.common.pojo;
  * 一些常量定义
  */
 public class CONSTANT {
-    private static final String UPLOADFILEPATH = "C:/Users/Aron/Desktop/test.xlsx";
+    private static final String UPLOADFILEPATH = "D:/edu";
 
     private static final char SEX_MALE = '男';
     private static final char SEX_FEMALE = '女';

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edupractice.malaria.modules.download.dao.CategoryFieldsMapper">
+    <resultMap id="categoryFieldsMap" type="com.edupractice.malaria.modules.download.pojo.CategoryFieldsRe">
+        <result column="field_name" property="fieldName"/>
+        <result column="display_name" property="displayName"/>
+    </resultMap>
+    <select id="selectCategoryFields" parameterType="String"
+            resultMap="categoryFieldsMap">
+        SELECT field_name,display_name FROM indicator
+        <where>
+            AND category = #{Disease}
+            AND downable=1
+        </where>
+        GROUP BY field_name
+        ORDER BY display_name ASC;
+    </select>
+</mapper>

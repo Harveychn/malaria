@@ -15,18 +15,7 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 		<!--自定义css-->
 		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/dataUpload.css}"/>
-
-		<!--全局js-->
-		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
-		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-		<!--Layer-->
-		<script type="text/javascript" th:src="@{/js/plugins/layer/layer.js}"></script>
-		<!--Dropzone-->
-	    <script type="text/javascript" th:src="@{/js/plugins/dropzone/dropzone.js}"></script>
-
-		<!--自定义js-->
-		<script type="test/javascript" th:src="@{/js/myjs/dataUpload.js}"></script>
-	</head>
+ </head>
 	
 	<body class="gray-bg">
 		<section class="wrapper wrapper-content animated fadeIn">
@@ -36,7 +25,6 @@
 						<div class="ibox-content">
 							<form id="my-awesome-dropzone" class="dropzone" action="/UploadFile/UploadToDB" method="post" enctype="multipart/form-data">
 								<div class="dropzone-previews"></div>
-								
 								<button type="submit" class="btn btn-primary pull-right">提交</button>
 								<div id="message" class="dz-message">
 				        			拖拽文件至此<br>
@@ -49,5 +37,15 @@
 				</div>
 			</div>
 		</section>
+		<!--全局js-->
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		<!--Layer-->
+		<script type="text/javascript" th:src="@{/js/plugins/layer/layer.js}"></script>
+		<!--Dropzone-->
+		<script type="text/javascript" th:src="@{/js/plugins/dropzone/dropzone.js}"></script>
+		<!--<script type="text/javascript" th:src="@{/js/util/uploadUtil.js}"></script>-->
+		<!--自定义js-->
+		<script src="/js/myjs/dataUpload.js"></script>
 	</body>
 </html>

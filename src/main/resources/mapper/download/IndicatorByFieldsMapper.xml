@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edupractice.malaria.modules.download.dao.IndicatorByFieldsMapper">
+    <select id="selectIndicatorByFields"
+            resultType="com.edupractice.malaria.modules.common.pojo.Indicator">
+        SELECT * FROM indicator
+        <where>
+            <if test="list!=null">
+                <foreach collection="list" index="index" item="item" open=" AND displayName in (" separator=","
+                         close=")">
+                    #{item}
+                </foreach>
+            </if>
+            AND downable =1
+        </where>
+        GROUP BY field_name
+        ORDER BY display_name ASC
+    </select>
+
+    <select id="selectBelongTables" resultType="String">
+        SELECT DISTINCT(belongTable) FROM indicator
+    </select>
+
+    <select id="selectData" parameterType="com.edupractice.malaria.modules.download.pojo.SQLQuery" resultType="java.util.Map"
+            statementType="STATEMENT">
+        SELECT ${select} FROM ${from}
+        <where>
+            ${where}
+        </where>
+    </select>
+</mapper>
