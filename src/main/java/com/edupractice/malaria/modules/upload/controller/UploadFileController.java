@@ -66,7 +66,6 @@ public class UploadFileController {
     @RequestMapping(value = "/UploadToDB", method = RequestMethod.POST)
     public @ResponseBody List<UploadInfo> UploadToDB(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //上传的多个文件
-        System.out.println("哈哈哈哈哈");
         List<FileListInfo> filesInform = getUploadFilePath(request, response);
         List<UploadInfo> uploadInfos = new ArrayList<>();
         UploadInfo uploadInform = null;
@@ -83,8 +82,8 @@ public class UploadFileController {
                     uploadInfos.add(i, uploadInform);
                     continue;
                 }
-//                uploadInform.setErrorOccur(true);
-//                uploadInform.setErrorMessage(current.getErrorMessage());
+//                uploadInform.html.setErrorOccur(true);
+//                uploadInform.html.setErrorMessage(current.getErrorMessage());
                 uploadInfos.add(i, uploadInform);
                 continue;
             }
@@ -93,7 +92,8 @@ public class UploadFileController {
             //根据第一行字段来判断文件数据应该上传到那一个表
             if (-1 != dispatcherUploadFileService.getDestination(filePath)) {
                 uploadInform.setHasThisModule(true);
-            } else {
+            }
+            else {
                 uploadInform.setHasThisModule(false);
                 uploadInfos.add(i, uploadInform);
                 continue;
@@ -118,7 +118,6 @@ public class UploadFileController {
     private List<FileListInfo> getUploadFilePath(HttpServletRequest request, HttpServletResponse response) throws Exception {
         MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
         List<MultipartFile> fileList = mr.getFiles("files[]");
-        System.out.println(fileList);
         List<FileListInfo> fileListInfos = new ArrayList<>();
         FileListInfo fileInform = null;
         for (int i = 0; i < fileList.size(); i++) {

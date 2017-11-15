@@ -32,7 +32,7 @@
                 var index = layer.open({
                     type: 2,
                     title: '服务器处理数据结果',
-                    content: '/UploadFile/displayUploadInform',
+                    content: '/UploadFile/displayUploadInfo',
                     area: ['90%', '90%'],
                     maxmin: true,
                     closeBtn: 1

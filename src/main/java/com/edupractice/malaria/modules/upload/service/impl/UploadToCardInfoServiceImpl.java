@@ -43,10 +43,16 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
     private MedicalUnitMapper medicalUnitMapper;
     @Resource
     private DoctorMapper doctorMapper;
+    @Resource
+    private MeteorologicalStationMapper meteorologicalStationMapper;
+    @Resource
+    private WeatherDataMapper weatherDataMapper;
 
+    private String fileYear;
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UploadToCardInfoServiceImpl.class);
 
     public Data2DBInfo saveDataToDB(String filePath) throws Exception {
+        fileYear = filePath.substring(filePath.lastIndexOf("-") + 1, filePath.lastIndexOf("."));
         List<Integer> errorRowsCode = new ArrayList<>();
         List<Integer> savedRowsCode = new ArrayList<>();
         //文件流数据
@@ -65,15 +71,17 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                 }
                 //获取第一行字段名
                 HSSFRow firstRow = hssfSheet.getRow(0);
+                //列数
+                int finalCellNum = firstRow.getLastCellNum();
                 List<String> fieldNames = new ArrayList<>();
-                for (int cellNum = 0; cellNum < firstRow.getLastCellNum(); cellNum++) {
+                for (int cellNum = 0; cellNum < finalCellNum; cellNum++) {
                     fieldNames.add(cellNum, getExcelValue.getValue(firstRow.getCell(cellNum)));
                 }
                 //遍历行，此处从第二行开始，第一行为字段名
                 for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
                     HSSFRow hssfRow = hssfSheet.getRow(rowNum);
                     Map<String, String> cellValues = new HashMap<>();
-                    for (int cellNum = 0; cellNum < hssfRow.getLastCellNum(); cellNum++) {
+                    for (int cellNum = 0; cellNum < finalCellNum; cellNum++) {
                         cellValues.put(fieldNames.get(cellNum), getExcelValue.getValue(hssfRow.getCell(cellNum)));
                     }
 
@@ -83,7 +91,6 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                     } else {
                         errorRowsCode.add(rowNum);
                     }
-                    cellValues =null;
                 }
             }
         }
@@ -99,8 +106,10 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                 }
                 //获取第一行字段名
                 XSSFRow firstRow = xssfSheet.getRow(0);
+                //列数
+                int finalCellNum = firstRow.getLastCellNum();
                 List<String> fieldNames = new ArrayList<>();
-                for (int cellNum = 0; cellNum < firstRow.getLastCellNum(); cellNum++) {
+                for (int cellNum = 0; cellNum < finalCellNum; cellNum++) {
                     fieldNames.add(cellNum, getExcelValue.getValue(firstRow.getCell(cellNum)));
                 }
                 //遍历行，此处从第二行开始，第一行为字段名
@@ -108,7 +117,7 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                 for (int rowNum = 1; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
                     XSSFRow xssfRow = xssfSheet.getRow(rowNum);
                     Map<String, String> cellValues = new HashMap<>();
-                    for (int cellNum = 0; cellNum < xssfRow.getLastCellNum(); cellNum++) {
+                    for (int cellNum = 0; cellNum < finalCellNum; cellNum++) {
                         cellValues.put(fieldNames.get(cellNum), getExcelValue.getValue(xssfRow.getCell(cellNum)));
                     }
                     //根据字段判断上传的文件，同时上传数据到数据库
@@ -136,15 +145,48 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
      */
     private Boolean switchTable(List<String> fieldNames, Map<String, String> cellValues, int rowNum) throws Exception {
         Boolean flag = null;
+
         switch (fieldNames.size()) {
-            //疾病信息表
-            case 43:
-                RowDataSorted<CardInfo, ErrorCardInfo> rowDataSorted = cardInformationCellData(cellValues);
-                if (rowDataSorted.getHasError()) {//行数据有错
+
+            //气候站表
+            case 11:
+                RowDataSorted<MeteorologicalStation, ErrorStationInfo> rowDataSorted1 = null;
+                rowDataSorted1 = MeteorologicalStationCellData(cellValues);
+                if (rowDataSorted1.getHasError()) {//行数据有错
 //                    this.errorRowsCode.add(rowNum);
                     flag = false;
                 } else {//行数据没有错误
-                    Upload2DBInfo upload2DBInfo = saveDataToDB(rowDataSorted.getCorrectData());
+                    Upload2DBInfo upload2DBInfo = saveDataToStationDB(rowDataSorted1.getCorrectData());
+                    if (upload2DBInfo.isSuccessOp()) {
+                        //记录成功插入第几行的数据
+//                        this.savedRowsCode.add(rowNum);
+                        flag = true;
+                    }
+                }
+                break;
+            //气候信息表
+            case 20: RowDataSorted<WeatherData, ErrorWeatherInfo> rowDataSorted2 = null;
+                rowDataSorted2 = WeatherDateCellData(cellValues);
+                if (rowDataSorted2.getHasError()) {//行数据有错
+//                    this.errorRowsCode.add(rowNum);
+                    flag = false;
+                } else {//行数据没有错误
+                    Upload2DBInfo upload2DBInfo = saveDataToWeatherDB(rowDataSorted2.getCorrectData());
+                    if (upload2DBInfo.isSuccessOp()) {
+                        //记录成功插入第几行的数据
+//                        this.savedRowsCode.add(rowNum);
+                        flag = true;
+                    }
+                }
+                break;
+            //疾病信息表
+            case 42:
+                RowDataSorted<CardInfo, ErrorCardInfo> rowDataSorted3 = cardInformationCellData(cellValues);
+                if (rowDataSorted3.getHasError()) {//行数据有错
+//                    this.errorRowsCode.add(rowNum);
+                    flag = false;
+                } else {//行数据没有错误
+                    Upload2DBInfo upload2DBInfo = saveDataToCardDB(rowDataSorted3.getCorrectData());
                     if (upload2DBInfo.isSuccessOp()) {
                         //记录成功插入第几行的数据
 //                        this.savedRowsCode.add(rowNum);
@@ -155,12 +197,13 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
             case 1:
                 break;
             default:
+                break;
         }
         return flag;
     }
 
     /**
-     * 对行数据，每个单元数据进行读取处理，返回正确或错误信息
+     * 对Card表中行数据，每个单元数据进行读取处理，返回正确或错误信息
      *
      * @param cellValues
      * @return
@@ -168,12 +211,11 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
      */
     private RowDataSorted<CardInfo, ErrorCardInfo> cardInformationCellData(Map<String, String> cellValues) throws Exception {
         RowDataSorted<CardInfo, ErrorCardInfo> rowDataSorted = new RowDataSorted<>();
-        Date nullDate = null;
         DateFormat df = DateFormat.getDateInstance();
-        nullDate = df.parse("0000-00-00");
+        Date nullDate = df.parse("0000-00-00");
         try {
             CardInfo cardInfo = new CardInfo();
-            cardInfo.setYear(Integer.parseInt(cellValues.get("数据年份")));
+            cardInfo.setYear(Integer.parseInt(fileYear));
             cardInfo.setCardID(Integer.parseInt(cellValues.get("卡片ID")));
             cardInfo.setCardNum(cellValues.get("卡片编号"));
             if (cellValues.get("卡片状态").trim().equals("原始卡")) {
@@ -277,32 +319,131 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
             rowDataSorted.setCorrectData(cardInfo);
         } catch (NumberFormatException e) {
             logger.error("NumberFormatException: " + e.getMessage());
-            ErrorCardInfo errorCardInform = dealError(cellValues);
+            ErrorCardInfo errorCardInform = dealCardError(cellValues);
             rowDataSorted.setHasError(Boolean.TRUE);
             rowDataSorted.setErrorData(errorCardInform);
         } catch (ParseException e) {
             logger.error("ParseException: " + e.getMessage());
-            ErrorCardInfo errorCardInform = dealError(cellValues);
+            ErrorCardInfo errorCardInform = dealCardError(cellValues);
             rowDataSorted.setHasError(Boolean.TRUE);
             rowDataSorted.setErrorData(errorCardInform);
         } catch (Exception e) {
             logger.error("Exception: " + e.getMessage());
-            ErrorCardInfo errorCardInform = dealError(cellValues);
+            ErrorCardInfo errorCardInform = dealCardError(cellValues);
             rowDataSorted.setHasError(Boolean.TRUE);
             rowDataSorted.setErrorData(errorCardInform);
         }
         return rowDataSorted;
-
     }
 
     /**
-     * 用于提取不符合格式的、错误的数据
+     * 对Station表中行数据，每个单元数据进行读取处理，返回正确或错误信息
      *
      * @param cellValues
      * @return
      * @throws Exception
      */
-    private ErrorCardInfo dealError(Map<String, String> cellValues) throws Exception {
+    private RowDataSorted<MeteorologicalStation, ErrorStationInfo> MeteorologicalStationCellData(Map<String, String> cellValues) throws Exception {
+        RowDataSorted<MeteorologicalStation, ErrorStationInfo> rowDataSorted = new RowDataSorted<>();
+        try {
+            MeteorologicalStation meteorologicalStation = new MeteorologicalStation();
+            if (!cellValues.get("区站号").trim().equals(".")) {
+                meteorologicalStation.setStationId(Integer.parseInt(cellValues.get("区站号")));
+            }
+            if (!cellValues.get("台站名称").trim().equals(".")) {
+                meteorologicalStation.setStationName(cellValues.get("台站名称").trim());
+            }
+            if (!cellValues.get("省份").trim().equals(".")) {
+                meteorologicalStation.setProvinces(cellValues.get("省份").trim());
+            }
+            if (!cellValues.get("纬度(度分)").trim().equals(".")) {
+                meteorologicalStation.setLat(Integer.parseInt(cellValues.get("纬度(度分)").trim()));
+            }
+            if (!cellValues.get("经度(度分)").trim().equals(".")) {
+                meteorologicalStation.setLng(Integer.parseInt(cellValues.get("经度(度分)").trim()));
+            }
+            if (!cellValues.get("海拔高度(0.1米)").trim().equals(".")) {
+                meteorologicalStation.setAltitude(Integer.parseInt(cellValues.get("海拔高度(0.1米)")));
+            }
+            if (!cellValues.get("开始年份").trim().equals(".")) {
+                meteorologicalStation.setStartYear(Integer.parseInt(cellValues.get("开始年份").trim()));
+            }
+            if (!cellValues.get("开始月份").trim().equals(".")) {
+                meteorologicalStation.setStartMonth(Integer.parseInt(cellValues.get("开始月份").trim()));
+            }
+            if (!cellValues.get("截止年份").trim().equals(".")) {
+                meteorologicalStation.setEndYear(Integer.parseInt(cellValues.get("截止年份").trim()));
+            }
+            if (!cellValues.get("截止月份").trim().equals(".")) {
+                meteorologicalStation.setEndMonth(Integer.parseInt(cellValues.get("截止月份").trim()));
+            }
+            if (!cellValues.get("缺测情况").trim().equals(".")) {
+                meteorologicalStation.setLackMeasurement(cellValues.get("缺测情况").trim());
+            }
+            rowDataSorted.setHasError(Boolean.FALSE);
+            rowDataSorted.setCorrectData(meteorologicalStation);
+
+        } catch (Exception e) {
+            logger.error("Exception: " + e.getMessage());
+            ErrorStationInfo errorStationInfo = dealStationError(cellValues);
+            rowDataSorted.setHasError(Boolean.TRUE);
+            rowDataSorted.setErrorData(errorStationInfo);
+        }
+        return rowDataSorted;
+    }
+
+    /**
+     * 对Weather表中行数据，每个单元数据进行读取处理，返回正确或错误信息
+     *
+     * @param cellValues
+     * @return
+     * @throws Exception
+     */
+    private RowDataSorted<WeatherData,ErrorWeatherInfo> WeatherDateCellData(Map<String, String> cellValues) {
+        RowDataSorted<WeatherData,ErrorWeatherInfo> rowDataSorted = new RowDataSorted<>();
+        try{
+            WeatherData weatherData =new WeatherData();
+            weatherData.setStationId(Integer.parseInt(cellValues.get("区站号").trim()));
+            weatherData.setWeatherYear(Integer.parseInt(cellValues.get("年").trim()));
+            weatherData.setWeatherMonth(Integer.parseInt(cellValues.get("月").trim()));
+            weatherData.setWeatherDay(Integer.parseInt(cellValues.get("日").trim()));
+            weatherData.setPrecipitation2020(cellValues.get("20-20时降水量").trim());
+            weatherData.setMaximumWindSpeed(Integer.parseInt(cellValues.get("极大风速").trim()));
+            weatherData.setDirectionMaximumWindSpeed(cellValues.get("极大风速的风向").trim());
+            weatherData.setAvePressure(Integer.parseInt(cellValues.get("平均本站气压").trim()));
+            weatherData.setAveWindSpeed(Integer.parseInt(cellValues.get("平均风速").trim()));
+            weatherData.setAveTemperature(Integer.parseInt(cellValues.get("平均气温").trim()));
+            weatherData.setAveVaporPressure(Integer.parseInt(cellValues.get("平均水汽压").trim()));
+            weatherData.setAveRelativeHumidity(Integer.parseInt(cellValues.get("平均相对湿度").trim()));
+            weatherData.setSunshineTime(Integer.parseInt(cellValues.get("日照时数").trim()));
+            weatherData.setDailyMinPressure(Integer.parseInt(cellValues.get("日最低本站气压").trim()));
+            weatherData.setDailyMinTemperature(Integer.parseInt(cellValues.get("日最低气温").trim()));
+            weatherData.setDailyMaxPressure(Integer.parseInt(cellValues.get("日最高本站气压").trim()));
+            weatherData.setDailyMaxTemperature(Integer.parseInt(cellValues.get("日最高气温").trim()));
+            weatherData.setMaxWindSpeed(Integer.parseInt(cellValues.get("最大风速").trim()));
+            weatherData.setDirectionMaxWindspeed(cellValues.get("最大风速的风向").trim());
+            weatherData.setMinRelativeHumidity(Integer.parseInt(cellValues.get("最小相对湿度").trim()));
+            rowDataSorted.setHasError(Boolean.FALSE);
+            rowDataSorted.setCorrectData(weatherData);
+        }catch (Exception e){
+            logger.error("Exception: " + e.getMessage());
+            ErrorWeatherInfo  errorWeatherInfo= dealWeatherDataError(cellValues);
+            rowDataSorted.setHasError(Boolean.TRUE);
+            rowDataSorted.setErrorData(errorWeatherInfo);
+        }
+
+        return rowDataSorted;
+    }
+
+
+    /**
+     * 用于提取Card不符合格式的、错误的数据
+     *
+     * @param cellValues
+     * @return
+     * @throws Exception
+     */
+    private ErrorCardInfo dealCardError(Map<String, String> cellValues) throws Exception {
         ErrorCardInfo errorCardInfo = new ErrorCardInfo();
         errorCardInfo.setYear(cellValues.get("数据年份"));
         errorCardInfo.setCardID(cellValues.get("卡片ID"));
@@ -351,12 +492,68 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
     }
 
     /**
-     * 保存正确的行数据到数据库中
+     * 用于提取Station不符合格式的、错误的数据
+     *
+     * @param cellValues
+     * @return
+     * @throws Exception
+     */
+    private ErrorStationInfo dealStationError(Map<String, String> cellValues) throws Exception {
+        ErrorStationInfo errorStationInfo = new ErrorStationInfo();
+        errorStationInfo.setStationId(cellValues.get("区站号"));
+        errorStationInfo.setStationName(cellValues.get("台站名称"));
+        errorStationInfo.setProvinces(cellValues.get("省份"));
+        errorStationInfo.setLat(cellValues.get("纬度(度分)"));
+        errorStationInfo.setLng(cellValues.get("经度(度分)"));
+        errorStationInfo.setAltitude(cellValues.get("海拔高度(0.1米)"));
+        errorStationInfo.setStartYear(cellValues.get("开始年份"));
+        errorStationInfo.setStartMonth(cellValues.get("开始月份"));
+        errorStationInfo.setEndYear(cellValues.get("截止年份"));
+        errorStationInfo.setEndMonth(cellValues.get("截止月份"));
+        errorStationInfo.setLackMeasurement(cellValues.get("缺测情况"));
+        return errorStationInfo;
+    }
+
+    /**
+     * 用于提取WeatherData不符合格式的、错误的数据
+     *
+     * @param cellValues
+     * @return
+     * @throws Exception
+     */
+    private ErrorWeatherInfo dealWeatherDataError(Map<String, String> cellValues) {
+        ErrorWeatherInfo errorWeatherInfo = new ErrorWeatherInfo();
+        errorWeatherInfo.setDistrictStationNum(cellValues.get("区站号").trim());
+        errorWeatherInfo.setWeatherYear(cellValues.get("年").trim());
+        errorWeatherInfo.setWeatherMonth(cellValues.get("月").trim());
+        errorWeatherInfo.setWeatherDay(cellValues.get("日").trim());
+        errorWeatherInfo.setPrecipitation2020(cellValues.get("20-20时降水量").trim());
+        errorWeatherInfo.setMaximumWindSpeed(cellValues.get("极大风速").trim());
+        errorWeatherInfo.setDirectionMaximumWindSpeed(cellValues.get("极大风速的风向").trim());
+        errorWeatherInfo.setAvePressure(cellValues.get("平均本站气压").trim());
+        errorWeatherInfo.setAveWindSpeed(cellValues.get("平均风速").trim());
+        errorWeatherInfo.setAveTemperature(cellValues.get("平均气温").trim());
+        errorWeatherInfo.setAveVaporPressure(cellValues.get("平均水汽压").trim());
+        errorWeatherInfo.setAveRelativeHumidity(cellValues.get("平均相对湿度").trim());
+        errorWeatherInfo.setSunshineTime(cellValues.get("日照时数").trim());
+        errorWeatherInfo.setDailyMinPressure(cellValues.get("日最低本站气压").trim());
+        errorWeatherInfo.setDailyMinTemperature(cellValues.get("日最低气温").trim());
+        errorWeatherInfo.setDailyMaxPressure(cellValues.get("日最高本站气压").trim());
+        errorWeatherInfo.setDailyMaxTemperature(cellValues.get("日最高气温").trim());
+        errorWeatherInfo.setMaxWindSpeed(cellValues.get("最大风速").trim());
+        errorWeatherInfo.setDirectionMaxWindSpeed(cellValues.get("最大风速的风向").trim());
+        errorWeatherInfo.setMinRelativeHumidity(cellValues.get("最小相对湿度").trim());
+        return errorWeatherInfo;
+    }
+
+
+    /**
+     * 保存正确的行数据到数据库Card中
      *
      * @param rowData
      * @throws Exception
      */
-    private Upload2DBInfo saveDataToDB(CardInfo rowData) throws Exception {
+    private Upload2DBInfo saveDataToCardDB(CardInfo rowData) throws Exception {
         Upload2DBInfo upload2DBInfo = new Upload2DBInfo();
         if (null != cardInformationMapper.selectByPrimaryKey(rowData.getCardID())) {
             upload2DBInfo.setNeedUpdate(true);
@@ -388,7 +585,7 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
             card.setDelReason(rowData.getDelReason());
             card.setNotes(rowData.getNotes());
             //外键部分
-//        cardInformation.setCategoryid1();
+            //Card外键Categoryid1;
             CaseCategory1Example caseCategory1Example = new CaseCategory1Example();
             caseCategory1Example.createCriteria().andCategory1NameEqualTo(rowData.getCaseCategory1Name());
             List<CaseCategory1> caseCategory1 = caseCategory1Mapper.selectByExample(caseCategory1Example);
@@ -404,7 +601,7 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                     logger.error("caseCategory1Mapper.insertSelective(insertCase) 失败！");
                 }
             }
-//        cardInformation.setCategoryid2();
+            //card外键setCategoryid2();
             CaseCategory2Example caseCategory2Example = new CaseCategory2Example();
             caseCategory2Example.createCriteria().andCategory2NameEqualTo(rowData.getCaseCategory2Name());
             List<CaseCategory2> caseCategory2List = caseCategory2Mapper.selectByExample(caseCategory2Example);
@@ -420,8 +617,9 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                 }
             }
 
-//        cardInformation.setPatientid();
+            //Card外键Patientid;
             PatientExample patientExample = new PatientExample();
+            //patient外键AddressID
             int addressID = 0;
             AddressGeocodeExample addressGeocodeExample = new AddressGeocodeExample();
             addressGeocodeExample.createCriteria().andAddressEqualTo(rowData.getAddress());
@@ -438,7 +636,7 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                     logger.error("addressGeocodeMapper.insertSelective(addressGeocode) 失败!");
                 }
             }
-
+            //patient外键CareerID
             int careerID = 0;
             CareerExample careerExample = new CareerExample();
             careerExample.createCriteria().andCareerEqualTo(rowData.getCareer());
@@ -454,7 +652,7 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                     logger.error("careerMapper.insertSelective(career) 失败!");
                 }
             }
-
+            //patient外键belongsID
             int belongsID = 0;
             PatientBelongsExample patientBelongsExample = new PatientBelongsExample();
             patientBelongsExample.createCriteria().andBelongsLevelEqualTo(rowData.getBelongsLevel());
@@ -570,11 +768,13 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
             }
         } catch (SQLException s) {
             upload2DBInfo.setSuccessOp(false);
-            logger.error("saveDataToDB(CardInform rowData) 数据库操作失败");
+            logger.error("saveDataToCardDB(CardInform rowData) 数据库操作失败");
+            s.printStackTrace();
             return upload2DBInfo;
         } catch (Exception e) {
             upload2DBInfo.setSuccessOp(false);
-            logger.error("saveDataToDB(CardInform rowData)失败 Exception信息：" + e.getMessage());
+            e.printStackTrace();
+            logger.error("saveDataToCardDB(CardInform rowData)失败 Exception信息：" + e.getMessage());
             return upload2DBInfo;
         }
         upload2DBInfo.setSuccessOp(true);
@@ -641,4 +841,104 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
         }
         return 0;
     }
+
+    /**
+     * 保存正确的行数据到数据库Station中
+     *
+     * @param rowData
+     * @throws Exception
+     */
+    private Upload2DBInfo saveDataToStationDB(MeteorologicalStation rowData) throws Exception {
+        Upload2DBInfo upload2DBInfo = new Upload2DBInfo();
+        if (null != meteorologicalStationMapper.selectByPrimaryKey(rowData.getStationId())) {
+            upload2DBInfo.setNeedUpdate(true);
+            upload2DBInfo.setNeedInsert(false);
+        } else {
+            upload2DBInfo.setNeedUpdate(false);
+            upload2DBInfo.setNeedInsert(true);
+        }
+        try {
+            MeteorologicalStation meteorologicalStation = new MeteorologicalStation();
+            meteorologicalStation.setStationId(rowData.getStationId());
+            meteorologicalStation.setStationName(rowData.getStationName());
+            meteorologicalStation.setProvinces(rowData.getProvinces());
+            meteorologicalStation.setLat(rowData.getLat());
+            meteorologicalStation.setLng(rowData.getLng());
+            meteorologicalStation.setAltitude(rowData.getAltitude());
+            meteorologicalStation.setStartYear(rowData.getStartYear());
+            meteorologicalStation.setStartMonth(rowData.getStartMonth());
+            meteorologicalStation.setEndYear(rowData.getEndYear());
+            meteorologicalStation.setEndMonth(rowData.getEndMonth());
+            meteorologicalStation.setLackMeasurement(rowData.getLackMeasurement());
+            if (upload2DBInfo.isNeedUpdate()) {
+                MeteorologicalStationExample meteorologicalStationExample = new MeteorologicalStationExample();
+                meteorologicalStationExample.createCriteria().andStationIdEqualTo(rowData.getStationId());
+                if (1 == meteorologicalStationMapper.updateByExampleSelective(meteorologicalStation, meteorologicalStationExample)) {
+                    logger.trace("meteorologicalStation更新stationID为的" + meteorologicalStation.getStationId() + "记录  成功 ");
+                } else {
+                    logger.error("meteorologicalStation更新stationID为的" + meteorologicalStation.getStationId() + "记录  失败 ");
+                }
+            }
+            if (upload2DBInfo.isNeedInsert()) {
+                if (1 == meteorologicalStationMapper.insert(meteorologicalStation)) {
+                    logger.trace("meteorologicalStation插入stationID为的" + meteorologicalStation.getStationId() + "记录  成功 ");
+                } else {
+                    logger.error("meteorologicalStation插入stationID为的" + meteorologicalStation.getStationId() + "记录  失败 ");
+                }
+            }
+        } catch (Exception e) {
+            upload2DBInfo.setSuccessOp(false);
+            logger.error("saveDataToStationDB(MeteorologicalStation rowData)失败 Exception信息：" + e.getMessage());
+            return upload2DBInfo;
+        }
+        upload2DBInfo.setSuccessOp(true);
+        return upload2DBInfo;
+    }
+    private Upload2DBInfo saveDataToWeatherDB(WeatherData rowData) {
+        Upload2DBInfo upload2DBInfo = new Upload2DBInfo();
+        WeatherDataExample weatherDataExample = new WeatherDataExample();
+        //外键station_id
+        MeteorologicalStationExample meteorologicalStationExample = new MeteorologicalStationExample();
+        meteorologicalStationExample.createCriteria().andStationIdEqualTo(rowData.getStationId());
+        MeteorologicalStation meteorologicalStation= meteorologicalStationMapper.selectByPrimaryKey(rowData.getStationId());
+        if(null != meteorologicalStation ){
+
+        }else {
+            MeteorologicalStation inserted = new MeteorologicalStation();
+            inserted.setStationId(rowData.getStationId());
+            if (1 == meteorologicalStationMapper.insertSelective(inserted)) {
+                //rowData.setStationId(inserted.getStationId());
+            } else {
+                logger.error("diseaseMapper.insertSelective(inserted) 失败!");
+            }
+
+        }
+        weatherDataExample.createCriteria().andStationIdEqualTo(rowData.getStationId())
+                .andWeatherYearEqualTo(rowData.getWeatherYear())
+                .andWeatherMonthEqualTo(rowData.getWeatherMonth())
+                .andWeatherDayEqualTo(rowData.getWeatherDay());
+        List<WeatherData> weatherDataList = weatherDataMapper.selectByExample(weatherDataExample);
+        if (0 < weatherDataList.size()) {
+            upload2DBInfo.setNeedUpdate(true);
+            upload2DBInfo.setNeedInsert(false);
+            rowData.setWeatherId(weatherDataList.get(0).getWeatherId());
+            if(1==weatherDataMapper.updateByPrimaryKey(rowData)){
+                logger.trace("weatherData更新weatherID为的" + rowData.getWeatherId() + "记录  成功 ");
+            } else {
+                logger.error("cardInformation更新cardID为的" + rowData.getWeatherId() + "记录  失败 ");
+            }
+        } else {
+            upload2DBInfo.setNeedUpdate(false);
+            upload2DBInfo.setNeedInsert(true);
+            if (1 == weatherDataMapper.insertSelective(rowData)) {
+                System.out.println(rowData.getWeatherId());
+            } else {
+                logger.error("weatherDataMapper.insertSelective(rowData) 失败!");
+            }
+        }
+        upload2DBInfo.setSuccessOp(true);
+
+        return upload2DBInfo;
+    }
+
 }

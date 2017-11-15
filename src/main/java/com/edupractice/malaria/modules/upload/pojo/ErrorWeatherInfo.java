@@ -1,184 +1,184 @@
 package com.edupractice.malaria.modules.upload.pojo;
 
-public class ErrorWeatherInfo<T> {
-    private T districtStationNum;
-    private T weatherYear;
-    private T weatherMonth;
-    private T weatherDay;
-    private T precipitation2020;
-    private T maximumWindSpeed;
-    private T directionMaximumWindSpeed;
-    private T avePressure;
-    private T aveWindSpeed;
-    private T aveTemperature;
-    private T aveVaporPressure;
-    private T aveRelativeHumidity;
-    private T sunshineTime;
-    private T dailyMinPressure;
-    private T dailyMinTemperature;
-    private T dailyMaxPressure;
-    private T dailyMaxTemperature;
-    private T maxWindSpeed;
-    private T directionMaxWindSpeed;
-    private T minRelativeHumidity;
+public class ErrorWeatherInfo {
+    private String districtStationNum;
+    private String weatherYear;
+    private String weatherMonth;
+    private String weatherDay;
+    private String precipitation2020;
+    private String maximumWindSpeed;
+    private String directionMaximumWindSpeed;
+    private String avePressure;
+    private String aveWindSpeed;
+    private String aveTemperature;
+    private String aveVaporPressure;
+    private String aveRelativeHumidity;
+    private String sunshineTime;
+    private String dailyMinPressure;
+    private String dailyMinTemperature;
+    private String dailyMaxPressure;
+    private String dailyMaxTemperature;
+    private String maxWindSpeed;
+    private String directionMaxWindSpeed;
+    private String minRelativeHumidity;
 
-    public T getDistrictStationNum() {
+    public String getDistrictStationNum() {
         return districtStationNum;
     }
 
-    public void setDistrictStationNum(T districtStationNum) {
+    public void setDistrictStationNum(String districtStationNum) {
         this.districtStationNum = districtStationNum;
     }
 
-    public T getWeatherYear() {
+    public String getWeatherYear() {
         return weatherYear;
     }
 
-    public void setWeatherYear(T weatherYear) {
+    public void setWeatherYear(String weatherYear) {
         this.weatherYear = weatherYear;
     }
 
-    public T getWeatherMonth() {
+    public String getWeatherMonth() {
         return weatherMonth;
     }
 
-    public void setWeatherMonth(T weatherMonth) {
+    public void setWeatherMonth(String weatherMonth) {
         this.weatherMonth = weatherMonth;
     }
 
-    public T getWeatherDay() {
+    public String getWeatherDay() {
         return weatherDay;
     }
 
-    public void setWeatherDay(T weatherDay) {
+    public void setWeatherDay(String weatherDay) {
         this.weatherDay = weatherDay;
     }
 
-    public T getPrecipitation2020() {
+    public String getPrecipitation2020() {
         return precipitation2020;
     }
 
-    public void setPrecipitation2020(T precipitation2020) {
+    public void setPrecipitation2020(String precipitation2020) {
         this.precipitation2020 = precipitation2020;
     }
 
-    public T getMaximumWindSpeed() {
+    public String getMaximumWindSpeed() {
         return maximumWindSpeed;
     }
 
-    public void setMaximumWindSpeed(T maximumWindSpeed) {
+    public void setMaximumWindSpeed(String maximumWindSpeed) {
         this.maximumWindSpeed = maximumWindSpeed;
     }
 
-    public T getDirectionMaximumWindSpeed() {
+    public String getDirectionMaximumWindSpeed() {
         return directionMaximumWindSpeed;
     }
 
-    public void setDirectionMaximumWindSpeed(T directionMaximumWindSpeed) {
+    public void setDirectionMaximumWindSpeed(String directionMaximumWindSpeed) {
         this.directionMaximumWindSpeed = directionMaximumWindSpeed;
     }
 
-    public T getAvePressure() {
+    public String getAvePressure() {
         return avePressure;
     }
 
-    public void setAvePressure(T avePressure) {
+    public void setAvePressure(String avePressure) {
         this.avePressure = avePressure;
     }
 
-    public T getAveWindSpeed() {
+    public String getAveWindSpeed() {
         return aveWindSpeed;
     }
 
-    public void setAveWindSpeed(T aveWindSpeed) {
+    public void setAveWindSpeed(String aveWindSpeed) {
         this.aveWindSpeed = aveWindSpeed;
     }
 
-    public T getAveTemperature() {
+    public String getAveTemperature() {
         return aveTemperature;
     }
 
-    public void setAveTemperature(T aveTemperature) {
+    public void setAveTemperature(String aveTemperature) {
         this.aveTemperature = aveTemperature;
     }
 
-    public T getAveVaporPressure() {
+    public String getAveVaporPressure() {
         return aveVaporPressure;
     }
 
-    public void setAveVaporPressure(T aveVaporPressure) {
+    public void setAveVaporPressure(String aveVaporPressure) {
         this.aveVaporPressure = aveVaporPressure;
     }
 
-    public T getAveRelativeHumidity() {
+    public String getAveRelativeHumidity() {
         return aveRelativeHumidity;
     }
 
-    public void setAveRelativeHumidity(T aveRelativeHumidity) {
+    public void setAveRelativeHumidity(String aveRelativeHumidity) {
         this.aveRelativeHumidity = aveRelativeHumidity;
     }
 
-    public T getSunshineTime() {
+    public String getSunshineTime() {
         return sunshineTime;
     }
 
-    public void setSunshineTime(T sunshineTime) {
+    public void setSunshineTime(String sunshineTime) {
         this.sunshineTime = sunshineTime;
     }
 
-    public T getDailyMinPressure() {
+    public String getDailyMinPressure() {
         return dailyMinPressure;
     }
 
-    public void setDailyMinPressure(T dailyMinPressure) {
+    public void setDailyMinPressure(String dailyMinPressure) {
         this.dailyMinPressure = dailyMinPressure;
     }
 
-    public T getDailyMinTemperature() {
+    public String getDailyMinTemperature() {
         return dailyMinTemperature;
     }
 
-    public void setDailyMinTemperature(T dailyMinTemperature) {
+    public void setDailyMinTemperature(String dailyMinTemperature) {
         this.dailyMinTemperature = dailyMinTemperature;
     }
 
-    public T getDailyMaxPressure() {
+    public String getDailyMaxPressure() {
         return dailyMaxPressure;
     }
 
-    public void setDailyMaxPressure(T dailyMaxPressure) {
+    public void setDailyMaxPressure(String dailyMaxPressure) {
         this.dailyMaxPressure = dailyMaxPressure;
     }
 
-    public T getDailyMaxTemperature() {
+    public String getDailyMaxTemperature() {
         return dailyMaxTemperature;
     }
 
-    public void setDailyMaxTemperature(T dailyMaxTemperature) {
+    public void setDailyMaxTemperature(String dailyMaxTemperature) {
         this.dailyMaxTemperature = dailyMaxTemperature;
     }
 
-    public T getMaxWindSpeed() {
+    public String getMaxWindSpeed() {
         return maxWindSpeed;
     }
 
-    public void setMaxWindSpeed(T maxWindSpeed) {
+    public void setMaxWindSpeed(String maxWindSpeed) {
         this.maxWindSpeed = maxWindSpeed;
     }
 
-    public T getDirectionMaxWindSpeed() {
+    public String getDirectionMaxWindSpeed() {
         return directionMaxWindSpeed;
     }
 
-    public void setDirectionMaxWindSpeed(T directionMaxWindSpeed) {
+    public void setDirectionMaxWindSpeed(String directionMaxWindSpeed) {
         this.directionMaxWindSpeed = directionMaxWindSpeed;
     }
 
-    public T getMinRelativeHumidity() {
+    public String getMinRelativeHumidity() {
         return minRelativeHumidity;
     }
 
-    public void setMinRelativeHumidity(T minRelativeHumidity) {
+    public void setMinRelativeHumidity(String minRelativeHumidity) {
         this.minRelativeHumidity = minRelativeHumidity;
     }
 }

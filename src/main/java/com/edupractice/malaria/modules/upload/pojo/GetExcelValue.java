@@ -21,38 +21,43 @@ public class GetExcelValue {
     public String getValue(HSSFCell hssfCell) {
         String cellValue = null;
         DecimalFormat df = new DecimalFormat("#");
-        try {
-            switch (hssfCell.getCellType()) {
-                case HSSFCell.CELL_TYPE_STRING:
-                    cellValue = hssfCell.getRichStringCellValue().getString().trim();
-                    break;
-                case HSSFCell.CELL_TYPE_NUMERIC:
-                    if (HSSFDateUtil.isCellDateFormatted(hssfCell)) {
+        if(hssfCell == null){
+            cellValue="";
+        }
+        else {
+            try {
+                switch (hssfCell.getCellType()) {
+                    case HSSFCell.CELL_TYPE_STRING:
+                        cellValue = hssfCell.getRichStringCellValue().getString().trim();
+                        break;
+                    case HSSFCell.CELL_TYPE_NUMERIC:
+                        if (HSSFDateUtil.isCellDateFormatted(hssfCell)) {
 //                        cellValue = new SimpleDateFormat("yyyy-MM-dd").format(hssfCell.getDateCellValue());
 //                        cellValue = hssfCell.getDateCellValue().toString();
-                        cellValue = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(hssfCell.getDateCellValue());
-                        if (cellValue.equals("."))
-                            cellValue = "0000-00-00 00:00";
-                    } else {
-                        cellValue = df.format(hssfCell.getNumericCellValue());
-                    }
-                    break;
-                case HSSFCell.CELL_TYPE_BOOLEAN:
-                    cellValue = String.valueOf(hssfCell.getBooleanCellValue()).trim();
-                    break;
-                case HSSFCell.CELL_TYPE_FORMULA:
-                    cellValue = hssfCell.getCellFormula();
-                    break;
-                case HSSFCell.CELL_TYPE_BLANK:
-                    cellValue = " ";
-                    break;
-                default:
-                    cellValue = " ";
-            }
-        } catch (NullPointerException n) {
-            logger.error("Excel单元格数据格式异常 信息：" + n.getMessage());
+                            cellValue = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(hssfCell.getDateCellValue());
+                            if (cellValue.equals("."))
+                                cellValue = "0000-00-00 00:00";
+                        } else {
+                            cellValue = df.format(hssfCell.getNumericCellValue());
+                        }
+                        break;
+                    case HSSFCell.CELL_TYPE_BOOLEAN:
+                        cellValue = String.valueOf(hssfCell.getBooleanCellValue()).trim();
+                        break;
+                    case HSSFCell.CELL_TYPE_FORMULA:
+                        cellValue = hssfCell.getCellFormula();
+                        break;
+                    case HSSFCell.CELL_TYPE_BLANK:
+                        cellValue = "";
+                        break;
+                    default:
+                        cellValue = "";
+                }
+            } catch (NullPointerException n) {
+                logger.error("Excel单元格数据格式异常 信息：" + n.getMessage());
 //            cellValue = null;
-            cellValue = ".";
+                cellValue = ".";
+            }
         }
         return cellValue;
     }
@@ -66,39 +71,44 @@ public class GetExcelValue {
     public String getValue(XSSFCell xssfCell) {
         String cellValue = null;
         DecimalFormat df = new DecimalFormat("#");
-        try {
-            switch (xssfCell.getCellType()) {
-                case XSSFCell.CELL_TYPE_STRING:
-                    cellValue = xssfCell.getRichStringCellValue().getString().trim();
-                    break;
-                case XSSFCell.CELL_TYPE_NUMERIC:
-                    if (HSSFDateUtil.isCellDateFormatted(xssfCell)) {
+        if(xssfCell == null){
+            cellValue=".";
+        }
+        else {
+            try {
+                switch (xssfCell.getCellType()) {
+                    case XSSFCell.CELL_TYPE_STRING:
+                        cellValue = xssfCell.getRichStringCellValue().getString().trim();
+                        break;
+                    case XSSFCell.CELL_TYPE_NUMERIC:
+                        if (HSSFDateUtil.isCellDateFormatted(xssfCell)) {
 //                        cellValue = new SimpleDateFormat("yyyy-MM-dd").format(xssfCell.getDateCellValue());
 //                        cellValue = xssfCell.getDateCellValue().toString();
-                        cellValue = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(xssfCell.getDateCellValue());
-                        if (cellValue.equals("."))
-                            cellValue = "0000-00-00 00:00";
-                    } else {
-                        cellValue = df.format(xssfCell.getNumericCellValue()).toString();
-                    }
-                    break;
-                case XSSFCell.CELL_TYPE_BOOLEAN:
-                    cellValue = String.valueOf(xssfCell.getBooleanCellValue()).trim();
-                    break;
-                case XSSFCell.CELL_TYPE_FORMULA:
-                    cellValue = xssfCell.getCellFormula();
-                    break;
-                case XSSFCell.CELL_TYPE_BLANK:
-                    cellValue = " ";
-                    break;
-                default:
+                            cellValue = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(xssfCell.getDateCellValue());
+                            if (cellValue.equals("."))
+                                cellValue = "0000-00-00 00:00";
+                        } else {
+                            cellValue = df.format(xssfCell.getNumericCellValue()).toString();
+                        }
+                        break;
+                    case XSSFCell.CELL_TYPE_BOOLEAN:
+                        cellValue = String.valueOf(xssfCell.getBooleanCellValue()).trim();
+                        break;
+                    case XSSFCell.CELL_TYPE_FORMULA:
+                        cellValue = xssfCell.getCellFormula();
+                        break;
+                    case XSSFCell.CELL_TYPE_BLANK:
+                        cellValue = ".";
+                        break;
+                    default:
 //                    cellValue = "default";
-                    cellValue = " ";
+                        cellValue = ".";
+                }
+            } catch (NullPointerException n) {
+                //单元格数据为空
+                logger.error("Excel单元格数据格式异常 信息：" + n.getMessage());
+                cellValue = ".";
             }
-        } catch (NullPointerException n) {
-            //单元格数据为空
-            logger.error("Excel单元格数据格式异常 信息：" + n.getMessage());
-            cellValue = ".";
         }
         return cellValue;
     }

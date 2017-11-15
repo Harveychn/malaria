@@ -14,7 +14,7 @@ public class PageController {
         return new ModelAndView("first-page");
     }
 
-    @RequestMapping("/LocatedUserMap")
+    @RequestMapping("/locatedUserMap")
     public ModelAndView LocatedUserMap(){
         return new ModelAndView("LocatedUserMap");
     }
