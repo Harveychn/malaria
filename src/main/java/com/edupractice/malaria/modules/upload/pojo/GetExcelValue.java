@@ -22,7 +22,7 @@ public class GetExcelValue {
         String cellValue = null;
         DecimalFormat df = new DecimalFormat("#");
         if(hssfCell == null){
-            cellValue="";
+            cellValue=".";
         }
         else {
             try {
@@ -48,10 +48,10 @@ public class GetExcelValue {
                         cellValue = hssfCell.getCellFormula();
                         break;
                     case HSSFCell.CELL_TYPE_BLANK:
-                        cellValue = "";
+                        cellValue = ".";
                         break;
                     default:
-                        cellValue = "";
+                        cellValue = ".";
                 }
             } catch (NullPointerException n) {
                 logger.error("Excel单元格数据格式异常 信息：" + n.getMessage());

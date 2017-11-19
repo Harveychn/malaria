@@ -5,6 +5,7 @@ import com.edupractice.malaria.modules.upload.pojo.Data2DBInfo;
 import com.edupractice.malaria.modules.upload.pojo.FileListInfo;
 import com.edupractice.malaria.modules.upload.pojo.UploadInfo;
 import com.edupractice.malaria.modules.upload.service.DispatcherUploadFileService;
+import com.edupractice.malaria.modules.upload.service.ExcelOperateService;
 import com.edupractice.malaria.modules.upload.service.UploadToCardInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,9 @@ public class UploadFileController {
 
     @Resource
     private UploadToCardInfoService uploadToCardInfoService;
+
+    @Resource
+    private ExcelOperateService excelOperateService;
 
     private List<UploadInfo> result;
 
@@ -98,7 +102,7 @@ public class UploadFileController {
                 uploadInfos.add(i, uploadInform);
                 continue;
             }
-            Data2DBInfo data2DBInfo = uploadToCardInfoService.saveDataToDB(filePath);
+            Data2DBInfo data2DBInfo =excelOperateService.ExcelOperateSave(filePath);
             uploadInform.setSavedRowsTotal(data2DBInfo.getSavedRowsTotal());
             uploadInform.setErrorRowCodes(data2DBInfo.getErrorRowsCode());
             uploadInfos.add(i, uploadInform);

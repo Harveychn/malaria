@@ -18,7 +18,7 @@ public class CONSTANT {
     //卡片状态--订正卡
     private static final char REVISED_CARDSTATUS = '1';
     //卡片状态--未知
-    private static  final char UKNOWN_CARDSTATUS = 'u';
+    private static final char UNKNOWN_CARDSTATUS = 'u';
 
     public static String getUPLOADFILEPATH() {
         return UPLOADFILEPATH;
@@ -52,7 +52,7 @@ public class CONSTANT {
         return REVISED_CARDSTATUS;
     }
 
-    public static char getUknownCardstatus() {
-        return UKNOWN_CARDSTATUS;
+    public static char getUnknownCardstatus() {
+        return UNKNOWN_CARDSTATUS;
     }
 }
