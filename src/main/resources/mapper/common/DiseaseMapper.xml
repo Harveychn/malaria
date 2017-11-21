@@ -99,24 +99,18 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.Disease" >
-    insert into disease (disease_id, disease_name)
-    values (#{diseaseId,jdbcType=INTEGER}, #{diseaseName,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.Disease" useGeneratedKeys="true" keyProperty="diseaseId" >
+    insert into disease (disease_name)
+    values (#{diseaseName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.Disease" >
+  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.Disease" useGeneratedKeys="true" keyProperty="diseaseId" >
     insert into disease
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="diseaseId != null" >
-        disease_id,
-      </if>
       <if test="diseaseName != null" >
         disease_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="diseaseId != null" >
-        #{diseaseId,jdbcType=INTEGER},
-      </if>
       <if test="diseaseName != null" >
         #{diseaseName,jdbcType=VARCHAR},
       </if>

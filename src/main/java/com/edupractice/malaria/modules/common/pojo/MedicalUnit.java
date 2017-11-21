@@ -5,15 +5,15 @@ public class MedicalUnit {
 
     private String unitName;
 
-    private String uniteType;
+    private String unitType;
 
-    private String uniteAreaCode;
+    private String unitAreaCode;
 
-    public MedicalUnit(Integer medicalUnitId, String unitName, String uniteType, String uniteAreaCode) {
+    public MedicalUnit(Integer medicalUnitId, String unitName, String unitType, String unitAreaCode) {
         this.medicalUnitId = medicalUnitId;
         this.unitName = unitName;
-        this.uniteType = uniteType;
-        this.uniteAreaCode = uniteAreaCode;
+        this.unitType = unitType;
+        this.unitAreaCode = unitAreaCode;
     }
 
     public MedicalUnit() {
@@ -36,19 +36,19 @@ public class MedicalUnit {
         this.unitName = unitName == null ? null : unitName.trim();
     }
 
-    public String getUniteType() {
-        return uniteType;
+    public String getUnitType() {
+        return unitType;
     }
 
-    public void setUniteType(String uniteType) {
-        this.uniteType = uniteType == null ? null : uniteType.trim();
+    public void setUnitType(String unitType) {
+        this.unitType = unitType == null ? null : unitType.trim();
     }
 
-    public String getUniteAreaCode() {
-        return uniteAreaCode;
+    public String getUnitAreaCode() {
+        return unitAreaCode;
     }
 
-    public void setUniteAreaCode(String uniteAreaCode) {
-        this.uniteAreaCode = uniteAreaCode == null ? null : uniteAreaCode.trim();
+    public void setUnitAreaCode(String unitAreaCode) {
+        this.unitAreaCode = unitAreaCode == null ? null : unitAreaCode.trim();
     }
 }

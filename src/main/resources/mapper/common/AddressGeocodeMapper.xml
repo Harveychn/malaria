@@ -105,20 +105,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.AddressGeocode" >
-    insert into address_geocode (address_id, lat, lng, 
-      precise, confidence, level, 
-      address, addr_nation_id)
-    values (#{addressId,jdbcType=INTEGER}, #{lat,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, 
-      #{precise,jdbcType=CHAR}, #{confidence,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{addrNationId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.AddressGeocode" useGeneratedKeys="true" keyProperty="addressId" >
+    insert into address_geocode (lat, lng, precise, 
+      confidence, level, address, 
+      addr_nation_id)
+    values (#{lat,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, #{precise,jdbcType=CHAR}, 
+      #{confidence,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{addrNationId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.AddressGeocode" >
+  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.AddressGeocode" useGeneratedKeys="true" keyProperty="addressId" >
     insert into address_geocode
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="addressId != null" >
-        address_id,
-      </if>
       <if test="lat != null" >
         lat,
       </if>
@@ -142,9 +139,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="addressId != null" >
-        #{addressId,jdbcType=INTEGER},
-      </if>
       <if test="lat != null" >
         #{lat,jdbcType=VARCHAR},
       </if>

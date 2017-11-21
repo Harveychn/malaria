@@ -1,6 +1,10 @@
 server:
   port: 80 #配置服务器端口
 spring:
+  http:
+    multipart:
+      max-file-size: "10MB"
+      max-request-size: "20MB"
   thymeleaf:
     cache: false  #模板缓存
     check-template-location: true #检查模板文件夹是否存在

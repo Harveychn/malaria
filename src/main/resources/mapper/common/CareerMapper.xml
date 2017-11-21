@@ -99,24 +99,18 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.Career" >
-    insert into career (career_id, career)
-    values (#{careerId,jdbcType=INTEGER}, #{career,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.Career" useGeneratedKeys="true" keyProperty="careerId" >
+    insert into career (career)
+    values (#{career,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.Career" >
+  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.Career" useGeneratedKeys="true" keyProperty="careerId" >
     insert into career
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="careerId != null" >
-        career_id,
-      </if>
       <if test="career != null" >
         career,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="careerId != null" >
-        #{careerId,jdbcType=INTEGER},
-      </if>
       <if test="career != null" >
         #{career,jdbcType=VARCHAR},
       </if>

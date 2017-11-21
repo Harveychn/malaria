@@ -7,6 +7,8 @@ import com.edupractice.malaria.modules.upload.pojo.ErrorCardInfo;
 import com.edupractice.malaria.modules.upload.pojo.RowDataSorted;
 import com.edupractice.malaria.modules.upload.pojo.Upload2DBInfo;
 import com.edupractice.malaria.modules.upload.service.UploadToCardInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,8 +44,7 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
     @Resource
     private DoctorMapper doctorMapper;
 
-    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UploadToCardInfoServiceImpl.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(UploadToCardInfoServiceImpl.class);
     /**
      * 对Card表中行数据，每个单元数据进行读取处理，返回正确或错误信息
      *
@@ -302,7 +303,12 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                 addressGeocode.setAddress(rowData.getAddress());
                 addressGeocode.setAddrNationId(rowData.getAddressNationID());
                 if (1 == addressGeocodeMapper.insertSelective(addressGeocode)) {
-                    addressID = addressGeocode.getAddressId();
+                    try {
+                        addressID = addressGeocode.getAddressId();
+                    } catch (Exception e) {
+                        System.out.println(addressGeocode.toString());
+                        e.printStackTrace();
+                    }
                 } else {
                     logger.error("addressGeocodeMapper.insertSelective(addressGeocode) 失败!");
                 }
@@ -460,10 +466,15 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
             if (upload2DBInfo.isNeedUpdate()) {
                 CardExample cardInformationExample = new CardExample();
                 cardInformationExample.createCriteria().andCardIdEqualTo(rowData.getCardID());
-                if (1 == cardInformationMapper.updateByExampleSelective(card, cardInformationExample)) {
-                    logger.trace("cardInformation更新cardID为的" + card.getCardId() + "记录  成功 ");
-                } else {
-                    logger.error("cardInformation更新cardID为的" + card.getCardId() + "记录  失败 ");
+                try {
+                    if (1 == cardInformationMapper.updateByExampleSelective(card, cardInformationExample)) {
+                        logger.trace("cardInformation更新cardID为的" + card.getCardId() + "记录  成功 ");
+                    } else {
+                        logger.error("cardInformation更新cardID为的" + card.getCardId() + "记录  失败 ");
+                    }
+                } catch (Exception e) {
+                    System.out.println(card.toString());
+                    e.printStackTrace();
                 }
             }
 
@@ -475,6 +486,7 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
                 }
             }
             upload2DBInfo.setSuccessOp(true);
+
         } catch (SQLException s) {
             upload2DBInfo.setSuccessOp(false);
             logger.error("saveDataToCardDB(CardInform rowData) 数据库操作失败");

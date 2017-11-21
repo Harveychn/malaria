@@ -5,8 +5,8 @@
     <constructor >
       <idArg column="medical_unit_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="unit_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="unite_type" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="unite_area_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="unit_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="unit_area_code" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    medical_unit_id, unit_name, unite_type, unite_area_code
+    medical_unit_id, unit_name, unit_type, unit_area_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.edupractice.malaria.modules.common.pojo.MedicalUnitExample" >
     select
@@ -101,40 +101,34 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.MedicalUnit" >
-    insert into medical_unit (medical_unit_id, unit_name, unite_type, 
-      unite_area_code)
-    values (#{medicalUnitId,jdbcType=INTEGER}, #{unitName,jdbcType=VARCHAR}, #{uniteType,jdbcType=VARCHAR}, 
-      #{uniteAreaCode,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.MedicalUnit" useGeneratedKeys="true" keyProperty="medicalUnitId" >
+    insert into medical_unit (unit_name, unit_type, unit_area_code
+      )
+    values (#{unitName,jdbcType=VARCHAR}, #{unitType,jdbcType=VARCHAR}, #{unitAreaCode,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.MedicalUnit" >
+  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.MedicalUnit" useGeneratedKeys="true" keyProperty="medicalUnitId" >
     insert into medical_unit
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="medicalUnitId != null" >
-        medical_unit_id,
-      </if>
       <if test="unitName != null" >
         unit_name,
       </if>
-      <if test="uniteType != null" >
-        unite_type,
+      <if test="unitType != null" >
+        unit_type,
       </if>
-      <if test="uniteAreaCode != null" >
-        unite_area_code,
+      <if test="unitAreaCode != null" >
+        unit_area_code,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="medicalUnitId != null" >
-        #{medicalUnitId,jdbcType=INTEGER},
-      </if>
       <if test="unitName != null" >
         #{unitName,jdbcType=VARCHAR},
       </if>
-      <if test="uniteType != null" >
-        #{uniteType,jdbcType=VARCHAR},
+      <if test="unitType != null" >
+        #{unitType,jdbcType=VARCHAR},
       </if>
-      <if test="uniteAreaCode != null" >
-        #{uniteAreaCode,jdbcType=VARCHAR},
+      <if test="unitAreaCode != null" >
+        #{unitAreaCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -153,11 +147,11 @@
       <if test="record.unitName != null" >
         unit_name = #{record.unitName,jdbcType=VARCHAR},
       </if>
-      <if test="record.uniteType != null" >
-        unite_type = #{record.uniteType,jdbcType=VARCHAR},
+      <if test="record.unitType != null" >
+        unit_type = #{record.unitType,jdbcType=VARCHAR},
       </if>
-      <if test="record.uniteAreaCode != null" >
-        unite_area_code = #{record.uniteAreaCode,jdbcType=VARCHAR},
+      <if test="record.unitAreaCode != null" >
+        unit_area_code = #{record.unitAreaCode,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -168,8 +162,8 @@
     update medical_unit
     set medical_unit_id = #{record.medicalUnitId,jdbcType=INTEGER},
       unit_name = #{record.unitName,jdbcType=VARCHAR},
-      unite_type = #{record.uniteType,jdbcType=VARCHAR},
-      unite_area_code = #{record.uniteAreaCode,jdbcType=VARCHAR}
+      unit_type = #{record.unitType,jdbcType=VARCHAR},
+      unit_area_code = #{record.unitAreaCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -180,11 +174,11 @@
       <if test="unitName != null" >
         unit_name = #{unitName,jdbcType=VARCHAR},
       </if>
-      <if test="uniteType != null" >
-        unite_type = #{uniteType,jdbcType=VARCHAR},
+      <if test="unitType != null" >
+        unit_type = #{unitType,jdbcType=VARCHAR},
       </if>
-      <if test="uniteAreaCode != null" >
-        unite_area_code = #{uniteAreaCode,jdbcType=VARCHAR},
+      <if test="unitAreaCode != null" >
+        unit_area_code = #{unitAreaCode,jdbcType=VARCHAR},
       </if>
     </set>
     where medical_unit_id = #{medicalUnitId,jdbcType=INTEGER}
@@ -192,8 +186,8 @@
   <update id="updateByPrimaryKey" parameterType="com.edupractice.malaria.modules.common.pojo.MedicalUnit" >
     update medical_unit
     set unit_name = #{unitName,jdbcType=VARCHAR},
-      unite_type = #{uniteType,jdbcType=VARCHAR},
-      unite_area_code = #{uniteAreaCode,jdbcType=VARCHAR}
+      unit_type = #{unitType,jdbcType=VARCHAR},
+      unit_area_code = #{unitAreaCode,jdbcType=VARCHAR}
     where medical_unit_id = #{medicalUnitId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -109,22 +109,19 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStation" >
-    insert into meteorological_station (station_id, station_name, provinces, 
-      lat, lng, altitude, 
-      start_year, start_month, end_year, 
-      end_month, lack_measurement)
-    values (#{stationId,jdbcType=INTEGER}, #{stationName,jdbcType=VARCHAR}, #{provinces,jdbcType=VARCHAR}, 
-      #{lat,jdbcType=INTEGER}, #{lng,jdbcType=INTEGER}, #{altitude,jdbcType=INTEGER}, 
-      #{startYear,jdbcType=INTEGER}, #{startMonth,jdbcType=INTEGER}, #{endYear,jdbcType=INTEGER}, 
-      #{endMonth,jdbcType=INTEGER}, #{lackMeasurement,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStation" useGeneratedKeys="true" keyProperty="stationId" >
+    insert into meteorological_station (station_name, provinces, lat, 
+      lng, altitude, start_year, 
+      start_month, end_year, end_month, 
+      lack_measurement)
+    values (#{stationName,jdbcType=VARCHAR}, #{provinces,jdbcType=VARCHAR}, #{lat,jdbcType=INTEGER}, 
+      #{lng,jdbcType=INTEGER}, #{altitude,jdbcType=INTEGER}, #{startYear,jdbcType=INTEGER}, 
+      #{startMonth,jdbcType=INTEGER}, #{endYear,jdbcType=INTEGER}, #{endMonth,jdbcType=INTEGER}, 
+      #{lackMeasurement,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStation" >
+  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.MeteorologicalStation" useGeneratedKeys="true" keyProperty="stationId" >
     insert into meteorological_station
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="stationId != null" >
-        station_id,
-      </if>
       <if test="stationName != null" >
         station_name,
       </if>
@@ -157,9 +154,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="stationId != null" >
-        #{stationId,jdbcType=INTEGER},
-      </if>
       <if test="stationName != null" >
         #{stationName,jdbcType=VARCHAR},
       </if>

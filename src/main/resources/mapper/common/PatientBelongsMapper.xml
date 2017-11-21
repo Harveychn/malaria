@@ -99,24 +99,18 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.PatientBelongs" >
-    insert into patient_belongs (belongs_id, belongs_level)
-    values (#{belongsId,jdbcType=INTEGER}, #{belongsLevel,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.PatientBelongs" useGeneratedKeys="true" keyProperty="belongsId" >
+    insert into patient_belongs (belongs_level)
+    values (#{belongsLevel,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.PatientBelongs" >
+  <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.PatientBelongs" useGeneratedKeys="true" keyProperty="belongsId" >
     insert into patient_belongs
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="belongsId != null" >
-        belongs_id,
-      </if>
       <if test="belongsLevel != null" >
         belongs_level,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="belongsId != null" >
-        #{belongsId,jdbcType=INTEGER},
-      </if>
       <if test="belongsLevel != null" >
         #{belongsLevel,jdbcType=VARCHAR},
       </if>

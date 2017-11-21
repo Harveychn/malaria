@@ -72,7 +72,6 @@ public class ExcelOperateServiceImpl implements ExcelOperateService {
                     } else {
                         errorRowsCode.add(rowNum);
                     }
-                    cellValues = null;
                 }
             }
         }
@@ -108,7 +107,6 @@ public class ExcelOperateServiceImpl implements ExcelOperateService {
                     } else {
                         errorRowsCode.add(rowNum);
                     }
-                    cellValues = null;
                 }
             }
         }

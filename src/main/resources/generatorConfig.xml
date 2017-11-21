@@ -70,6 +70,7 @@
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="address_id" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="card" domainObjectName="Card"
@@ -82,36 +83,43 @@
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="career_id" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="case_category1" domainObjectName="CaseCategory1"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="category_id1" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="case_category2" domainObjectName="CaseCategory2"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="category_id2" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="disease" domainObjectName="Disease"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="disease_id" sqlStatement="JDBC"></generatedKey>
+            
         </table>
 
         <table tableName="doctor" domainObjectName="Doctor"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="doctor_id" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="four_level_linkage" domainObjectName="FourLevelLinkage"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="id" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="indicator" domainObjectName="Indicator"
@@ -124,31 +132,35 @@
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="medical_unit_id" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="meteorological_station" domainObjectName="MeteorologicalStation"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="station_id" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="patient" domainObjectName="Patient"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="patient_id" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="patient_belongs" domainObjectName="PatientBelongs"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="belongs_id" sqlStatement="JDBC"></generatedKey>
         </table>
 
         <table tableName="weather_data" domainObjectName="WeatherData"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+            <generatedKey column="weather_id" sqlStatement="JDBC"></generatedKey>
         </table>
-
     </context>
 </generatorConfiguration>

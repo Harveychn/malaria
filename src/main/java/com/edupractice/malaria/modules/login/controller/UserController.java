@@ -1,5 +1,6 @@
 package com.edupractice.malaria.modules.login.controller;
 
+import com.edupractice.malaria.modules.login.pojo.ShowUser;
 import com.edupractice.malaria.modules.login.service.UserService;
 import com.edupractice.malaria.modules.login.pojo.User;
 import org.codehaus.groovy.runtime.powerassert.SourceText;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -86,9 +90,16 @@ public class UserController {
 
     @RequestMapping("/showCheckUser")
     public ModelAndView showCheckUser() throws Exception {
-        List<User> User = userService.selectCheckUser();
+        List<User> users = userService.selectCheckUser();
+        List<ShowUser> users1 = new ArrayList<>();
+        ShowUser showUser =new ShowUser();
+        for (int i = 0; i < users.size(); i++) {
+            showUser.setUser(users.get(i));
+            showUser.setJoinDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(users.get(i).getJoinDate()));
+            users1.add(showUser);
+        }
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("checkUser", User);
+        modelAndView.addObject("checkUser", users1);
         modelAndView.setViewName("view/common/checkUser");
         return modelAndView;
     }
