@@ -1,6 +1,6 @@
 package com.edupractice.malaria.modules.upload.controller;
 
-import com.edupractice.malaria.modules.common.pojo.CONSTANT;
+import com.edupractice.malaria.modules.common.pojo.constant.CONSTANT;
 import com.edupractice.malaria.modules.upload.pojo.Data2DBInfo;
 import com.edupractice.malaria.modules.upload.pojo.FileListInfo;
 import com.edupractice.malaria.modules.upload.pojo.UploadInfo;

@@ -1,4 +1,4 @@
-package com.edupractice.malaria.modules.common.pojo;
+package com.edupractice.malaria.modules.common.pojo.constant;
 /**
  * 一些常量定义
  */

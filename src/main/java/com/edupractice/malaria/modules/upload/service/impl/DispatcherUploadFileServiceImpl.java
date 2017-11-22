@@ -1,5 +1,8 @@
 package com.edupractice.malaria.modules.upload.service.impl;
 
+import com.edupractice.malaria.modules.common.pojo.constant.CARDCONSTANT;
+import com.edupractice.malaria.modules.common.pojo.constant.STATIONCONSTANT;
+import com.edupractice.malaria.modules.common.pojo.constant.WEATHERCONSTANT;
 import com.edupractice.malaria.modules.upload.service.DispatcherUploadFileService;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -57,89 +60,14 @@ public class DispatcherUploadFileServiceImpl implements DispatcherUploadFileServ
      * @throws Exception
      */
     private int getCaseNum(List<String> fieldNames) throws Exception {
-        if (42 == fieldNames.size()) {
-            if (fieldNames.get(0).trim().equals("卡片ID")
-                    && fieldNames.get(1).trim().equals("卡片编号")
-                    && fieldNames.get(2).trim().equals("卡片状态")
-                    && fieldNames.get(3).trim().equals("患者姓名")
-                    && fieldNames.get(4).trim().equals("性别")
-                    && fieldNames.get(5).trim().equals("出生日期")
-                    && fieldNames.get(6).trim().equals("年龄")
-                    && fieldNames.get(7).trim().equals("患者工作单位")
-                    && fieldNames.get(8).trim().equals("联系电话")
-                    && fieldNames.get(9).trim().equals("病人属于")
-                    && fieldNames.get(10).trim().equals("现住地址国标")
-                    && fieldNames.get(11).trim().equals("现住详细地址")
-                    && fieldNames.get(12).trim().equals("职业")
-                    && fieldNames.get(13).trim().equals("病例分类")
-                    && fieldNames.get(14).trim().equals("病例分类2")
-                    && fieldNames.get(15).trim().equals("发病日期")
-                    && fieldNames.get(16).trim().equals("诊断时间")
-                    && fieldNames.get(17).trim().equals("死亡日期")
-                    && fieldNames.get(18).trim().equals("疾病名称")
-                    && fieldNames.get(19).trim().equals("订正前病种")
-                    && fieldNames.get(20).trim().equals("填卡医生")
-                    && fieldNames.get(21).trim().equals("医生填卡日期")
-                    && fieldNames.get(22).trim().equals("报告单位地区编码")
-                    && fieldNames.get(23).trim().equals("报告单位")
-                    && fieldNames.get(24).trim().equals("单位类型")
-                    && fieldNames.get(25).trim().equals("报告卡录入时间")
-                    && fieldNames.get(26).trim().equals("录卡用户")
-                    && fieldNames.get(27).trim().equals("录卡用户所属单位")
-                    && fieldNames.get(28).trim().equals("县区审核时间")
-                    && fieldNames.get(29).trim().equals("地市审核时间")
-                    && fieldNames.get(30).trim().equals("省市审核时间")
-                    && fieldNames.get(31).trim().equals("审核状态")
-                    && fieldNames.get(32).trim().equals("订正报告时间")
-                    && fieldNames.get(33).trim().equals("订正终审时间")
-                    && fieldNames.get(34).trim().equals("终审死亡时间")
-                    && fieldNames.get(35).trim().equals("订正用户")
-                    && fieldNames.get(36).trim().equals("订正用户所属单位")
-                    && fieldNames.get(37).trim().equals("删除时间")
-                    && fieldNames.get(38).trim().equals("删除用户")
-                    && fieldNames.get(39).trim().equals("删除用户所属单位")
-                    && fieldNames.get(40).trim().equals("删除原因")
-                    && fieldNames.get(41).trim().equals("备注")
-                    ) {
+        if (cardRowNameList().equals(fieldNames)) {
                 return 1;
             }
-        }
-        if (20 == fieldNames.size()) {
-            if (fieldNames.get(0).trim().equals("区站号")
-                    && fieldNames.get(1).trim().equals("年")
-                    && fieldNames.get(2).trim().equals("月")
-                    && fieldNames.get(3).trim().equals("日")
-                    && fieldNames.get(4).trim().equals("20-20时降水量")
-                    && fieldNames.get(5).trim().equals("极大风速")
-                    && fieldNames.get(6).trim().equals("极大风速的风向")
-                    && fieldNames.get(7).trim().equals("平均本站气压")
-                    && fieldNames.get(8).trim().equals("平均风速")
-                    && fieldNames.get(9).trim().equals("平均气温")
-                    && fieldNames.get(10).trim().equals("平均水汽压")
-                    && fieldNames.get(11).trim().equals("平均相对湿度")
-                    && fieldNames.get(12).trim().equals("日照时数")
-                    && fieldNames.get(13).trim().equals("日最低本站气压")
-                    && fieldNames.get(14).trim().equals("日最低气温")
-                    && fieldNames.get(15).trim().equals("日最高本站气压")
-                    && fieldNames.get(16).trim().equals("日最高气温")
-                    && fieldNames.get(17).trim().equals("最大风速")
-                    && fieldNames.get(18).trim().equals("最大风速的风向")
-                    && fieldNames.get(19).trim().equals("最小相对湿度")) {
+        if (weatherRowNameList().equals(fieldNames)) {
                 return 2;
             }
-        }
-        if(11==fieldNames.size()){
-            if(fieldNames.get(0).trim().equals("区站号")
-                    && fieldNames.get(1).trim().equals("台站名称")
-                    && fieldNames.get(2).trim().equals("省份")
-                    && fieldNames.get(3).trim().equals("纬度(度分)")
-                    && fieldNames.get(4).trim().equals("经度(度分)")
-                    && fieldNames.get(5).trim().equals("海拔高度(0.1米)")
-                    && fieldNames.get(6).trim().equals("开始年份")
-                    && fieldNames.get(7).trim().equals("开始月份")
-                    && fieldNames.get(8).trim().equals("截止年份")
-                    && fieldNames.get(9).trim().equals("截止月份")
-                    && fieldNames.get(10).trim().equals("缺测情况")){
+        if(stationRowNameList().equals(fieldNames)){
+            {
                 return 3;
             }
         }
@@ -147,4 +75,92 @@ public class DispatcherUploadFileServiceImpl implements DispatcherUploadFileServ
         return -1;
     }
 
+    private List<String> cardRowNameList(){
+        List<String> cardList = new ArrayList<>();
+        cardList.add(0,CARDCONSTANT.getCardId());
+        cardList.add(1,CARDCONSTANT.getCardNum());
+        cardList.add(2,CARDCONSTANT.getCardStatus());
+        cardList.add(3,CARDCONSTANT.getPatientName());
+        cardList.add(4,CARDCONSTANT.getSEX());
+        cardList.add(5,CARDCONSTANT.getBIRTHDAY());
+        cardList.add(6,CARDCONSTANT.getAGE());
+        cardList.add(7,CARDCONSTANT.getWorkUnit());
+        cardList.add(8,CARDCONSTANT.getTEL());
+        cardList.add(9,CARDCONSTANT.getBelongsLevel());
+        cardList.add(10,CARDCONSTANT.getAddressNationId());
+        cardList.add(11,CARDCONSTANT.getADDRESS());
+        cardList.add(12,CARDCONSTANT.getCAREER());
+        cardList.add(13,CARDCONSTANT.getCaseCategory1Name());
+        cardList.add(14,CARDCONSTANT.getCaseCategory2Name());
+        cardList.add(15,CARDCONSTANT.getIllDate());
+        cardList.add(16,CARDCONSTANT.getConfirmDate());
+        cardList.add(17,CARDCONSTANT.getDeathDate());
+        cardList.add(18,CARDCONSTANT.getDiseaseName());
+        cardList.add(19,CARDCONSTANT.getDiseasePreRevised());
+        cardList.add(20,CARDCONSTANT.getFillCardDoc());
+        cardList.add(21,CARDCONSTANT.getFillCardDate());
+        cardList.add(22,CARDCONSTANT.getReportUnitAreaCode());
+        cardList.add(23,CARDCONSTANT.getReportUnit());
+        cardList.add(24,CARDCONSTANT.getUnitType());
+        cardList.add(25,CARDCONSTANT.getReportInputDate());
+        cardList.add(26,CARDCONSTANT.getInputUser());
+        cardList.add(27,CARDCONSTANT.getInputUserUnit());
+        cardList.add(28,CARDCONSTANT.getCountyJudgeDate());
+        cardList.add(29,CARDCONSTANT.getLocalJudgeDate());
+        cardList.add(30,CARDCONSTANT.getProvinceJudgeDate());
+        cardList.add(31,CARDCONSTANT.getJudgeStatus());
+        cardList.add(32,CARDCONSTANT.getRevisedReportDate());
+        cardList.add(33,CARDCONSTANT.getRevisedFinalJudgeDate());
+        cardList.add(34,CARDCONSTANT.getDeathFinalJudgeDate());
+        cardList.add(35,CARDCONSTANT.getRevisedUser());
+        cardList.add(36,CARDCONSTANT.getRevisedUserUnit());
+        cardList.add(37,CARDCONSTANT.getDelDate());
+        cardList.add(38,CARDCONSTANT.getDelUser());
+        cardList.add(39,CARDCONSTANT.getDelUserUnit());
+        cardList.add(40,CARDCONSTANT.getDelReason());
+        cardList.add(41,CARDCONSTANT.getNOTES());
+
+        return cardList;
+    }
+
+    private List<String> stationRowNameList(){
+        List<String> stationList = new ArrayList<>();
+        stationList.add(0,STATIONCONSTANT.getStationId());
+        stationList.add(1,STATIONCONSTANT.getStationName());
+        stationList.add(2,STATIONCONSTANT.getPROVINCES());
+        stationList.add(3,STATIONCONSTANT.getLAT());
+        stationList.add(4,STATIONCONSTANT.getLNG());
+        stationList.add(5,STATIONCONSTANT.getALTITUDE());
+        stationList.add(6,STATIONCONSTANT.getStartYear());
+        stationList.add(7,STATIONCONSTANT.getStartMonth());
+        stationList.add(8,STATIONCONSTANT.getEndYear());
+        stationList.add(9,STATIONCONSTANT.getEndMonth());
+        stationList.add(10, STATIONCONSTANT.getLackMeasurement());
+        return stationList;
+    }
+
+    private List<String> weatherRowNameList(){
+        List<String> weatherList = new ArrayList<>();
+        weatherList.add(0,WEATHERCONSTANT.getStationId());
+        weatherList.add(1,WEATHERCONSTANT.getWeatherYear());
+        weatherList.add(2,WEATHERCONSTANT.getWeatherMonth());
+        weatherList.add(3,WEATHERCONSTANT.getWeatherDay());
+        weatherList.add(4,WEATHERCONSTANT.getPrecipitation2020());
+        weatherList.add(5,WEATHERCONSTANT.getMaximumWindSpeed());
+        weatherList.add(6,WEATHERCONSTANT.getDirectionMaximumWindSpeed());
+        weatherList.add(7,WEATHERCONSTANT.getAvePressure());
+        weatherList.add(8,WEATHERCONSTANT.getAveWindSpeed());
+        weatherList.add(9,WEATHERCONSTANT.getAveTemperature());
+        weatherList.add(10,WEATHERCONSTANT.getAveVaporPressure());
+        weatherList.add(11,WEATHERCONSTANT.getAveRelativeHumidity());
+        weatherList.add(12,WEATHERCONSTANT.getSunshineTime());
+        weatherList.add(13,WEATHERCONSTANT.getDailyMinPressure());
+        weatherList.add(14,WEATHERCONSTANT.getDailyMinTemperature());
+        weatherList.add(15,WEATHERCONSTANT.getDailyMaxPressure());
+        weatherList.add(16,WEATHERCONSTANT.getDailyMaxTemperature());
+        weatherList.add(17,WEATHERCONSTANT.getMaxWindSpeed());
+        weatherList.add(18,WEATHERCONSTANT.getDirectionMaxWindSpeed());
+        weatherList.add(19,WEATHERCONSTANT.getMinRelativeHumidity());
+        return weatherList;
+    }
 }

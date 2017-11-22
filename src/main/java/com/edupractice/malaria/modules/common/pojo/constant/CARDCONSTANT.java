@@ -1,4 +1,4 @@
-package com.edupractice.malaria.modules.common.pojo;
+package com.edupractice.malaria.modules.common.pojo.constant;
 
 public class CARDCONSTANT {
     private static final String CARD_ID = "卡片ID";
@@ -14,8 +14,8 @@ public class CARDCONSTANT {
     private static final String ADDRESS_NATION_ID = "现住地址国标";
     private static final String ADDRESS = "现住详细地址";
     private static final String CAREER = "职业";
-    private static final String CASECATEGORY_1_NAME = "病例分类";
-    private static final String CASECATEGORY_2_NAME = "病例分类2";
+    private static final String CASE_CATEGORY_1_NAME = "病例分类";
+    private static final String CASE_CATEGORY_2_NAME = "病例分类2";
     private static final String ILL_DATE = "发病日期";
     private static final String CONFIRM_DATE = "诊断时间";
     private static final String DEATH_DATE = "死亡日期";
@@ -96,12 +96,12 @@ public class CARDCONSTANT {
         return CAREER;
     }
 
-    public static String getCasecategory1Name() {
-        return CASECATEGORY_1_NAME;
+    public static String getCaseCategory1Name() {
+        return CASE_CATEGORY_1_NAME;
     }
 
-    public static String getCasecategory2Name() {
-        return CASECATEGORY_2_NAME;
+    public static String getCaseCategory2Name() {
+        return CASE_CATEGORY_2_NAME;
     }
 
     public static String getIllDate() {

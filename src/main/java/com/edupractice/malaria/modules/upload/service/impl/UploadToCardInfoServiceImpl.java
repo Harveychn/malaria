@@ -2,6 +2,8 @@ package com.edupractice.malaria.modules.upload.service.impl;
 
 import com.edupractice.malaria.modules.common.dao.*;
 import com.edupractice.malaria.modules.common.pojo.*;
+import com.edupractice.malaria.modules.common.pojo.constant.CARDCONSTANT;
+import com.edupractice.malaria.modules.common.pojo.constant.CONSTANT;
 import com.edupractice.malaria.modules.upload.pojo.CardInfo;
 import com.edupractice.malaria.modules.upload.pojo.ErrorCardInfo;
 import com.edupractice.malaria.modules.upload.pojo.RowDataSorted;
@@ -91,8 +93,8 @@ public class UploadToCardInfoServiceImpl implements UploadToCardInfoService {
             cardInfo.setAddressNationID(Integer.parseInt(cellValues.get(CARDCONSTANT.getAddressNationId())));
             cardInfo.setAddress(cellValues.get(CARDCONSTANT.getADDRESS()));
             cardInfo.setCareer(cellValues.get(CARDCONSTANT.getCAREER()));
-            cardInfo.setCaseCategory1Name(cellValues.get(CARDCONSTANT.getCasecategory1Name()));
-            cardInfo.setCaseCategory2Name(cellValues.get(CARDCONSTANT.getCasecategory2Name()));
+            cardInfo.setCaseCategory1Name(cellValues.get(CARDCONSTANT.getCaseCategory1Name()));
+            cardInfo.setCaseCategory2Name(cellValues.get(CARDCONSTANT.getCaseCategory2Name()));
             if (!cellValues.get(CARDCONSTANT.getIllDate()).trim().equals(".")) {
                 cardInfo.setIllDate(new SimpleDateFormat("yyyy-MM-dd").parse(cellValues.get(CARDCONSTANT.getIllDate())));
             } else {
