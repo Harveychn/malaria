@@ -20,7 +20,7 @@
 			</div>
 			
 			<div class="partDivide">
-				<a id="eturnTerm" href="" class="btn btn-link pull-left" type="submit">返回</a>
+				<a id="eturnTerm" href="dataDownload.html" class="btn btn-link pull-left" type="submit">返回</a>
 				<button id="ubmitTerm" class="btn btn-primary pull-right" type="submit">开始下载</button>
 			</div>
 			
@@ -33,7 +33,7 @@
 			</div>
 			
 			<div class="partDivide">
-				<div class="form-control">
+				<div class="form-group">
 					<label class="fieldName">选择年龄区间：</label>
 					<input id="minAge" class="form-control" type="number" min="1" max="100" placeholder="最小年龄" />
 					<input id="maxAge" class="form-control" type="number" min="1" max="100" placeholder="最大年龄" />
@@ -61,7 +61,8 @@
 			
 			<div class="partDivide">
 				<label class="fieldName">选择数据地区：</label>
-				<select id="province" class="mySelect">
+				<div class="form-group">
+					<select id="province" class="mySelect">
 					<option>未选</option>
 				</select>
 				
@@ -76,6 +77,7 @@
 				<select id="village" class="mySelect">
 					<option>未选</option>
 				</select>
+				</div>
 			</div>
 			
 			<div class="partDivide">
@@ -87,13 +89,6 @@
 							<button id="needAll" class="btn btn-default">全选</button>
 						</div>
 					</div>
-					
-					<th:each item="" var="item">
-						<label class="field">
-							<input id="fields" type="checkbox" name="selectedFields" value="" />
-							<label></label>
-						</label>
-					</th:each>
 				</div>
 			</div>
 		</section>
