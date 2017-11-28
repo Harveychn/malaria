@@ -45,6 +45,7 @@ public class DownloadDBDataController {
     @RequestMapping("/fieldNameDownloadable.do")
     public ModelAndView fieldNameDownloadable(@RequestParam(value = "category") String category) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
+        //获取对应参数的可选择下载字段
         List<CategoryFieldsRe> categoryFieldsRes = downloadDBDataService.getFieldsNameDownload(category);
         if (categoryFieldsRes != null) {
             modelAndView.addObject("categoryFieldsRes", categoryFieldsRes);
