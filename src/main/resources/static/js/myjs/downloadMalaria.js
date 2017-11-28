@@ -44,7 +44,7 @@ $('#submitTerm').on('click', function (event) {
         return;
     }
     $.ajax({
-        url: "/DownloadDBData/diseaseParams.do",
+        url: "/DownloadDBData/diseaseParams",
         data: {
             'selectedFields': fields,
             'province': addsPro,
@@ -60,12 +60,12 @@ $('#submitTerm').on('click', function (event) {
         type: "post",
         traditional: true,
         success: function (data) {
-            // console.log("OK :" + data);
+            console.log("OK :" + data);
             layer.close(loading);
-            window.open("/DownloadDBData/downloadExcel.do", "_self");
+            window.open("/DownloadDBData/downloadExcel", "_self");
         },
         error: function () {
-            console.error("'/DownloadDBData/diseaseParams.do' Error");
+            console.error("'/DownloadDBData/diseaseParams' Error");
             window.open("view/error/500.jsp", "_self");
         }
     });

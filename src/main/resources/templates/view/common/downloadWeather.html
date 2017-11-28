@@ -19,9 +19,8 @@
 				<h2>气候数据下载</h2>
 				<hr />
 			</div>
-			
 			<div class="partDivide">
-				<a id="returnTerm" href="/DownloadDBData/downloadView" class="btn btn-link pull-left" type="submit">返回</a>
+				<a id="returnTerm" th:href="@{/DownloadDBData/downloadView}" class="btn btn-link pull-left" type="submit">返回</a>
         		<button id="submitTerm" class="btn btn-primary pull-right" type="submit">开始下载</button>
 			</div>
 			
@@ -44,13 +43,15 @@
                     		<button id="needAll" class="btn btn-default" >全选</button>
                 		</div>
 					</div>
-					
-					<th:each items="" var="item">
-                		<label class="field">
-                    		<input id="fields" type="checkbox" name="selectedFields" value=""/>
-                   			 <label></label>
-                		</label>
-           			 </th:each>
+
+					<table>
+						<tr th:each="categoryFieldsRe,categoryFieldsReStat : ${categoryFieldsRes}">
+							<label class="field">
+								<input type="checkbox" id="fields" name="selectedFields" th:value="${categoryFieldsRe.displayName}"/>
+								<label th:text="${categoryFieldsRe.displayName}"></label>
+							</label>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</section>

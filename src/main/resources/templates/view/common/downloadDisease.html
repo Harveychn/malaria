@@ -1,105 +1,112 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
-	<head th:fragment="header">
-		<meta charset="UTF-8" />
-		<title>疟疾数据下载</title>
-		<!--引用css-->
-		<link rel="stylesheet" type="text/css" th:href="@{/css/plugins/iCheck/flat/blue.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/download.css}" />
-		<!--自定义css-->
-		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/downloadDisease.css}" />
-	</head>
-	<body>
-		<section class="container">
-			<div align="center">
-				<h2>疟疾数据下载</h2>
-				<hr />
-			</div>
-			
-			<div class="partDivide">
-				<a id="eturnTerm" href="dataDownload.html" class="btn btn-link pull-left" type="submit">返回</a>
-				<button id="ubmitTerm" class="btn btn-primary pull-right" type="submit">开始下载</button>
-			</div>
-			
-			<div class="partDivide">
-				<div class="form-group">
-					<label class="fieldName">选择时间区间：</label>
-					<input id="beginYear" class="form-control" type="number" min="1900" max="2099" placeholder="数据开始年份" />
-					<input id="endYear" class="form-control" type="number" min="1900" max="2099" placeholder="数据结束年份" />
+<head th:fragment="header">
+	<meta charset="UTF-8" />
+	<title>疟疾数据下载</title>
+	<!--引用css-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/plugins/iCheck/flat/blue.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/download.css}" />
+	<!--自定义css-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/downloadDisease.css}" />
+</head>
+<body>
+<section class="container">
+	<div align="center">
+		<h2>疟疾数据下载</h2>
+		<hr />
+	</div>
+	<div class="partDivide">
+		<a id="returnTerm" th:href="@{/DownloadDBData/downloadView}"   class="btn btn-link pull-left" type="submit">返回</a>
+		<button id="submitTerm" class="btn btn-primary pull-right" type="submit">开始下载</button>
+	</div>
+
+	<div class="partDivide">
+		<div class="form-group">
+			<label class="fieldName">选择时间区间：</label>
+			<input id="beginYear" class="form-control" type="number" min="1900" max="2099" placeholder="数据开始年份" />
+			<input id="endYear" class="form-control" type="number" min="1900" max="2099" placeholder="数据结束年份" />
+		</div>
+	</div>
+
+	<div class="partDivide">
+		<div class="form-group">
+			<label class="fieldName">选择年龄区间：</label>
+			<input id="minAge" class="form-control" type="number" min="1" max="100" placeholder="最小年龄" />
+			<input id="maxAge" class="form-control" type="number" min="1" max="100" placeholder="最大年龄" />
+		</div>
+	</div>
+
+	<div class="partDivide">
+		<span class="fieldName">请选择性别：</span>
+
+		<label class="sexField">
+			<input type="radio" name="iCheck" value="0" />
+			<span class="sexSpan">全部</span>
+		</label>
+
+		<label class="sexField">
+			<input type="radio" name="iCheck" value="1" />
+			<span class="sexSpan">男</span>
+		</label>
+
+		<label class="sexField">
+			<input type="radio" name="iCheck" value="2" />
+			<span class="sexSpan">女</span>
+		</label>
+	</div>
+
+	<div class="partDivide">
+		<label class="fieldName">选择数据地区：</label>
+		<div class="form-group">
+			<select id="province" class="mySelect">
+				<option>未选</option>
+			</select>
+
+			<select id="city" class="mySelect">
+				<option>未选</option>
+			</select>
+
+			<select id="county" class="mySelect">
+				<option>未选</option>
+			</select>
+
+			<select id="village" class="mySelect">
+				<option>未选</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="partDivide">
+		<div class="fieldContainer">
+			<div class="describe">
+				<div>
+					<span class="fieldName">请选择将要下载的字段：</span>
+					<button id="needNon" class="btn btn-default">全不选</button>
+					<button id="needAll" class="btn btn-default">全选</button>
 				</div>
 			</div>
-			
-			<div class="partDivide">
-				<div class="form-group">
-					<label class="fieldName">选择年龄区间：</label>
-					<input id="minAge" class="form-control" type="number" min="1" max="100" placeholder="最小年龄" />
-					<input id="maxAge" class="form-control" type="number" min="1" max="100" placeholder="最大年龄" />
-				</div>
-			</div>
-			
-			<div class="partDivide">
-				<span class="fieldName">请选择性别：</span>
-				
-				<label class="sexField">
-					<input type="radio" name="iCheck" value="0" />
-					<span class="sexSpan">全部</span>
-				</label>
-				
-				<label class="sexField">
-					<input type="radio" name="iCheck" value="1" />
-					<span class="sexSpan">男</span>
-				</label>
-				
-				<label class="sexField">
-					<input type="radio" name="iCheck" value="2" />
-					<span class="sexSpan">女</span>
-				</label>
-			</div>
-			
-			<div class="partDivide">
-				<label class="fieldName">选择数据地区：</label>
-				<div class="form-group">
-					<select id="province" class="mySelect">
-					<option>未选</option>
-				</select>
-				
-				<select id="city" class="mySelect">
-					<option>未选</option>
-				</select>
-				
-				<select id="country" class="mySelect">
-					<option>未选</option>
-				</select>
-				
-				<select id="village" class="mySelect">
-					<option>未选</option>
-				</select>
-				</div>
-			</div>
-			
-			<div class="partDivide">
-				<div class="fieldContainer">
-					<div class="describe">
-						<div>
-							<span class="fieldName">请选择将要下载的字段：</span>
-							<button id="needNon" class="btn btn-default">全不选</button>
-							<button id="needAll" class="btn btn-default">全选</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		
-		<!--引用js-->
-		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
-		<script type="text/javascript" th:src="@{/js/plugins/iCheck/icheck.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/plugins/layer/layer.js}"></script>
-		<script type="text/javascript" th:src="@{/js/myjs/downloadMalaria.js}"></script>
-		<script type="text/javascript"th:src="@{/js/FourLevelLinkage.js}"></script>
-		<!--自定义js-->
-		<script type="text/javascript" th:src="@{/js/myjs/downloadDisease.js}"></script>
-	</body>
+			<table>
+				<tr th:each="categoryFieldsRe,categoryFieldsReStat : ${categoryFieldsRes}">
+					<label class="field">
+						<input type="checkbox" id="fields" name="selectedFields" th:value="${categoryFieldsRe.displayName}"/>
+						<label th:text="${categoryFieldsRe.displayName}"></label>
+					</label>
+				</tr>
+			</table>
+		</div>
+	</div>
+</section>
+
+<!--引用js-->
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/iCheck/icheck.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/js/myjs/downloadMalaria.js}"></script>
+<script type="text/javascript"th:src="@{/js/FourLevelLinkage.js}"></script>
+<!--自定义js-->
+<script type="text/javascript" th:src="@{/js/myjs/downloadDisease.js}"></script>
+</body>
 </html>
