@@ -1,10 +1,13 @@
 package com.edupractice.malaria.modules.download.service.impl;
 
+import com.edupractice.malaria.modules.common.pojo.Indicator;
 import com.edupractice.malaria.modules.download.dao.CategoryFieldsMapper;
 import com.edupractice.malaria.modules.download.dao.IndicatorByFieldsMapper;
 import com.edupractice.malaria.modules.download.pojo.CategoryFieldsRe;
 import com.edupractice.malaria.modules.download.pojo.DownloadParamVo;
+import com.edupractice.malaria.modules.download.pojo.SQLQuery;
 import com.edupractice.malaria.modules.download.service.DownloadDBDataService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -12,9 +15,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class DownloadDBDataServiceImpl implements DownloadDBDataService {
@@ -90,9 +91,82 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
      * @return
      * @throws Exception
      */
-    private List<Map<String, Object>> getDiseaseIndicators(DownloadParamVo downloadParamVo) {
-
-        return new ArrayList<>();
+    private List<Map<String, Object>> getDiseaseIndicators(DownloadParamVo downloadParamVo) throws Exception{
+//        List<String> selectedDisplayFields = downloadParamVo.getSelectedName();
+//        List<Indicator> indicators = indicatorByFieldsMapper.selectIndicatorByFields(selectedDisplayFields);
+//        Set<String> selectFieldSet = new HashSet<>();
+//        Set<String> fromTableSet = new HashSet<>();
+//        Set<String> tableSet = new HashSet<>();
+//        Set<String> whereSet = new HashSet<>();
+//
+//        for (int i = 0; i < indicators.size(); i++) {
+//            Indicator current = indicators.get(i);
+//            selectFieldSet.add(" " + current.getTableAlias()+ "." + current.getFieldName() + " AS '" + current.getDisplayName() + "'");
+//            fromTableSet.add(" " + current.getBelongTable() + " " + current.getTableAlias());
+//            if (!tableSet.contains(current.getBelongTable())) {
+//                tableSet.add(current.getBelongTable());
+//            }
+//        }
+//
+//        //筛选条件
+//        if (tableSet.contains("weather_data")) {
+//            if (0 != downloadParamVo.getBeginYear() && 0 != downloadParamVo.getEndYear()) {
+//                whereSet.add(" AND wd.weatherYear BETWEEN " + downloadParamVo.getBeginYear() + " AND " + downloadParamVo.getEndYear());
+//            }
+//            if (tableSet.contains("meteorological_station_insformation")) {
+//                whereSet.add(" AND wd.districtStationNum=msi.districtStationNum");
+//            }
+//        }
+//        if (tableSet.contains("patient_information")) {
+//            //时间区间
+//            if (0 != downloadParamVo.getBeginYear() && 0 != downloadParamVo.getEndYear()) {
+//                whereSet.add(" AND pi.year BETWEEN " + downloadParamVo.getBeginYear() + " AND " + downloadParamVo.getEndYear());
+//            }
+//            //地区 (应该区分为四级 省、市、镇、村)
+//            if (null != downloadParamVo.getAddrLevel1()) {
+//                whereSet.add(" AND (pi.address LIKE '%" + downloadParamVo.getAddrLevel1() + "%')");
+//                if (null != downloadParamVo.getAddrLevel2()) {
+//                    whereSet.add(" AND (pi.address LIKE '%" + downloadParamVo.getAddrLevel2() + "%')");
+//                    if (null != downloadParamVo.getAddrLevel3()) {
+//                        whereSet.add(" AND (pi.address LIKE '%" + downloadParamVo.getAddrLevel3() + "%')");
+//                        if (null != downloadParamVo.getAddrLevel4()) {
+//                            whereSet.add(" AND (pi.address LIKE '%" + downloadParamVo.getAddrLevel4() + "%')");
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        StringBuilder selectBuilder = new StringBuilder();
+//        for (Iterator<String> it = selectFieldSet.iterator(); it.hasNext(); ) {
+//            selectBuilder.append(it.next());
+//            if (it.hasNext()) {
+//                selectBuilder.append(",");
+//            }
+//        }
+//        StringBuilder fromBuilder = new StringBuilder();
+//        for (Iterator<String> it = fromTableSet.iterator(); it.hasNext(); ) {
+//            fromBuilder.append(it.next());
+//            if (it.hasNext()) {
+//                fromBuilder.append(",");
+//            }
+//        }
+//
+//        StringBuilder whereBuilder = new StringBuilder();
+//        for (Iterator<String> it = whereSet.iterator(); it.hasNext(); ) {
+//            whereBuilder.append(it.next());
+//            if (it.hasNext()) {
+//                whereBuilder.append(" ");
+//            }
+//        }
+//
+//        SQLQuery sqlQuery = new SQLQuery();
+//
+//        sqlQuery.setSelect(selectBuilder.toString());
+//        sqlQuery.setFrom(fromBuilder.toString());
+//        sqlQuery.setWhere(whereBuilder.toString());
+        List<Map<String,Object>> resultMapList = indicatorByFieldsMapper.selectData(sqlQuery);
+        return resultMapList;
     }
 
     /**
