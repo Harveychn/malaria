@@ -6,7 +6,7 @@
         SELECT * FROM indicator
         <where>
             <if test="list!=null">
-                <foreach collection="list" index="index" item="item" open=" AND displayName in (" separator=","
+                <foreach collection="list" index="index" item="item" open=" AND display_name in (" separator=","
                          close=")">
                     #{item}
                 </foreach>
