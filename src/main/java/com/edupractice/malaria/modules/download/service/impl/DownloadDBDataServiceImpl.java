@@ -92,8 +92,8 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
      * @throws Exception
      */
     private List<Map<String, Object>> getDiseaseIndicators(DownloadParamVo downloadParamVo) throws Exception{
-        List<String> selectedDisplayFields = downloadParamVo.getSelectedName();
-        List<Indicator> indicators = indicatorByFieldsMapper.selectIndicatorByFields(selectedDisplayFields);
+//        List<String> selectedDisplayFields = downloadParamVo.getSelectedName();
+//        List<Indicator> indicators = indicatorByFieldsMapper.selectIndicatorByFields(selectedDisplayFields);
       return  new ArrayList<>();
     }
 
