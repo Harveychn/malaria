@@ -12,4 +12,5 @@ public interface IndicatorByFieldsMapper {
     List<Indicator> selectIndicatorByFields(List<String> displayFields) throws Exception;
     List<String> selectBelongTables() throws Exception;
     List<Map<String,Object>> selectData(SQLQuery sqlQuery)throws Exception;
+    List<Indicator> selectIndicatorOfDisease()throws Exception;
 }

@@ -28,4 +28,10 @@
             ${where}
         </where>
     </select>
+
+    <select id="selectIndicatorOfDisease" resultType="com.edupractice.malaria.modules.common.pojo.Indicator">
+        SELECT * FROM indicator
+            WHERE category = 'Disease'
+
+    </select>
 </mapper>
