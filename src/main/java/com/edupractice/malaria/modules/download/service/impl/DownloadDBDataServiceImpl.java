@@ -7,12 +7,10 @@ import com.edupractice.malaria.modules.download.pojo.CategoryFieldsRe;
 import com.edupractice.malaria.modules.download.pojo.DownloadParamVo;
 import com.edupractice.malaria.modules.download.pojo.SQLQuery;
 import com.edupractice.malaria.modules.download.service.DownloadDBDataService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -108,15 +106,14 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
         }
         //多表连接条件
         whereSet.add(" AND cd.patient_id = " + "pi.patient_id" +
-                " AND cd.patient_id = " + "pi.patient_id" +
                 " AND cd.disease_id = " + "di.disease_id" +
                 " AND cd.category_id1 = " + "cc1.category_id1" +
                 " AND cd.category_id2 = " + "cc2.category_id2" +
                 " AND cd.fill_card_doc_id = " + "do.doctor_id" +
                 " AND cd.report_unit_id = " + "mu.medical_unit_id" +
-                " AND cd.input_user_id = " + "do.doctor_id" +
-                " AND cd.revised_user_id = " + "do.doctor_id" +
-                " AND cd.del_user_id = " + "do.doctor_id" +
+                " AND cd.input_user_id = " + "do1.doctor_id" +
+                " AND cd.revised_user_id = " + "do2.doctor_id" +
+                " AND cd.del_user_id = " + "do3.doctor_id" +
                 " AND pi.address_id = " + "ag.address_id" +
                 " AND pi.career_id = " + "ca.career_id" +
                 " AND pi.belongs_id = " + "pb.belongs_id");
