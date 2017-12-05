@@ -1,16 +1,14 @@
 package com.edupractice.malaria.modules.download.service.impl;
 
 import com.edupractice.malaria.modules.common.pojo.Indicator;
+import com.edupractice.malaria.modules.common.pojo.WeatherData;
 import com.edupractice.malaria.modules.download.dao.CategoryFieldsMapper;
 import com.edupractice.malaria.modules.download.dao.IndicatorByFieldsMapper;
 import com.edupractice.malaria.modules.download.pojo.CategoryFieldsRe;
 import com.edupractice.malaria.modules.download.pojo.DownloadParamVo;
 import com.edupractice.malaria.modules.download.pojo.SQLQuery;
 import com.edupractice.malaria.modules.download.service.DownloadDBDataService;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -46,11 +44,12 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
         List<Map<String, Object>> totalData = new ArrayList<>();
         List<String> selectedFields = downloadParamVo.getSelectedName();
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
-        if ("Disease".equals(downloadParamVo.getCategory().trim())) {
+        HSSFCellStyle cellStyle = hssfWorkbook.createCellStyle();
+        if (downloadParamVo.getCategory().trim().equals("Disease")) {
             totalData = getDiseaseIndicators(downloadParamVo);
-        } else if ("Weather".equals(downloadParamVo.getCategory().trim())) {
+        } else if (downloadParamVo.getCategory().trim().equals("Weather")) {
             totalData = getWeatherIndicators(downloadParamVo);
-        } else if ("Station".equals(downloadParamVo.getCategory().trim())) {
+        } else if (downloadParamVo.getCategory().trim().equals("Station")) {
             totalData = getStationIndicators(downloadParamVo);
         }
         HSSFSheet hssfSheet = hssfWorkbook.createSheet("下载数据");
@@ -70,8 +69,8 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
             for (int cellNum = 0; cellNum < selectedFields.size(); cellNum++) {
                 String currentKey = selectedFields.get(cellNum);
                 cells[cellNum] = currentRow.createCell(cellNum);
-                //单元格数据为空时，设置为“ ”
-                if (null == currentData.get(currentKey)) {
+                //单元格数据为空或为"."时，设置为" "
+                if (null == currentData.get(currentKey) || currentData.get(currentKey).equals(".")) {
                     cells[cellNum].setCellValue(" ");
                     continue;
                 }
@@ -79,6 +78,13 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
             }
         }
         return hssfWorkbook;
+    }
+
+    /**
+     *设置单元格格式
+     */
+    private void setStyle(String string){
+
     }
 
     /**
@@ -192,7 +198,9 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
      * @return
      * @throws Exception
      */
-    private List<Map<String, Object>> getWeatherIndicators(DownloadParamVo downloadParamVo) {
+    private List<Map<String, Object>> getWeatherIndicators(DownloadParamVo downloadParamVo) throws Exception {
+        List<String> selectedDisplayFields = downloadParamVo.getSelectedName();
+        List<Indicator> indicators = indicatorByFieldsMapper.selectIndicatorByFields(selectedDisplayFields);
         return new ArrayList<>();
     }
 
@@ -204,8 +212,24 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
      * @return
      * @throws Exception
      */
-    private List<Map<String, Object>> getStationIndicators(DownloadParamVo downloadParamVo) {
-        return new ArrayList<>();
+    private List<Map<String, Object>> getStationIndicators(DownloadParamVo downloadParamVo)throws Exception {
+        List<String> selectedDisplayFields = downloadParamVo.getSelectedName();
+        List<Indicator> indicators = indicatorByFieldsMapper.selectIndicatorByFields(selectedDisplayFields);
+        SQLQuery sqlQuery = new SQLQuery();
+        sqlQuery.setSelect(toString(indicators));
+        sqlQuery.setFrom("meteorological_station");
+        sqlQuery.setWhere("");
+        List<Map<String, Object>> resultMapList = indicatorByFieldsMapper.selectData(sqlQuery);
+        return resultMapList;
+    }
+
+    public String toString(List<Indicator> strings){
+        String returnString="";
+        for (Indicator string: strings
+             ) {
+            returnString += (string.getFieldName() + " AS " +string.getDisplayName() + ",");
+        }
+        return returnString.substring(0,returnString.length()-1);
     }
 
 

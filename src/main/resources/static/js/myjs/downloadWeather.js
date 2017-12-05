@@ -9,17 +9,8 @@ $('#submitTerm').on('click', function (event) {
         shade:[0.8,'white']
     });
     //获取选择的时间
-    // var beginYear = $('#start').val();
     var beginYear = $('#beginYear').val();
-    // console.log(beginYear);
-    // var endYear = $('#end').val();
     var endYear = $('#endYear').val();
-    // console.log(endYear);
-    //获取选择的地址
-    // var addsPro = $('#province option:selected').val();
-    // var addsCity = $('#city option:selected').val();
-    // var addsCounty = $('#county option:selected').val();
-    // var addsVillage = $('#village option:selected').val();
 
     //获取选择的字段
     var fields = [];
