@@ -8,7 +8,10 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/plugins/iCheck/flat/blue.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		
+		<!--自定义css-->
 		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/download.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/downloadStation.css}" />
 	</head>
 	
 	<body>
@@ -18,18 +21,18 @@
 			</div>
 			
 			<div class="partDivide">
-				<a id="returnTerm" class="btn btn-primary pull-left"  th:href="@{/DownloadDBData/downloadView}" style="margin-left: 50px;">返回</a>
+				<button id="returnTerm" class="btn btn-primary pull-left" type="submit" th:href="@{/DownloadDBData/downloadView}"  style="margin-left: 50px;">返回</button>
 				<button id="submitTerm" class="btn btn-primary pull-right" type="submit">开始下载</button>
 			</div>
 			
 			<hr />
 			
-			<div class="partDivide">
+			<div class="partDivide" style="margin-bottom: 100px;">
 				<div class="fieldContainer">
 					<div class="describe">
 						<div>
-							<span class="fieldName">请选择将要下载的字段：</span>
-							<button id="needNon" class="btn btn-default">全部选</button>
+							<span class="fieldName" style="margin-left: 50px;">请选择将要下载的字段：</span>
+							<button id="needNon" class="btn btn-default" style="margin-right: 50px;">全部选</button>
 							<button id="needAll" class="btn btn-default">全选</button>
 						</div>
 					</div>
