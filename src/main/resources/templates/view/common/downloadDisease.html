@@ -8,16 +8,18 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/plugins/iCheck/flat/blue.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/download.css}" />
 	<!--自定义css-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/download.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/downloadDisease.css}" />
 </head>
 <body>
 <section class="container">
+	
 	<div align="center">
 		<h2>疟疾数据下载</h2>
 		<hr />
 	</div>
+	
 	<div class="partDivide">
 		<button id="returnTerm" class="btn btn-primary pull-left" type="submit" onclick="window.open('dataDownload.html')" style="margin-left: 50px;">返回</button>
 		<button id="submitTerm" class="btn btn-primary pull-right" type="submit" style="margin-right: 50px;">开始下载</button>
@@ -56,7 +58,7 @@
 	</div>
 
 	<div class="partDivide">
-		<form class="form-inline" style="margin-left: 50px;margin-bottom: -90px;">
+		<form class="form-inline" style="margin-left: 50px;">
 			<label class="fieldName">选择数据地区：</label>
 				<div class="form-group">
 					
