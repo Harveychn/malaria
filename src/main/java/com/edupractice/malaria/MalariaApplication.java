@@ -3,8 +3,10 @@ package com.edupractice.malaria;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +23,13 @@ import javax.servlet.MultipartConfigElement;
 @EnableScheduling //启用定时任务
 @EnableAsync //启用异步执行注解
 @MapperScan("com.edupractice.malaria.modules.*.dao")//配置Mapper接口类扫描路径
-public class MalariaApplication {
+public class MalariaApplication extends SpringBootServletInitializer{
 
-	public static void main(String[] args) {
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(MalariaApplication.class);
+	}
+
+	public static void main(String[] args)throws Exception {
 		SpringApplication.run(MalariaApplication.class, args);
 	}
 

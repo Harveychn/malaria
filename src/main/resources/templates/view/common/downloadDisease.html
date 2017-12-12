@@ -19,7 +19,7 @@
 		<hr />
 	</div>
 	<div class="partDivide">
-		<button id="returnTerm" class="btn btn-primary pull-left" type="submit" onclick="window.open('dataDownload.html')" style="margin-left: 50px;">返回</button>
+		<a id="returnTerm" class="btn btn-primary pull-left"  th:href="@{/DownloadDBData/downloadView}" style="margin-left: 50px;">返回</a>
 		<button id="submitTerm" class="btn btn-primary pull-right" type="submit" style="margin-right: 50px;">开始下载</button>
 	</div>
 
@@ -56,7 +56,7 @@
 	</div>
 
 	<div class="partDivide">
-		<form class="form-inline" style="margin-left: 50px;margin-bottom: -90px;">
+		<form class="form-inline" style="margin-left: 50px;">
 			<label class="fieldName">选择数据地区：</label>
 				<div class="form-group">
 					

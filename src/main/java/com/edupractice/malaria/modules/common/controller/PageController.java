@@ -16,7 +16,7 @@ public class PageController {
 
     @RequestMapping("/locatedUserMap")
     public ModelAndView LocatedUserMap(){
-        return new ModelAndView("LocatedUserMap");
+        return new ModelAndView("locatedUserMap");
     }
 
 }

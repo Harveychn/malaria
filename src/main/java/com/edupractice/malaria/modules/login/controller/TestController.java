@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class TestController {
 
-    @GetMapping(value = "mapView")
+    @GetMapping(value = "/mapView")
     public ModelAndView mapView()throws Exception{
         return new ModelAndView("locatedUserMap");
     }
