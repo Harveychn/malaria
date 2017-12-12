@@ -19,72 +19,72 @@
 		<hr />
 	</div>
 	<div class="partDivide">
-		<a id="returnTerm" th:href="@{/DownloadDBData/downloadView}"   class="btn btn-link pull-left" type="submit">返回</a>
-		<button id="submitTerm" class="btn btn-primary pull-right" type="submit">开始下载</button>
+		<button id="returnTerm" class="btn btn-primary pull-left" type="submit" onclick="window.open('dataDownload.html')" style="margin-left: 50px;">返回</button>
+		<button id="submitTerm" class="btn btn-primary pull-right" type="submit" style="margin-right: 50px;">开始下载</button>
 	</div>
 
 	<div class="partDivide">
-		<div class="form-group">
+		<div class="form-group" style="margin-left: 50px;">
 			<label class="fieldName">选择时间区间：</label>
-			<input id="beginYear" class="form-control" type="number" min="1900" max="2099" placeholder="数据开始年份" />
-			<input id="endYear" class="form-control" type="number" min="1900" max="2099" placeholder="数据结束年份" />
+			<input id="beginYear" class="form-control" type="number" style="width: 170px;" min="1900" max="2099" placeholder="数据开始年份" />
+			~
+			<input id="endYear" class="form-control" type="number" style="width: 170px;" min="1900" max="2099" placeholder="数据结束年份" />
 		</div>
 	</div>
 
 	<div class="partDivide">
-		<div class="form-group">
+		<div class="form-group" style="margin-left: 50px;">
 			<label class="fieldName">选择年龄区间：</label>
-			<input id="minAge" class="form-control" type="number" min="1" max="100" placeholder="最小年龄" />
-			<input id="maxAge" class="form-control" type="number" min="1" max="100" placeholder="最大年龄" />
+			<input id="minAge" class="form-control" type="number" style="width: 170px;" min="1" max="100" placeholder="最小年龄" />
+			~
+			<input id="maxAge" class="form-control" type="number" style="width: 170px;" min="1" max="100" placeholder="最大年龄" />
 		</div>
 	</div>
 
 	<div class="partDivide">
-		<span class="fieldName">请选择性别：</span>
-
-		<label class="sexField">
-			<input type="radio" name="iCheck" value="0" />
-			<span class="sexSpan">全部</span>
-		</label>
-
-		<label class="sexField">
-			<input type="radio" name="iCheck" value="1" />
-			<span class="sexSpan">男</span>
-		</label>
-
-		<label class="sexField">
-			<input type="radio" name="iCheck" value="2" />
-			<span class="sexSpan">女</span>
-		</label>
+		<form class="form-inline" style="margin-left: 50px;">
+					<span class="fieldName">请选择性别：</span>
+				
+					<div class="form-group">
+						<select id="sex" class="mySelect" style="width: 170px; margin-left: 18px;">
+							<option>全部</option>
+							<option>男</option>
+							<option>女</option>
+						</select>
+					</div>
+		</form>
 	</div>
 
 	<div class="partDivide">
-		<label class="fieldName">选择数据地区：</label>
-		<div class="form-group">
-			<select id="province" class="mySelect">
-				<option>未选</option>
-			</select>
-
-			<select id="city" class="mySelect">
-				<option>未选</option>
-			</select>
-
-			<select id="county" class="mySelect">
-				<option>未选</option>
-			</select>
-
-			<select id="village" class="mySelect">
-				<option>未选</option>
-			</select>
-		</div>
+		<form class="form-inline" style="margin-left: 50px;margin-bottom: -90px;">
+			<label class="fieldName">选择数据地区：</label>
+				<div class="form-group">
+					
+					<select id="province" class="mySelect" style="width: 170px;margin-right: 10px;">
+						<option>未选</option>
+					</select>
+				
+					<select id="city" class="mySelect" style="width: 170px; margin-right: 10px;">
+						<option>未选</option>
+					</select>
+					
+					<select id="county" class="mySelect" style="width: 170px; margin-right: 10px;">
+						<option>未选</option>
+					</select>
+			
+					<select id="village" class="mySelect" style="width: 170px; margin-right: 10px;">
+						<option>未选</option>
+					</select>
+				</div>
+		</form>
 	</div>
 
-	<div class="partDivide">
+	<div class="partDivide" style="margin-bottom: 100px;">
 		<div class="fieldContainer">
 			<div class="describe">
 				<div>
-					<span class="fieldName">请选择将要下载的字段：</span>
-					<button id="needNon" class="btn btn-default">全不选</button>
+					<span class="fieldName" style="margin-left: 50px;">请选择将要下载的字段：</span>
+					<button id="needNon" class="btn btn-default" style="margin-right: 50px;">全不选</button>
 					<button id="needAll" class="btn btn-default">全选</button>
 				</div>
 			</div>
