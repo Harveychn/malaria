@@ -21,25 +21,29 @@
 	</div>
 	
 	<div class="partDivide">
-		<a id="returnTerm" class="btn btn-primary pull-left"  th:href="@{/DownloadDBData/downloadView}" style="margin-left: 50px;">返回</a>
+		<a id="returnTerm" class="btn btn-primary pull-left" onclick="window.open('dataDownload.html')" style="margin-left: 50px;">返回</a>
 		<button id="submitTerm" class="btn btn-primary pull-right" type="submit" style="margin-right: 50px;">开始下载</button>
 	</div>
 
 	<div class="partDivide">
-		<div class="form-group" style="margin-left: 50px;">
-			<label class="fieldName">选择时间区间：</label>
-			<input id="beginYear" class="form-control" type="number" style="width: 170px;" min="1900" max="2099" placeholder="数据开始年份" />
-			~
-			<input id="endYear" class="form-control" type="number" style="width: 170px;" min="1900" max="2099" placeholder="数据结束年份" />
+		<div class="form-inline">
+			<div class="form-group" style="margin-left: 50px;">
+				<label class="fieldName">选择时间区间：</label>
+				<input id="beginYear" class="form-control" type="number" style="width: 170px;" min="1900" max="2099" placeholder="数据开始年份" />
+				~
+				<input id="endYear" class="form-control" type="number" style="width: 170px;" min="1900" max="2099" placeholder="数据结束年份" />
+			</div>
 		</div>
 	</div>
 
 	<div class="partDivide">
-		<div class="form-group" style="margin-left: 50px;">
-			<label class="fieldName">选择年龄区间：</label>
-			<input id="minAge" class="form-control" type="number" style="width: 170px;" min="1" max="100" placeholder="最小年龄" />
-			~
-			<input id="maxAge" class="form-control" type="number" style="width: 170px;" min="1" max="100" placeholder="最大年龄" />
+		<div class="form-inline">
+			<div class="form-group" style="margin-left: 50px;">
+				<label class="fieldName">选择年龄区间：</label>
+				<input id="minAge" class="form-control" type="number" style="width: 170px;" min="1" max="100" placeholder="最小年龄" />
+				~
+				<input id="maxAge" class="form-control" type="number" style="width: 170px;" min="1" max="100" placeholder="最大年龄" />
+			</div>
 		</div>
 	</div>
 
