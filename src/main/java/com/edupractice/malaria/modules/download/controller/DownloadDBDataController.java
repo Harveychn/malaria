@@ -111,8 +111,13 @@ public class DownloadDBDataController {
         }
         int sex = 0;
         try {
-            sex = Integer.parseInt(requests.getParameter("sex").trim());
-        } catch (NumberFormatException e) {
+            switch (requests.getParameter("sex").trim()){
+                case "男": sex=1;break;
+                case "女": sex=2;break;
+                case "全部":sex =0;break;
+                default:break;
+            }
+        } catch (Exception e) {
             System.out.println("sex信息转换错误 信息：" + e.getMessage());
             sex = 0;
         }

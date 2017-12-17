@@ -23,7 +23,7 @@
 	
 	<body class="fixed-sidebar full-height-layout gray-bg skin-1 mini-navbar" style="overflow: hidden;">
 		<header class="cd-main-header animate-search">
-			<a class="navbar-minimalize minimalize-styl-2 btn btn-primary my-small-navbar" href="#">
+			<a class="navbar-minimalize minimalize-styl-2 btn btn-primary my-small-navbar" th:href="@{#}">
 				<i class="fa fa-bars my-fa-bar"></i>
 			</a>
 			<nav class="cd-main-nav-wrapper">
@@ -41,7 +41,7 @@
 				<div class="sidebar-collapse"><!--不存在-->
 					<ul id="side-menu" class="nav">
 						<li>
-							<a href="#">
+							<a th:href="@{#}">
 								<i class="fa fa fa-fire"></i>
 								<span class="nav-label">爆发分析</span>
 								<span class="fa arrow"></span>
@@ -49,21 +49,21 @@
 							
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="hotMap.html" class="J_menuItem">热力图</a><!--定义不存在-->
-									<a href="" class="J_menuItem">动态迁移</a>
+									<a th:href="@{#}" class="J_menuItem">热力图</a><!--定义不存在-->
+									<a th:href="@{#}" class="J_menuItem">动态迁移</a>
 								</li>
 							</ul>
 						</li>
 						
 						<li>
-							<a href="" class="J_menuItem">
+							<a th:href="@{#}" class="J_menuItem">
 								<i class="fa fa fa-bar-chart"></i>
 								<span class="nav-label">数据分析</span>
 							</a>
 						</li>
 						
 						<li>
-							<a href="#">
+							<a th:href="@{#}">
 								<i class="fa fa fa-area-chart"></i>
 								<span class="nav-label">统计预测</span>
 								<span class="fa arrow"></span>
@@ -75,14 +75,14 @@
 						</li>
 						
 						<li>
-							<a class="J_menuItem" href="">
+							<a class="J_menuItem" th:href="@{#}">
 								<i class="fa fa fa-calculator"></i>
 								<span class="nav-label">执行计算</span>
 							</a>
 						</li>
 						
 						<li>
-							<a href="" class="J_menuItem">
+							<a th:href="@{#}" class="J_menuItem">
 								<i class="fa fa fa-calculator"></i>
 								<span class="nav-label">相关数据</span>
 							</a>
@@ -102,7 +102,7 @@
 				
 					<nav class="page-tabs J_menuTabs"><!--定义不存在-->
 						<div class="page-tabs-content">
-							<a href="#" class="active J_menuTab" data-id="first-page.html">首页</a>
+							<a th:href="@{#}" class="active J_menuTab" data-id="first-page.html">首页</a>
 						</div>
 					</nav>
 				

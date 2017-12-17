@@ -19,7 +19,7 @@ $('#submitTerm').on('click', function (event) {
     var endYear = $('#endYear').val();
     // console.log(endYear);
     //获取选择的性别
-    var sex = $('#sex option:checked').val();
+    var sex = $('#sex option:selected').val();
     // console.log(sex);
     //获取选择的地址
     var addsPro = $('#province option:selected').val();

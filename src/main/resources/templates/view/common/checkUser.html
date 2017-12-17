@@ -48,8 +48,8 @@
 										<td th:text=${checkUser.user.userPhone}></td>
 										<td th:text=${checkUser.user.userUnit}></td>
 										<td th:text=${checkUser.joinDate}></td>
-										<td><a href="#"><i class="fa fa-check text-navy"></i> 通过</a></td>
-										<td><a href="#"><i class="fa fa-close text-navy"></i> 拒绝</a></td>
+										<td><a th:href="@{#}"><i class="fa fa-check text-navy"></i> 通过</a></td>
+										<td><a th:href="@{#}"><i class="fa fa-close text-navy"></i> 拒绝</a></td>
 									</tr>
 							    </tbody>
 								
