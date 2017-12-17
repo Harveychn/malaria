@@ -22,7 +22,7 @@
 	
 	<body class="fixed-sidebar full-height-layout gray-bg skin-1 mini-navbar" style="overflow: hidden;">
 		<header class="cd-main-header animate-search">
-			<a class="navbar-minimalize minimalize-styl-2 btn btn-primary my-small-navbar" href="#">
+			<a class="navbar-minimalize minimalize-styl-2 btn btn-primary my-small-navbar" th:href="@{#}">
 				<i class="fa fa-bars my-fa-bar"></i>
 			</a>
 			<nav class="cd-main-nav-wrapper">
@@ -54,7 +54,7 @@
 						</li>
 						
 						<li>
-							<a href="#">
+							<a th:href="@{#}">
 								<i class="fa fa fa-fire"></i>
 								<span class="nav-label">爆发分析</span>
 								<span class="fa arrow"></span>
@@ -62,21 +62,21 @@
 							
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="../../../templates/hotMap.html" class="J_menuItem">热力图</a><!--定义不存在-->
+									<a th:href="@{/hotMap}" class="J_menuItem">热力图</a><!--定义不存在-->
 									<a href="" class="J_menuItem">动态迁移</a>
 								</li>
 							</ul>
 						</li>
 						
 						<li>
-							<a href="../../../templates/analyzeSexChart.html" class="J_menuItem">
+							<a th:href="@{/analyzeSexChart}" class="J_menuItem">
 								<i class="fa fa fa-bar-chart"></i>
 								<span class="nav-label">数据分析</span>
 							</a>
 						</li>
 						
 						<li>
-							<a href="#">
+							<a th:href="@{#}">
 								<i class="fa fa fa-area-chart"></i>
 								<span class="nav-label">统计预测</span>
 								<span class="fa arrow"></span>
@@ -115,7 +115,7 @@
 				
 					<nav class="page-tabs J_menuTabs"><!--定义不存在-->
 						<div class="page-tabs-content">
-							<a href="javascript:" class="active J_menuTab" data-id="first-page.html">首页</a>
+							<a th:href="@{javascript:}" class="active J_menuTab" data-id="first-page.html">首页</a>
 						</div>
 					</nav>
 				
@@ -146,7 +146,7 @@
 						</ul>
 					</div>
 				
-					<a href="/user/exitToUserUI" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-in">退出</i></a>
+					<a th:href="@{/user/exitToUserUI}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-in">退出</i></a>
 				</div>
 			
 				<div id="content-main" class="row J_mainContent"><!--定义不存在-->

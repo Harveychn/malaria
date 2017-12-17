@@ -30,13 +30,13 @@
 				</div>
 				
 				<div class="col-sm-5">
-					<form method="post" action="/user/login"> <!--action无用-->
+					<form method="post" th:action="@{/user/login}"> <!--action无用-->
 						<h4 class="no-margins">登录：</h4>
 						<input name="userEmail" type="text" class="form-control uname" placeholder="用户名" autocomplete="on"/>
 						<input name="userPassword" type="password" class="form-control pword m-b" placeholder="密码" />
 						
-						<strong><a href="">忘记密码</a></strong>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>还没有账号？ <a href="/user/registerView">立即注册&raquo;</a></strong>
+						<strong><a th:href="@{#}">忘记密码</a></strong>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>还没有账号？ <a th:href="@{/user/registerView}">立即注册&raquo;</a></strong>
 						<button type="submit" class="btn btn-success btn-block">登录</button>
 					</form>
 				</div>
