@@ -4,7 +4,7 @@
 $(function () {
     $.ajax({
         type: "get",
-        url: "/district/getProvinces.do",
+        url: "../../district/getProvinces.do",
         dataType: "json",
         success: function (data) {
             var selPro = data.data[0];
