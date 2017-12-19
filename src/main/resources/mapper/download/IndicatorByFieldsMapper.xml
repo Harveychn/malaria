@@ -14,7 +14,7 @@
             AND downable =1
         </where>
         GROUP BY field_name
-        ORDER BY display_name ASC
+--         ORDER BY display_name ASC
     </select>
 
     <select id="selectBelongTables" resultType="String">
