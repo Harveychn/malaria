@@ -14,7 +14,7 @@ $(function () {
             });
             // $('#province option[value="' + selPro.name + '"]').attr("selected", "true");
             $('#province option[value="未选"]').attr("selected", "true");
-            var cityUrl = "/district/getCities.do?provinceId=" + selPro.id;
+            var cityUrl = "../../district/getCities.do?provinceId=" + selPro.id;
             $.ajax({
                 url: cityUrl,
                 success: function (data) {
@@ -25,7 +25,7 @@ $(function () {
                     });
                     // $('#city option[value="' + selCity.name + '"]').attr("selected", "true");
                     $('#city option[value="未选"]').attr("selected", "true");
-                    var countyUrl = "/district/getCounties.do?cityId=" + selCity.id;
+                    var countyUrl = "../..//district/getCounties.do?cityId=" + selCity.id;
                     $.ajax({
                         url: countyUrl,
                         success: function (data) {
@@ -36,7 +36,7 @@ $(function () {
                             });
                             // $('#county option[value="' + selCounty.name + '"]').attr("selected", "true");
                             $('#county option[value="未选"]').attr("selected", "true");
-                            var villageUrl = "/district/getVillages.do?countyId=" + selCounty.id;
+                            var villageUrl = "../..//district/getVillages.do?countyId=" + selCounty.id;
                             $.ajax({
                                 url: villageUrl,
                                 success: function (data) {
@@ -59,25 +59,25 @@ $('#province').change(function () {
     var _this = $(this);
     var provinceCode = _this.find('option:selected').attr('code');
     if (undefined != provinceCode) {
-        var cityUrl = "/district/getCities.do?provinceId=" + provinceCode;
+        var cityUrl = "../..//district/getCities.do?provinceId=" + provinceCode;
     } else {
-        var cityUrl = "/district/getCities.do?provinceId=0";
+        var cityUrl = "../..//district/getCities.do?provinceId=0";
     }
     masterAddrC(cityUrl, 'city');
     setTimeout(function () {
         var cityCode = $('#city').find('option').eq(0).attr('code');
         if (cityCode != undefined) {
-            var countyUrl = '/district/getCounties.do?cityId=' + cityCode;
+            var countyUrl = '../..//district/getCounties.do?cityId=' + cityCode;
         } else {
-            var countyUrl = '/district/getCounties.do?cityId=0';
+            var countyUrl = '../..//district/getCounties.do?cityId=0';
         }
         masterAddrC(countyUrl, 'county');
         setTimeout(function () {
             var countyCode = $('#county').find('option').eq(0).attr('code');
             if (undefined != countyCode) {
-                var villageUrl = '/district/getVillages.do?countyId=' + countyCode;
+                var villageUrl = '../..//district/getVillages.do?countyId=' + countyCode;
             } else {
-                var villageUrl = '/district/getVillages.do?countyId=0';
+                var villageUrl = '../..//district/getVillages.do?countyId=0';
             }
             masterAddrC(villageUrl, 'village');
             setTimeout(function () {
@@ -94,9 +94,9 @@ $('#city').change(function () {
     var _this = $(this);
     var cityCode = _this.find('option:selected').attr('code');
     if (cityCode != undefined) {
-        var countyUrl = '/district/getCounties.do?cityId=' + cityCode;
+        var countyUrl = '../..//district/getCounties.do?cityId=' + cityCode;
     } else {
-        var countyUrl = '/district/getCounties.do?cityId=0';
+        var countyUrl = '../..//district/getCounties.do?cityId=0';
     }
 
     masterAddrC(countyUrl, 'county');
@@ -105,9 +105,9 @@ $('#city').change(function () {
 
 //            console.log("countyCode:" + countyCode);
         if (undefined != countyCode) {
-            var villageUrl = '/district/getVillages.do?countyId=' + countyCode;
+            var villageUrl = '../..//district/getVillages.do?countyId=' + countyCode;
         } else {
-            var villageUrl = '/district/getVillages.do?countyId=0';
+            var villageUrl = '../..//district/getVillages.do?countyId=0';
         }
         masterAddrC(villageUrl, 'village');
         setTimeout(function () {
@@ -124,9 +124,9 @@ $('#county').change(function () {
 
 //        console.log("countyCode: " + countyCode);
     if (countyCode != undefined) {
-        var villageUrl = '/district/getVillages.do?countyId=' + countyCode;
+        var villageUrl = '../..//district/getVillages.do?countyId=' + countyCode;
     } else {
-        var villageUrl = '/district/getVillages.do?countyId=0';
+        var villageUrl = '../..//district/getVillages.do?countyId=0';
     }
     masterAddrC(villageUrl, 'village');
     setTimeout(function () {
