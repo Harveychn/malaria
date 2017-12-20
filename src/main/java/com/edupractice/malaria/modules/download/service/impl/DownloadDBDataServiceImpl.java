@@ -181,8 +181,6 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
                 whereBuilder.append(" ");
             }
         }
-
-
         SQLQuery sqlQuery = new SQLQuery();
         sqlQuery.setSelect(selectBuilder.toString());
         sqlQuery.setFrom(fromBuilder.toString());
@@ -201,7 +199,57 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
     private List<Map<String, Object>> getWeatherIndicators(DownloadParamVo downloadParamVo) throws Exception {
         List<String> selectedDisplayFields = downloadParamVo.getSelectedName();
         List<Indicator> indicators = indicatorByFieldsMapper.selectIndicatorByFields(selectedDisplayFields);
-        return new ArrayList<>();
+        Set<String> selectFieldSet = new HashSet<>();
+        Set<String> fromTableSet = new HashSet<>();
+        Set<String> tableSet = new HashSet<>();
+        Set<String> whereSet = new HashSet<>();
+        fromTableSet.add(" " + "weather_data" +"  "+ "AS"+"  "+ "wd");
+        fromTableSet.add(" " + "meteorological_station" +"  "+ "AS"+"  "+ "ms");
+        for (Indicator indicator : indicators
+                ) {
+
+       selectFieldSet.add(" " + indicator.getTableAlias() + "." + indicator.getFieldName() + " AS '" + indicator.getDisplayName() + "'");
+        }
+
+        //多表连接条件
+        whereSet.add(" AND wd.station_id = ms.station_id");
+
+        //筛选条件
+        if (0 != downloadParamVo.getBeginYear() && 0 != downloadParamVo.getEndYear() && downloadParamVo.getBeginYear() <= downloadParamVo.getEndYear()) {
+            whereSet.add(" AND wd.weather_year BETWEEN " + downloadParamVo.getBeginYear() + " AND " + downloadParamVo.getEndYear());
+        }
+
+        StringBuilder selectBuilder = new StringBuilder();
+        for (Iterator<String> it = selectFieldSet.iterator(); it.hasNext(); ) {
+            selectBuilder.append(it.next());
+            if (it.hasNext()) {
+                selectBuilder.append(",");
+            }
+        }
+
+        StringBuilder fromBuilder = new StringBuilder();
+        for (Iterator<String> it = fromTableSet.iterator(); it.hasNext(); ) {
+            fromBuilder.append(it.next());
+            if (it.hasNext()) {
+                fromBuilder.append(",");
+            }
+        }
+
+        StringBuilder whereBuilder = new StringBuilder();
+        for (Iterator<String> it = whereSet.iterator(); it.hasNext(); ) {
+            whereBuilder.append(it.next());
+            if (it.hasNext()) {
+                whereBuilder.append(" ");
+            }
+        }
+        SQLQuery sqlQuery = new SQLQuery();
+        sqlQuery.setSelect(selectBuilder.toString());
+        sqlQuery.setFrom(fromBuilder.toString());
+        sqlQuery.setWhere(whereBuilder.toString());
+        List<Map<String, Object>> resultMapList = indicatorByFieldsMapper.selectData(sqlQuery);
+        return resultMapList;
+
+
     }
 
 

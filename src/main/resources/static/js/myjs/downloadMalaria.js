@@ -44,7 +44,7 @@ $('#submitTerm').on('click', function (event) {
         return;
     }
     $.ajax({
-        url: "diseaseParams",
+        url: "../../DownloadDBData/diseaseParams",
         data: {
             'selectedFields': fields,
             'province': addsPro,
@@ -62,7 +62,7 @@ $('#submitTerm').on('click', function (event) {
         success: function (data) {
             console.log("OK :" + data);
             layer.close(loading);
-            window.open("downloadExcel", "_self");
+            window.open("../downloadExcel", "_self");
         },
         error: function () {
             console.error("'/DownloadDBData/diseaseParams' Error");
