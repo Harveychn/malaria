@@ -25,7 +25,7 @@ $('#submitTerm').on('click', function (event) {
         return;
     }
     $.ajax({
-        url: "/DownloadDBData/weatherParams.do",
+        url: "../../DownloadDBData/weatherParams",
         data: {
             'selectedFields': fields,
             // 'province': addsPro,
@@ -40,7 +40,7 @@ $('#submitTerm').on('click', function (event) {
         success: function (data) {
             layer.close(loading);
             console.log("OK :" + data);
-            window.open("/DownloadDBData/downloadExcel", "_self");
+            window.open("../downloadExcel", "_self");
         },
         error: function () {
             console.error("访问服务器'/DownloadDBData/weatherParams.do' Error");

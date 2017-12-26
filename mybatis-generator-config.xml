@@ -15,8 +15,10 @@
         </commentGenerator>
 
         <!-- !!!! Database Configurations 数据库连接配置!!!! -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1/malaria"
-                        userId="root" password="zxh980278090"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/malaria"
+                        userId="root" password="roothdu2017"/>
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://47.104.98.40:3306/malaria"-->
+                        <!--userId="root" password="roothdu2017"/>-->
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>

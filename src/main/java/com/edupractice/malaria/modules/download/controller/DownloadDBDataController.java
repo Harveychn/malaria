@@ -5,6 +5,7 @@ import com.edupractice.malaria.modules.download.pojo.DownloadParamVo;
 import com.edupractice.malaria.modules.download.service.DownloadDBDataService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,8 +43,8 @@ public class DownloadDBDataController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/fieldNameDownloadable.do")
-    public ModelAndView fieldNameDownloadable(@RequestParam(value = "category") String category) throws Exception {
+    @RequestMapping("/fieldNameDownloadable.do/{category}")
+    public ModelAndView fieldNameDownloadable(@PathVariable String category) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         //获取对应参数的可选择下载字段
         List<CategoryFieldsRe> categoryFieldsRes = downloadDBDataService.getFieldsNameDownload(category);
