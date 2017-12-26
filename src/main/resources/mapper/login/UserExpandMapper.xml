@@ -29,10 +29,10 @@
     </select>
 
     <update id="updateCheckUserAgree" >
-        UPDATE user SET is_checked='1',user_role='2' WHERE user_email=#{useremail,jdbcType=VARCHAR}
+        UPDATE user SET is_checked='2',user_role='2' WHERE user_email=#{useremail,jdbcType=VARCHAR}
     </update>
     <update id="updateCheckUserReject">
-        UPDATE user SET is_checked='2',user_role='2' WHERE user_email=#{useremail,jdbcType=VARCHAR}
+        UPDATE user SET is_checked='1',user_role='1' WHERE user_email=#{useremail,jdbcType=VARCHAR}
     </update>
     <delete id="deleteCheckUser">
         DELETE USER WHERE user_email=#{useremail,jdbcType=VARCHAR}

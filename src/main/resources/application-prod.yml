@@ -15,7 +15,8 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
   datasource:
-    url: jdbc:mysql://47.104.98.40:3306/malaria?useUnicode=true&characterEncoding=utf8&useSSL=true
+#    url: jdbc:mysql://47.104.98.40:3306/malaria?useUnicode=true&characterEncoding=utf8&useSSL=true
+    url: jdbc:mysql://localhost:3306/malaria?useUnicode=true&characterEncoding=utf8&useSSL=true
     username: root
     password: roothdu2017
     driver-class-name: com.mysql.jdbc.Driver
