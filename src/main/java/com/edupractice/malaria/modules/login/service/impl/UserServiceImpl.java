@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     private UserExpandMapper userExpandMapper;
 
     //登陆方法的实现，从html页面获取userEmail与userPassword与user中的userPassword比较
-    public User checkLogin(String userEmail,String password) throws Exception {
+    public User checkLogin(String userEmail, String password) throws Exception {
         System.out.println(userEmail);
         System.out.println(password);
         User user = userMapper.selectByEmail(userEmail);
@@ -37,8 +37,7 @@ public class UserServiceImpl implements UserService {
         //已审核
         if (user.getIsChecked().equals("1")) {
             //密码正确
-            if(user.getUserPassword().equals(password))
-            {
+            if (user.getUserPassword().equals(password)) {
                 System.out.println(user);
                 return user;
             }
@@ -73,9 +72,16 @@ public class UserServiceImpl implements UserService {
         return userExpandMapper.selectCheckUser();
     }
 
-    //更新check_user中的isChecked和userRole
-    public void updateUser(String userEmail) throws Exception {
-        userExpandMapper.updateCheckUser(userEmail);
+    public void updateUserAgree(String userEmail) throws Exception {
+        userExpandMapper.updateCheckUserAgree(userEmail);
+    }
+
+    public void updateUserReject(String userEmail) throws Exception {
+        userExpandMapper.updateCheckUserReject(userEmail);
+    }
+
+    public void deleteCheckUser(String userEmail) throws Exception {
+        userExpandMapper.deleteCheckUser(userEmail);
     }
 
 }

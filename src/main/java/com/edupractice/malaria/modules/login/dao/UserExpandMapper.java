@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public interface UserExpandMapper {
     List<User> selectCheckUser();
-    List<User> updateCheckUser(String userEmail);
+    void updateCheckUserAgree(String userEmail);
+    void updateCheckUserReject(String userEmail);
+    void deleteCheckUser(String uerEmail);
 
 }

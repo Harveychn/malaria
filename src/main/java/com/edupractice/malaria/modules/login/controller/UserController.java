@@ -104,9 +104,20 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("/checkUserAgree")
-    public ModelAndView checkUserAgree() throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
+    @RequestMapping("/checkUserAgree/{userEmail}")
+    public int checkUserAgree(@PathVariable String userEmail) throws Exception {
+        userService.updateUserAgree(userEmail);
+        return 1;
+    }
+
+    @RequestMapping("/checkUserReject/{userEmail}")
+    public int checkUserReject(@PathVariable String userEmail)throws Exception{
+        userService.updateUserReject(userEmail);
+        return 1;
+    }
+
+    @RequestMapping("/Reject")
+    public ModelAndView reject(User user)throws Exception{
+        return  new ModelAndView();
     }
 }

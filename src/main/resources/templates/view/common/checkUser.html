@@ -44,12 +44,12 @@
 								<tr th:each="checkUser,checkUserStat : ${checkUser}">
 										<td th:text=${checkUser.user.userName}></td>
 										<td th:text=${checkUser.user.userRealName}></td>
-										<td th:text=${checkUser.user.userEmail}></td>
+										<td id="userEmail" th:text=${checkUser.user.userEmail}></td>
 										<td th:text=${checkUser.user.userPhone}></td>
 										<td th:text=${checkUser.user.userUnit}></td>
 										<td th:text=${checkUser.joinDate}></td>
-										<td><a th:href="@{#}"><i class="fa fa-check text-navy"></i> 通过</a></td>
-										<td><a th:href="@{#}"><i class="fa fa-close text-navy"></i> 拒绝</a></td>
+										<td><a id="checkUserAgree" onclick=checkUserAgree()><i class="fa fa-check text-navy"></i> 通过</a></td>
+										<td><a id="checkUserReject" onclick=checkUserReject()><i class="fa fa-close text-navy"></i> 拒绝</a></td>
 									</tr>
 							    </tbody>
 								

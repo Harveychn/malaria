@@ -14,5 +14,8 @@ public interface UserService {
     boolean checkRegister(String userEmail) throws Exception;
     void saveRegister(User User) throws Exception;
     List<User> selectCheckUser() throws Exception;
-    void updateUser(String userEmail) throws Exception;
+    void updateUserAgree(String userEmail) throws Exception;
+    void updateUserReject(String userEmail) throws Exception;
+    void deleteCheckUser(String userEmail) throws Exception;
+
 }
