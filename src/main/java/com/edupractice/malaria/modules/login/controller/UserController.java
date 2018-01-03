@@ -51,11 +51,8 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView userLogin(User user) throws Exception {
-        System.out.println(user.getUserEmail());
-        System.out.println(user.getUserPassword());
         User userChecked = userService.checkLogin(user.getUserEmail(), user.getUserPassword());
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println(userChecked);
         if (null != userChecked) {
             modelAndView.addObject("user", user);
             //系统管理员页面

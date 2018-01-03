@@ -7,7 +7,7 @@ $(function () {
         url: "../../district/getProvinces.do",
         dataType: "json",
         success: function (data) {
-            var selPro = data.data[0];
+            //var selPro = data.data[0];
             $.each(data.data, function (i, item) {
                 var $option = '<option code=' + item.id + ' value=' + item.name + '>' + item.name + '</option>';
                 $("#province").append($option);

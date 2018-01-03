@@ -19,4 +19,13 @@ public class PageController {
         return new ModelAndView("locatedUserMap");
     }
 
+    @RequestMapping("/hotMap")
+    public  ModelAndView hotMap(){
+        return new ModelAndView("hotMap");
+    }
+    @RequestMapping("/analyzeSexChart")
+    public ModelAndView analyzeSexChart(){
+        return new ModelAndView("analyzeSexChart");
+    }
+
 }
