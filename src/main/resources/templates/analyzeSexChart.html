@@ -6,15 +6,19 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>数据分析</title>
+		
+			
+		<!--图标引入-->
 		<link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}" />
+		
+		<!--全局css-->
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
-		<script type="text/javascript" th:src="@{/js/myjs/analyzeSexChart.js}"></script>
-		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/build/dist/echarts.js}"></script>
+		<!--自定义css-->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/analyzeSexChart.css}" />
+		
 	</head>
 	<body>
 		<!--数据来源部分-->
@@ -98,4 +102,11 @@
 			</div>
 		</section>
 	</body>
+	
+	<!--全局js-->
+	<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/build/dist/echarts.js}"></script>
+	<!--自定义js-->
+	<script type="text/javascript" th:src="@{/js/myjs/analyzeSexChart.js}"></script>
 </html>
