@@ -51,13 +51,13 @@
 				<div class="col-sm-9">
 					<div class="tabs-container">
 						<ul class="nav nav-tabs" role="tablist" id="myTab"><!--role属性不存在-->
-							<li id="d1" class="col-sm-6 active">
+							<li id="d1" class="change col-sm-6 active">
 								<a data-loggle = "tab" th:href="@{#tab-1}" aria-expanded="true"><!--data-loggle,aria-expanded属性不存在-->
 									<h2 align="center"><strong>恶性疟</strong></h2>
 								</a>
 							</li>
 							
-							<li id="d2" class="col-sm-6">
+							<li id="d2" class="change col-sm-6">
 								<a data-loggle = "tab" th:href="@{#tab-2}" aria-expanded="false"><!--data-loggle,aria-expanded属性不存在-->
 									<h2 align="center"><strong>间日疟</strong></h2>
 								</a>
@@ -65,7 +65,7 @@
 						</ul>
 						
 						<div class="tab-content">
-							<div id="tab-1" class="tab-pane fade in active" role="tabpanel">
+							<div id="tab-1" class="tab-pane fade in" role="tabpanel">
 								<div class="panel-body">
 									<div class="col-sm-12">
 										<div id="sexChartTab_1" style="height: 300px;"></div>
@@ -81,7 +81,7 @@
 								</div>
 							</div>
 							
-							<div id="tab-2" class="tab-pane fade active" role="tabpanel">
+							<div id="tab-2" class="tab-pane fade" role="tabpanel">
 								<div class="panel-body">
 									<div class="col-sm-12">
 										<div id="sexChartTab_2" style="height: 300px;"></div>

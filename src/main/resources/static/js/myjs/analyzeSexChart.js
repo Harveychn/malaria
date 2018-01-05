@@ -526,3 +526,30 @@ $(function () {
             }
         });
     }
+    
+$(document).ready(function(){
+	var tabindex = d1;
+	$('#tab-1').show();
+	$('.change').click(function(){
+		var index = $(this).index();
+		if(tabindex == index)
+		{
+			return;
+		}
+		tabindex=index;
+		$('.active').removeClass('active');
+		$(this).addClass('active');
+		//$('.left-change').removeClass('left-change');
+		//$(this).addClass('left-change');
+		if(index == d1)
+		{
+			$('#tab-1').hide();
+			$('#tab-2').show();
+		}
+		else
+		{
+			$('#tab-1').show();
+			$('#tab-2').hide();
+		}
+	})
+})
