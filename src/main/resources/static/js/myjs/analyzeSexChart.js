@@ -19,7 +19,7 @@ $(function () {
 // 路径配置
     require.config({
         paths: {
-            echarts: '${webRoot}/js/build/dist'
+            echarts: '/js/build/dist'
         }
     });
     require(

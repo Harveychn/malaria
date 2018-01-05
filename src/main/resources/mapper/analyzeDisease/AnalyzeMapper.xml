@@ -16,17 +16,19 @@
 
     <select id="analyzeBySex" parameterType="String"
             resultMap="analyzeBySexMap">
-        SELECT cd.year AS dataYear,di.diseaseName AS disease,pi.sex AS sex,COUNT(pi.sex) AS num FROM card cd ,patient AS pi,disease AS di,disease di
-
+        SELECT cd.year AS dataYear,di.disease_name AS disease,pi.sex AS sex,COUNT(pi.sex) AS num FROM card cd ,patient
+        pi,disease di ,address_geocode ag
         <where>
-            AND cd.patient_id=pi.patient_id,cd.disease_id=di.disease_id
-            AND di.diseaseName NOT LIKE '疟疾（未分型）'
+            AND cd.patient_id=pi.patient_id
+            AND cd.disease_id=di.disease_id
+            AND pi.address_id = ag.address_id
+            AND di.disease_name NOT LIKE '疟疾（未分型）'
             <if test="'default'!=_parameter and ''!=_parameter">
-                AND p.address LIKE '%${_parameter}%'
+                AND ag.address LIKE '%${_parameter}%'
             </if>
         </where>
-        GROUP BY p.sex , pi.diseaseName , cd.year
-        ORDER BY cd.year,pi.diseaseName,pi.sex;
+        GROUP BY pi.sex , di.disease_name,cd.year
+        ORDER BY cd.year,di.disease_name,pi.sex;
     </select>
 
 
@@ -39,18 +41,25 @@
 
     <select id="analyzeByCareer" parameterType="String"
             resultMap="analyzeByCareerMap">
-        SELECT p.`year` AS `year`,pci.diseaseName AS diseaseName,p.career AS career,COUNT(p.career) AS patientNum
-        FROM patient_information p JOIN patient_cases_information pci
-        ON p.`year` = pci.`year` AND p.cardID = pci.cardID
+        SELECT
+        cd.year AS year,
+        di.disease_name AS diseaseName,
+        ca.career AS career,
+        COUNT(ca.career) AS patientNum
+        FROM card cd, disease di, career ca, patient pi, address_geocode ag
         <where>
-            AND pci.diseaseName NOT LIKE '疟疾（未分型）'
-            AND p.career NOT LIKE '不详'
+            AND cd.patient_id = pi.patient_id
+            AND pi.address_id = ag.address_id
+            AND pi.career_id = ca.career_id
+            AND cd.disease_id = cd.disease_id
+            AND di.disease_name NOT LIKE '疟疾（未分型）'
+            AND ca.career NOT LIKE '不详'
             <if test="'default'!=_parameter and ''!=_parameter">
-                AND p.address LIKE '%${_parameter}%'
+                AND ag.address LIKE '%${_parameter}%'
             </if>
         </where>
-        GROUP BY p.career,pci.`year`,pci.diseaseName
-        ORDER BY p.`year`,pci.diseaseName,p.career
+        GROUP BY ca.career, cd.year, di.disease_name
+        ORDER BY cd.year, di.disease_name, ca.career
     </select>
 
     <resultMap id="analyzeByAgeGroupMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AgeGroupAnalyzeRe">
@@ -62,7 +71,8 @@
 
     <select id="analyzeByAgeGroup" parameterType="String"
             resultMap="analyzeByAgeGroupMap">
-        SELECT p.`year` AS `year`,pci.diseaseName AS disease,
+        SELECT cd.year AS `year`,
+        di.disease_name AS disease,
         CASE
         WHEN cd.year-YEAR(pi.birthday)+1 BETWEEN 0 and 9 THEN '0-9'
         WHEN cd.year-YEAR(pi.birthday)+1 BETWEEN 10 and 19 THEN '10-19'
@@ -75,14 +85,15 @@
         WHEN cd.year-YEAR(pi.birthday)+1 BETWEEN 80 and 89 THEN '80-89'
         WHEN cd.year-YEAR(pi.birthday)+1 BETWEEN 90 and 99 THEN '90-99'
         ELSE '>99'
-        END AS ageGroup
-        ,COUNT(p.cardID) AS patientNum
-        FROM patient_information p JOIN patient_cases_information pci
-        ON pci.`year` = p.`year` AND pci.cardID = p.cardID
+        END AS ageGroup ,COUNT(cd.card_id) AS patientNum
+        FROM card cd, patient pi, disease di, address_geocode ag
         <where>
-            AND pci.diseaseName NOT LIKE '疟疾（未分型）'
+            AND cd.patient_id = pi.patient_id
+            AND di.disease_id = cd.disease_id
+            AND pi.address_id = ag.address_id
+            AND di.disease_name NOT LIKE '疟疾（未分型）'
             <if test="'default'!=_parameter and ''!=_parameter">
-                AND p.address LIKE '%${_parameter}%'
+                AND ag.address LIKE '%${_parameter}%'
             </if>
         </where>
         GROUP BY
@@ -98,7 +109,7 @@
         WHEN cd.year-YEAR(pi.birthday)+1 BETWEEN 80 and 89 THEN '80-89'
         WHEN cd.year-YEAR(pi.birthday)+1 BETWEEN 90 and 99 THEN '90-99'
         ELSE '>99'
-        END,p.`year`,pci.diseaseName
-        ORDER BY cd.year,pci.diseaseName,ageGroup;
+        END,cd.year, di.disease_name
+        ORDER BY cd.year, di.disease_name, ageGroup;
     </select>
 </mapper>
