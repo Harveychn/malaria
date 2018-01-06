@@ -36,6 +36,17 @@ $(function () {
                 var ageChartTab_2 = ec.init(document.getElementById('ageChartTab_2'));
                 var careerChartTab_1 = ec.init(document.getElementById('careerChartTab_1'));
                 var careerChartTab_2 = ec.init(document.getElementById('careerChartTab_2'));
+                window.onresize = function () {
+                    resizeChartArea();
+                    sexChartTab_1.resize();
+                    sexChartTab_2.resize();
+                    ageChartTab_1.resize();
+                    ageChartTab_2.resize();
+                    careerChartTab_1.resize();
+                    careerChartTab_2.resize();
+                }
+
+
                 var initOption = initChartOption();
 
                 sexChartTab_1.setOption(initOption);
@@ -156,6 +167,16 @@ $(function () {
                 });
             }
     );
+
+    function resizeChartArea () {
+        $("#sexChartTab_1").css( 'width', $(".tabs-container").width()*0.90 );
+        $("#ageChartTab_1").css( 'width', $(".tabs-container").width()*0.90 );
+        $("#careerChartTab_1").css( 'width', $(".tabs-container").width()*0.90 );
+        $("#sexChartTab_2").css( 'width', $(".tabs-container").width()*0.90 );
+        $("#ageChartTab_2").css( 'width', $(".tabs-container").width()*0.90 );
+        $("#careerChartTab_2").css( 'width', $(".tabs-container").width()*0.90 );
+    }
+    resizeChartArea();
     function sexSeriesItem() {
         return {
             series: [{
@@ -527,3 +548,4 @@ $(function () {
         });
     }
     
+
