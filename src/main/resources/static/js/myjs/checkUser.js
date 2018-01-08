@@ -16,7 +16,7 @@ function checkUserAgree(obj) {
         url: "../user/checkUserAgree/" + userEmailTemp,
         dataType: "json",
         success: function () {
-            console.log("11111111111111111111111111111111111111111");
+            console.log(userEmailTemp);
             window.open("../user/showCheckUser", "_self");
         }
     })

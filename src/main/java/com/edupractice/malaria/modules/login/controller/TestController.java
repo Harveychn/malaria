@@ -17,17 +17,4 @@ public class TestController {
         return new ModelAndView("UserUI");
     }
 
-    @GetMapping(value = "/hello")
-    public String testFunc()throws Exception{
-        return "ok";
-    }
-
-    @GetMapping(value = "/getView")
-    public ModelAndView getView()throws Exception{
-        return new ModelAndView("test");
-    }
-    @GetMapping(value = "/homepage")
-    public ModelAndView homepage()throws Exception{
-        return new ModelAndView("first-page");
-    }
 }

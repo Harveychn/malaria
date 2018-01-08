@@ -15,7 +15,7 @@ public class PageController {
     }
 
     @RequestMapping("/locatedUserMap")
-    public ModelAndView LocatedUserMap(){
+    public ModelAndView locatedUserMap(){
         return new ModelAndView("locatedUserMap");
     }
 
@@ -23,6 +23,12 @@ public class PageController {
     public  ModelAndView hotMap(){
         return new ModelAndView("hotMap");
     }
+
+    @RequestMapping("/dynamicOutbreak")
+    public  ModelAndView dynamicOutbreak(){
+        return new ModelAndView("hotMap");
+    }
+
     @RequestMapping("/analyzeSexChart")
     public ModelAndView analyzeSexChart(){
         return new ModelAndView("analyzeSexChart");
