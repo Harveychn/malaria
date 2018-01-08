@@ -33,10 +33,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/loginView", method = RequestMethod.GET)
-    public ModelAndView loginView(String errorMessage,String userCount) throws Exception {
+    public ModelAndView loginView(String errorMessage, String userCount) throws Exception {
         System.out.println(errorMessage);
         System.out.println(userCount);
-        return new ModelAndView("view/common/login") ;
+        return new ModelAndView("view/common/login");
     }
 
     @RequestMapping(value = "/registerView", method = RequestMethod.GET)
@@ -89,10 +89,9 @@ public class UserController {
     public ModelAndView showCheckUser() throws Exception {
         List<User> users = userService.selectCheckUser();
         List<ShowUser> users1 = new ArrayList<>();
-        ShowUser showUser =new ShowUser();
+
         for (int i = 0; i < users.size(); i++) {
-            showUser.setUser(users.get(i));
-            showUser.setJoinDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(users.get(i).getJoinDate()));
+            ShowUser showUser = new ShowUser(users.get(i), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(users.get(i).getJoinDate()));
             users1.add(showUser);
         }
         ModelAndView modelAndView = new ModelAndView();
@@ -108,13 +107,13 @@ public class UserController {
     }
 
     @RequestMapping("/checkUserReject/{userEmail}")
-    public int checkUserReject(@PathVariable String userEmail)throws Exception{
+    public int checkUserReject(@PathVariable String userEmail) throws Exception {
         userService.updateUserReject(userEmail);
         return 1;
     }
 
     @RequestMapping("/Reject")
-    public ModelAndView reject(User user)throws Exception{
-        return  new ModelAndView();
+    public ModelAndView reject(User user) throws Exception {
+        return new ModelAndView();
     }
 }

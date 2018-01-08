@@ -7,6 +7,11 @@ public class ShowUser {
     private User user;
     private String joinDate;
 
+    public ShowUser(User user, String joinDate) {
+        this.user = user;
+        this.joinDate = joinDate;
+    }
+
     public User getUser() {
         return user;
     }
