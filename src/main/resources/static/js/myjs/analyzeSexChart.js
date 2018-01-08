@@ -1,7 +1,7 @@
 $(function () {
         $.ajax({
             type: "get",
-            url: "/district/getProvinces.do",
+            url: "../district/getProvinces.do",
             dataType: "json",
             success: function (data) {
                 $.each(data.data, function (i, item) {
@@ -19,7 +19,7 @@ $(function () {
 // 路径配置
     require.config({
         paths: {
-            echarts: '/js/build/dist'
+            echarts: '../js/build/dist'
         }
     });
     require(
@@ -75,7 +75,7 @@ $(function () {
 //                    ageAjaxFunction(dataSource, ageChartTab_1, ageChartTab_2);
                     $.ajax({
                         type: "post",
-                        url: "/AnalyzeByCharts/ageGroupChart",
+                        url: "../AnalyzeByCharts/ageGroupChart",
                         data: {
                             dataSource: dataSource
                         },
@@ -278,7 +278,7 @@ $(function () {
     function sexAjaxFunction(dataSource, sexChartTab_1, sexChartTab_2) {
         $.ajax({
             type: "post",
-            url: "/AnalyzeByCharts/sexChart",
+            url: "../AnalyzeByCharts/sexChart",
             data: {
                 dataSource: dataSource
             },
@@ -370,7 +370,7 @@ $(function () {
     function ageAjaxFunction(dataSource, ageChartTab_1, ageChartTab_2) {
         $.ajax({
             type: "post",
-            url: "/AnalyzeByCharts/ageGroupChart",
+            url: "../AnalyzeByCharts/ageGroupChart",
             data: {
                 dataSource: dataSource
             },
@@ -462,7 +462,7 @@ $(function () {
     function careerAjaxFunction(dataSource, careerChartTab_1, careerChartTab_2) {
         $.ajax({
             type: "post",
-            url: "/AnalyzeByCharts/careerChart",
+            url: "../AnalyzeByCharts/careerChart",
             data: {
                 dataSource: dataSource
             },

@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by 郑晓辉 on 2016/10/1.
+ * 动态爆发
  */
 @Controller
 @RequestMapping("/DynamicOutbreak")

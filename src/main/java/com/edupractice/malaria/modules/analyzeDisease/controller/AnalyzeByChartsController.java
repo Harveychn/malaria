@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * 根据疾病进行分类
  * 展示疾病人群的性别、职业、年龄段的关系
- * Created by 郑晓辉 on 2016/10/3.
  */
 @Controller
 @RequestMapping("/AnalyzeByCharts")

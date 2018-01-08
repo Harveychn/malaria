@@ -45,7 +45,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
         List<Integer> valueListC1 = new ArrayList<>();
         for (int i = 0; i < yearListC1.size(); i++) {
             valueListC1.add(i * sexList.size(), 0);
-            valueListC1.add(i * sexList.size() + 1, 0);
+            valueListC1.add(i * sexList.size() + 1, 0);//valueList数值清零
             for (int j = 0; j < diseaseC1.size(); j++) {
                 SexAnalyzeRe current = diseaseC1.get(j);
                 if (yearListC1.get(i).equals(Integer.toString(current.getYear()))) {
@@ -55,7 +55,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
                     if (current.getSex().equals(sexList.get(1))) {
                         valueListC1.set(i * sexList.size() + 1, current.getPatientNum());
                     }
-                }
+                }//赋值对应年份患病男女数量
             }
         }
         SexChart sexChartC1 = new SexChart();
@@ -67,7 +67,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
         List<Integer> valueListC2 = new ArrayList<>();
         for (int i = 0; i < yearListC2.size(); i++) {
             valueListC2.add(i * sexList.size(), 0);
-            valueListC2.add(i * sexList.size() + 1, 0);
+            valueListC2.add(i * sexList.size() + 1, 0);//valueList数值清零
             for (int j = 0; j < diseaseC2.size(); j++) {
                 SexAnalyzeRe current = diseaseC2.get(j);
                 if (yearListC2.get(i).equals(Integer.toString(current.getYear()))) {
@@ -78,7 +78,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
                     if (current.getSex().equals(sexList.get(1))) {
                         valueListC2.set(i * sexList.size() + 1, current.getPatientNum());
                     }
-                }
+                }//赋值对应年份患病男女数量
             }
         }
         SexChart sexChartC2 = new SexChart();
@@ -166,7 +166,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
     @Override
     public List<AgeGroupChart> analyzeByAgeGroup(String dataSource) throws Exception {
         List<AgeGroupAnalyzeRe> ageGroupAnalyzeReList = analyzeMapper.analyzeByAgeGroup(dataSource);
-        if (0>=ageGroupAnalyzeReList.size()){
+        if (0 >= ageGroupAnalyzeReList.size()) {
             return null;
         }
         List<AgeGroupChart> ageGroupChartList = new ArrayList<>();
@@ -231,7 +231,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
         ageGroupChartC2.setValuesList(valueList_2);
         ageGroupChartC2.setAgeGroupList(ageGroupList_2);
         ageGroupChartList.add(ageGroupChartC2);
-        return  ageGroupChartList;
+        return ageGroupChartList;
     }
 
 }
