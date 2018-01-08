@@ -5,8 +5,12 @@ $(document).ready(function () {
 
 });
 
-function checkUserAgree() {
-    var userEmailTemp = document.getElementById("userEmail").innerHTML;
+function checkUserAgree(obj) {
+    var tr1 = obj.parentNode.parentNode;
+    var num = tr1.rowIndex;
+    console.log(num);
+
+    var userEmailTemp = document.getElementById("myTable").rows[num].cells[2].innerHTML;
     $.ajax({
         type: "post",
         url: "../user/checkUserAgree/" + userEmailTemp,
@@ -18,8 +22,11 @@ function checkUserAgree() {
     })
 }
 
-function checkUserReject() {
-    var userEmailTemp = document.getElementById("userEmail").innerHTML;
+function checkUserReject(obj) {
+    var tr1 = obj.parentNode.parentNode;
+    var num = tr1.rowIndex;
+    console.log(num);
+    var userEmailTemp = document.getElementById("myTable").rows[num].cells[2].innerHTML;
     $.ajax({
         type: "post",
         url: "../user/checkUserReject/" + userEmailTemp,

@@ -1,78 +1,80 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
-	<head th:fragment="header">
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		
-		<title>审核页面</title>
-		
-		<link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}" />
-		<!--引用css-->
-		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/plugins/footable/footable.core.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-	</head>
-	
-	<body class="gray-bg">
-		<section class="wrapper wrapper-content animated fadeInRight">
-			<section class="row">
-				<div class="col-sm-12">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5>审核</h5>
-						</div>
-						
-						<div class="ibox-content">
-							<table class="footable table table-striped toggle-arrow-tiny" data-page-size="8">
-								<thead>
-									<tr>
-										<th>用户名</th>
-             	      <th>真实姓名</th>
-                	  <th>邮箱</th>
-                    <th>电话</th>
-                    <th>用户单位</th>
-                    <th>注册时间</th>
-                    <th>操作</th>
-									</tr>
-								</thead>
+    <title>审核页面</title>
 
-								<tbody>
-								<tr th:each="checkUser,checkUserStat : ${checkUser}">
-										<td th:text=${checkUser.user.userName}></td>
-										<td th:text=${checkUser.user.userRealName}></td>
-										<td id="userEmail" th:text=${checkUser.user.userEmail}></td>
-										<td th:text=${checkUser.user.userPhone}></td>
-										<td th:text=${checkUser.user.userUnit}></td>
-										<td th:text=${checkUser.joinDate}></td>
-										<td><a id="checkUserAgree" onclick=checkUserAgree()><i class="fa fa-check text-navy"></i> 通过</a></td>
-										<td><a id="checkUserReject" onclick=checkUserReject()><i class="fa fa-close text-navy"></i> 拒绝</a></td>
-									</tr>
-							    </tbody>
-								
-								<tfoot>
-									<tr>
-										<td colspan="5">
-											<ul class="pagination pull-right"></ul>
-										</td>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-					</div>
-				</div>
-			</section>
-		</section>
+    <link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}"/>
+    <!--引用css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/plugins/footable/footable.core.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 
-		<!--全局js-->
-		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
-		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/plugins/footable/footable.all.min.js}" ></script>
-		<!--自定义js-->
-		<script type="text/javascript" th:src="@{/js/myjs/checkUser.js}"></script>
-	</body>
+</head>
+
+<body class="gray-bg">
+<section class="wrapper wrapper-content animated fadeInRight">
+    <section class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>审核</h5>
+                </div>
+
+                <div class="ibox-content">
+                    <table id="myTable" class="footable table table-striped toggle-arrow-tiny" data-page-size="8">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>真实姓名</th>
+                            <th>邮箱</th>
+                            <th>电话</th>
+                            <th>用户单位</th>
+                            <th>注册时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="checkUser,checkUserStat : ${checkUser}">
+                            <td th:text=${checkUser.user.userName}></td>
+                            <td th:text=${checkUser.user.userRealName}></td>
+                            <td th:text=${checkUser.user.userEmail}></td>
+                            <td th:text=${checkUser.user.userPhone}></td>
+                            <td th:text=${checkUser.user.userUnit}></td>
+                            <td th:text=${checkUser.joinDate}></td>
+                            <td><a id="checkUserAgree"  onclick="checkUserAgree(this)"><i class="fa fa-check text-navy"></i> 通过</a>
+                            </td>
+                            <td><a id="checkUserReject" onclick="checkUserReject(this)"><i class="fa fa-close text-navy"></i>
+                                拒绝</a></td>
+                        </tr>
+                        </tbody>
+
+                        <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <ul class="pagination pull-right"></ul>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<!--全局js-->
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/footable/footable.all.min.js}"></script>
+<!--自定义js-->
+<script type="text/javascript" th:src="@{/js/myjs/checkUser.js}"></script>
+</body>
 
 </html>
