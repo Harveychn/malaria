@@ -7,12 +7,12 @@
     </resultMap>
     <select id="selectCategoryFields" parameterType="String"
             resultMap="categoryFieldsMap">
-        SELECT field_name,display_name FROM indicator
+        SELECT indicator_id,field_name,display_name FROM indicator
         <where>
             AND category = #{Disease}
             AND downable=1
         </where>
         GROUP BY field_name
---         ORDER BY display_name ASC;
+        ORDER BY indicator_id ASC;
     </select>
 </mapper>
