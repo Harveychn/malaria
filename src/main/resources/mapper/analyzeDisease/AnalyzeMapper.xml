@@ -24,7 +24,7 @@
             AND pi.address_id = ag.address_id
             AND di.disease_name NOT LIKE '疟疾（未分型）'
             <if test="'default'!=_parameter and ''!=_parameter">
-                AND ag.address LIKE '%${_parameter}%'
+                AND ag.address LIKE '${_parameter}%'
             </if>
         </where>
         GROUP BY pi.sex , di.disease_name,cd.year
@@ -55,7 +55,7 @@
             AND di.disease_name NOT LIKE '疟疾（未分型）'
             AND ca.career NOT LIKE '不详'
             <if test="'default'!=_parameter and ''!=_parameter">
-                AND ag.address LIKE '%${_parameter}%'
+                AND ag.address LIKE '${_parameter}%'
             </if>
         </where>
         GROUP BY ca.career, cd.year, di.disease_name
@@ -93,7 +93,7 @@
             AND pi.address_id = ag.address_id
             AND di.disease_name NOT LIKE '疟疾（未分型）'
             <if test="'default'!=_parameter and ''!=_parameter">
-                AND ag.address LIKE '%${_parameter}%'
+                AND ag.address LIKE '${_parameter}%'
             </if>
         </where>
         GROUP BY
