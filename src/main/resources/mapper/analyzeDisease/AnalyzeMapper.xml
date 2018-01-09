@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.edupractice.malaria.modules.analyzeDisease.dao.AnalyzeMapper">
 
-    <select id="selectDisease" resultType="String">
+    <select id="selectDisease" resultType="java.lang.String">
         SELECT DISTINCT(diseaseName) FROM disease
         WHERE diseaseName NOT LIKE '%未分型%'
     </select>
