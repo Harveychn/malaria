@@ -7,13 +7,13 @@ $(function () {
         url: "../../district/getProvinces.do",
         dataType: "json",
         success: function (data) {
-            //var selPro = data.data[0];
+            var selPro = data.data[0];
             $.each(data.data, function (i, item) {
                 var $option = '<option code=' + item.id + ' value=' + item.name + '>' + item.name + '</option>';
                 $("#province").append($option);
             });
-            // $('#province option[value="' + selPro.name + '"]').attr("selected", "true");
-            $('#province option[value="未选"]').attr("selected", "true");
+            $('#province option[value="' + selPro.name + '"]').attr("selected", "true");
+            // $('#province option[value="未选"]').attr("selected", "true");
             var cityUrl = "../../district/getCities.do?provinceId=" + selPro.id;
             $.ajax({
                 url: cityUrl,
@@ -23,8 +23,8 @@ $(function () {
                         var $option = '<option code=' + item.id + ' value=' + item.name + '>' + item.name + '</option>';
                         $('#city').append($option);
                     });
-                    // $('#city option[value="' + selCity.name + '"]').attr("selected", "true");
-                    $('#city option[value="未选"]').attr("selected", "true");
+                    $('#city option[value="' + selCity.name + '"]').attr("selected", "true");
+                    // $('#city option[value="未选"]').attr("selected", "true");
                     var countyUrl = "../..//district/getCounties.do?cityId=" + selCity.id;
                     $.ajax({
                         url: countyUrl,
@@ -34,8 +34,8 @@ $(function () {
                                 var $option = '<option code=' + item.id + ' value=' + item.name + '>' + item.name + '</option>';
                                 $('#county').append($option);
                             });
-                            // $('#county option[value="' + selCounty.name + '"]').attr("selected", "true");
-                            $('#county option[value="未选"]').attr("selected", "true");
+                            $('#county option[value="' + selCounty.name + '"]').attr("selected", "true");
+                            // $('#county option[value="未选"]').attr("selected", "true");
                             var villageUrl = "../..//district/getVillages.do?countyId=" + selCounty.id;
                             $.ajax({
                                 url: villageUrl,
