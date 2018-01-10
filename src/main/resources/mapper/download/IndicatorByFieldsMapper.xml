@@ -16,7 +16,7 @@
         GROUP BY field_name
     </select>
 
-    <select id="selectBelongTables" resultType="String">
+    <select id="selectBelongTables" resultType="java.lang.String">
         SELECT DISTINCT(belongTable) FROM indicator
     </select>
 

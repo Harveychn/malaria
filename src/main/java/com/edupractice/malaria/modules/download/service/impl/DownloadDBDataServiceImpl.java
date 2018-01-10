@@ -69,9 +69,21 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
             for (int cellNum = 0; cellNum < selectedFields.size(); cellNum++) {
                 String currentKey = selectedFields.get(cellNum);
                 cells[cellNum] = currentRow.createCell(cellNum);
-                //单元格数据为空或为"."时，设置为" "
+                //单元格数据为空或为"."时，设置为" "0
                 if (null == currentData.get(currentKey) || currentData.get(currentKey).equals(".")) {
                     cells[cellNum].setCellValue(" ");
+                    continue;
+                } else if (currentData.get(currentKey).equals("0") && currentKey.equals("卡片状态")) {
+                    cells[cellNum].setCellValue("原始卡");
+                    continue;
+                } else if (currentData.get(currentKey).equals("1") && currentKey.equals("卡片状态")) {
+                    cells[cellNum].setCellValue("订正卡");
+                    continue;
+                } else if (currentData.get(currentKey).equals("0") && currentKey.equals("审核状态")) {
+                    cells[cellNum].setCellValue("未审核卡");
+                    continue;
+                } else if (currentData.get(currentKey).equals("1") && currentKey.equals("审核状态")) {
+                    cells[cellNum].setCellValue("已审核卡");
                     continue;
                 }
                 cells[cellNum].setCellValue(currentData.get(currentKey).toString());
@@ -81,9 +93,9 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
     }
 
     /**
-     *设置单元格格式
+     * 设置单元格格式
      */
-    private void setStyle(String string){
+    private void setStyle(String string) {
 
     }
 
@@ -104,10 +116,10 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
         Set<String> fromTableSet = new HashSet<>();
         Set<String> tableSet = new HashSet<>();
         Set<String> whereSet = new HashSet<>();
-        for (Indicator diseaseIndicator : diseaseIndicators
-                ) {
+        for (Indicator diseaseIndicator : diseaseIndicators) {
+
             tableSet.add(diseaseIndicator.getBelongTable());
-            fromTableSet.add(" " + diseaseIndicator.getBelongTable() +"  "+ "AS"+"  "+ diseaseIndicator.getTableAlias());
+            fromTableSet.add(" " + diseaseIndicator.getBelongTable() + "  " + "AS" + "  " + diseaseIndicator.getTableAlias());
             selectFieldSet.add(" " + diseaseIndicator.getTableAlias() + "." + diseaseIndicator.getFieldName() + " AS '" + diseaseIndicator.getDisplayName() + "'");
         }
         //多表连接条件
@@ -203,12 +215,12 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
         Set<String> fromTableSet = new HashSet<>();
         Set<String> tableSet = new HashSet<>();
         Set<String> whereSet = new HashSet<>();
-        fromTableSet.add(" " + "weather_data" +"  "+ "AS"+"  "+ "wd");
-        fromTableSet.add(" " + "meteorological_station" +"  "+ "AS"+"  "+ "ms");
+        fromTableSet.add(" " + "weather_data" + "  " + "AS" + "  " + "wd");
+        fromTableSet.add(" " + "meteorological_station" + "  " + "AS" + "  " + "ms");
         for (Indicator indicator : indicators
                 ) {
 
-       selectFieldSet.add(" " + indicator.getTableAlias() + "." + indicator.getFieldName() + " AS '" + indicator.getDisplayName() + "'");
+            selectFieldSet.add(" " + indicator.getTableAlias() + "." + indicator.getFieldName() + " AS '" + indicator.getDisplayName() + "'");
         }
 
         //多表连接条件
@@ -260,7 +272,7 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
      * @return
      * @throws Exception
      */
-    private List<Map<String, Object>> getStationIndicators(DownloadParamVo downloadParamVo)throws Exception {
+    private List<Map<String, Object>> getStationIndicators(DownloadParamVo downloadParamVo) throws Exception {
         List<String> selectedDisplayFields = downloadParamVo.getSelectedName();
         List<Indicator> indicators = indicatorByFieldsMapper.selectIndicatorByFields(selectedDisplayFields);
         SQLQuery sqlQuery = new SQLQuery();
@@ -271,13 +283,13 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
         return resultMapList;
     }
 
-    public String toString(List<Indicator> strings){
-        String returnString="";
-        for (Indicator string: strings
-             ) {
-            returnString += (string.getFieldName() + " AS " +string.getDisplayName() + ",");
+    public String toString(List<Indicator> strings) {
+        String returnString = "";
+        for (Indicator string : strings
+                ) {
+            returnString += (string.getFieldName() + " AS " + string.getDisplayName() + ",");
         }
-        return returnString.substring(0,returnString.length()-1);
+        return returnString.substring(0, returnString.length() - 1);
     }
 
 

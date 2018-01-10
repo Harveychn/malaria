@@ -12,7 +12,6 @@
             AND category = #{Disease}
             AND downable=1
         </where>
-        GROUP BY field_name
         ORDER BY indicator_id ASC;
     </select>
 </mapper>
