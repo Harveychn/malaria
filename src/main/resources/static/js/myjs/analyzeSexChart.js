@@ -228,7 +228,8 @@ function initChartOption() {
                 formatter: function (s) {
                     return s.slice(0, 7);
                 }
-            }
+            },
+            notMerge:true
         },
         noDataLoadingOption: {
             text: '暂无数据',
