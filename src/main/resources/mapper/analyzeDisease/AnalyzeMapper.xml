@@ -51,7 +51,7 @@
             AND cd.patient_id = pi.patient_id
             AND pi.address_id = ag.address_id
             AND pi.career_id = ca.career_id
-            AND cd.disease_id = cd.disease_id
+            AND cd.disease_id = di.disease_id
             AND di.disease_name NOT LIKE '疟疾（未分型）'
             AND ca.career NOT LIKE '不详'
             <if test="'default'!=_parameter and ''!=_parameter">
