@@ -4,7 +4,7 @@
 <head th:fragment="header">
 		<meta charset="UTF-8"/>
 		<title>首页</title>
-		<link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}" />
+		<link rel="shortcut icon" href="../static/pictures/malaria.ico" th:href="@{/static/pictures/malaria.ico}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
@@ -61,18 +61,19 @@
 									<div class="page-heading">
 
 										<h5 class="panel-title">
-											<a data-toggle = "collapse" data-parent = "#version" href="#v41">v1.0</a>
-											<code class="pull-right">2016.11.10</code>
+											<a data-toggle = "collapse" data-parent = "#version" th:href="@{#v41}">v2.0</a>
+											<code class="pull-right">2018.01.01</code>
 											<!--找不到这几个样式的位置-->
 										</h5>
 									</div>
 									
 									<div id="v41" class="panel-collapse collapse in">
 										<div class="panel-body">
-											<div class="alert alert-warning">此版本是一个测试版本，主要是实现各种功能，让我们期待2.0的到来。</div>
+											<div class="alert alert-warning">此版本是一个测试版本，主要是实现各种功能，让我们期待3.0的到来。</div>
 											<ol>
 												<li>首页修改地图大小，增加简介功能，让用户更直观了解该系统。</li>
-                                        		<li>用户和管理员功能修改。</li>
+												<br />
+                        <li>用户和管理员功能修改。</li>
 											</ol>
 										</div>
 									</div>
@@ -91,16 +92,25 @@
 					</div>
 				</div>
 				
-				<div class="ibox-content">
+				<div class="ibox-content" style="margin-top: -25px;">
+					<br />
+					<p>本项目受国家自然科学基金资助。</p>
+					<br />
+					<p>项目号：81402760</p>
+					<br />
+					<p>项目名称：基于网络的建模、推理和优化方法及其在疟疾监控中的实证研究</p>
+				</div>
+				
+				<div class="ibox-content" style="margin-top: -20px;">
 					<p><i class="fa fa-send-o"></i>
-						邮箱：<br>benyunshi@outlook.com, hongjunqiu@outlook.com
+						邮箱：benyunshi@outlook.com, hongjunqiu@outlook.com
 					</p>
-					<p><i class="fa fa-institution"></i>
-						单位：<br>杭州电子科技大学复杂数据与公共安全实验室
+					<!--<p><i class="fa fa-institution"></i>
+						单位：杭州电子科技大学复杂数据与公共安全实验室
 					</p>
 					<p><i class="fa fa-building"></i>
-						地址：<br>浙江省下沙高教园区2号大街1号 310018
-					</p>
+						 &nbsp;地址：浙江省下沙高教园区2号大街1号 310018
+					</p>-->
 				</div>
 			</section>
 		
