@@ -8,14 +8,14 @@
     <title>基于时空的疟疾数据监控系统</title>
 
     <!--引用css-->
-    <link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/navStyle.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="shortcut icon" href="../../../static/pictures/malaria.ico" th:href="@{/static/pictures/malaria.ico}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/navStyle.css" th:href="@{/css/navStyle.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/animate.css" th:href="@{/css/animate.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/style.css" th:href="@{/css/style.css}"/>
     <!--自定义css-->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/mycss/AdminUI.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/mycss/AdminUI.css" th:href="@{/css/mycss/AdminUI.css}"/>
 
 </head>
 
@@ -40,14 +40,14 @@
         <div class="sidebar-collapse"><!--不存在-->
             <ul id="side-menu" class="nav">
                 <li>
-                    <a class="J_menuItem" th:href="@{/UploadFile/uploadView}">
+                    <a class="J_menuItem" href="../common/dataUpload.html" th:href="@{/UploadFile/uploadView}">
                         <i class="fa fa-cloud-upload"></i>
                         <span class="nav-label">数据导入</span>
                     </a>
                 </li>
 
                 <li>
-                    <a class="J_menuItem" th:href="@{/DownloadDBData/downloadView}">
+                    <a class="J_menuItem" href="../common/dataDownload.html" th:href="@{/DownloadDBData/downloadView}">
                         <i class="fa fa-cloud-download"></i>
                         <span class="nav-label">数据下载</span>
                     </a>
@@ -62,14 +62,14 @@
 
                     <ul class="nav nav-second-level">
                         <li>
-                            <a th:href="@{/home/hotMap}" class="J_menuItem">热力图</a><!--定义不存在-->
+                            <a href="../../hotMap.html" th:href="@{/home/hotMap}" class="J_menuItem">热力图</a><!--定义不存在-->
                             <!--<a href="@{/home/dynamicOutbreak}" class="J_menuItem">动态迁移</a>-->
                         </li>
                     </ul>
                 </li>
 
                 <li>
-                    <a th:href="@{/home/analyzeSexChart}" class="J_menuItem">
+                    <a href="../../analyzeSexChart.html" th:href="@{/home/analyzeSexChart}" class="J_menuItem">
                         <i class="fa fa fa-bar-chart"></i>
                         <span class="nav-label">数据分析</span>
                     </a>
@@ -143,22 +143,22 @@
         </div>
 
         <div id="content-main" class="row J_mainContent"><!--定义不存在-->
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" th:src="@{/home/firstPage}"
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="../../first-page.html" th:src="@{/home/firstPage}"
                     frameborder="0" data-id="first-page.html" seamless="seamless"></iframe>
         </div>
     </section>
 
 </section>
 <!--全局js-->
-<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/jquery.metisMenu.js}"></script>
-<script type="text/javascript" th:src="@{/js/jquery.slimscroll.min.js}"></script>
+<script type="text/javascript" src="../../../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="../../../static/js/jquery.metisMenu.js" th:src="@{/js/jquery.metisMenu.js}"></script>
+<script type="text/javascript" src="../../../static/js/jquery.slimscroll.min.js" th:src="@{/js/jquery.slimscroll.min.js}"></script>
 <!--自定义js-->
-<script type="text/javascript" th:src="@{/js/hplus.js}"></script>
-<script type="text/javascript" th:src="@{/js/contabs.js}"></script>
+<script type="text/javascript" src="../../../static/js/hplus.js" th:src="@{/js/hplus.js}"></script>
+<script type="text/javascript" src="../../../static/js/contabs.js" th:src="@{/js/contabs.js}"></script>
 <!--第三方插件-->
-<script type="text/javascript" th:src="@{/js/pace.min.js}"></script>
+<script type="text/javascript" src="../../../static/js/pace.min.js" th:src="@{/js/pace.min.js}"></script>
 
 </body>
 
