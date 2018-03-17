@@ -81,96 +81,6 @@ require(
             console.info(dataSource);
             sexAjaxFunction(dataSource, sexChartTab_1, sexChartTab_2);
             ageAjaxFunction(dataSource, ageChartTab_1, ageChartTab_2);
-            // $.ajax({
-            //     type: "post",
-            //     url: "../AnalyzeByCharts/ageGroupChart",
-            //     data: {
-            //         dataSource: dataSource
-            //     },
-            //     dataType: "json",
-            //     success: function (data) {
-            //         for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
-            //             //for timeLine
-            //             var yearList = data[dataIndex].yearList;
-            //             var yearListLength = yearList.length;
-            //             if (data[dataIndex].disease === "恶性疟") {
-            //                 var ageChartOption = initChartOption();
-            //                 ageChartTab_1.setOption(ageChartOption);
-            //                 ageChartOption.options[0].series[0].data = [];
-            //                 ageChartOption.options[0].title.text = '年龄组比例分析';
-            //                 ageChartOption.options[0].title.subtext = '恶性疟患者';
-            //                 for (var yearIndex = 0; yearIndex < yearListLength; yearIndex++) {
-            //                     if (0 === yearIndex) {
-            //                         ageChartOption.options[0].legend.data = [];
-            //                         ageChartOption.options[0].legend.data = data[dataIndex].ageGroupList[0];
-            //                         ageChartOption.options[0].series[0].name = yearList[yearIndex] + '';
-            //                         for (var ageIndex = 0; ageIndex < data[dataIndex].ageGroupList[0].length; ageIndex++) {
-            //                             ageChartOption.options[0].series[0].data.push({
-            //                                 value: data[dataIndex].valuesList[0][ageIndex],
-            //                                 name: data[dataIndex].ageGroupList[0][ageIndex]
-            //                             });
-            //                         }
-            //                         console.log("ageChartOption.options[0]: "+ageChartOption);
-            //                     } else {
-            //                         var item = seriesItem();
-            //                         item.legend.data = [];
-            //                         item.legend.data = data[dataIndex].ageGroupList[yearIndex];
-            //                         item.series[0].name = yearList[yearIndex];
-            //                         item.series[0].data = [];
-            //                         for (var ageIndex = 0; ageIndex < data[dataIndex].ageGroupList[yearIndex].length; ageIndex++) {
-            //                             item.series[0].data.push({
-            //                                 value: data[dataIndex].valuesList[yearIndex][ageIndex],
-            //                                 name: data[dataIndex].ageGroupList[yearIndex][ageIndex]
-            //                             });
-            //                         }
-            //                         ageChartOption.options.push(item);
-            //                     }
-            //                 }
-            //                 console.log(" ageChartTab_1.setOption(ageChartOption);"+ageChartOption);
-            //                 ageChartOption.timeline.data = yearList;
-            //                 ageChartTab_1.setOption(ageChartOption);
-            //             }
-            //             if (data[dataIndex].disease === "间日疟") {
-            //                 var ageChartOption = initChartOption();
-            //                 ageChartTab_2.setOption(ageChartOption);
-            //                 ageChartOption.options[0].series[0].data = [];
-            //                 ageChartOption.options[0].title.text = '年龄组比例分析';
-            //                 ageChartOption.options[0].title.subtext = '间日疟患者';
-            //                 for (var yearIndex = 0; yearIndex < yearListLength; yearIndex++) {
-            //                     if (0 === yearIndex) {
-            //                         ageChartOption.options[0].legend.data = [];
-            //                         ageChartOption.options[0].legend.data = data[dataIndex].ageGroupList[0];
-            //                         ageChartOption.options[0].series[0].name = yearList[yearIndex] + '';
-            //                         for (var ageIndex = 0; ageIndex < data[dataIndex].ageGroupList[0].length; ageIndex++) {
-            //                             ageChartOption.options[0].series[0].data.push({
-            //                                 value: data[dataIndex].valuesList[0][ageIndex],
-            //                                 name: data[dataIndex].ageGroupList[0][ageIndex]
-            //                             });
-            //                         }
-            //                     } else {
-            //                         var item = seriesItem();
-            //                         item.legend.data = [];
-            //                         item.legend.data = data[dataIndex].ageGroupList[yearIndex];
-            //                         item.series[0].name = yearList[yearIndex];
-            //                         item.series[0].data = [];
-            //                         for (var ageIndex = 0; ageIndex < data[dataIndex].ageGroupList[yearIndex].length; ageIndex++) {
-            //                             item.series[0].data.push({
-            //                                 value: data[dataIndex].valuesList[yearIndex][ageIndex],
-            //                                 name: data[dataIndex].ageGroupList[yearIndex][ageIndex]
-            //                             });
-            //                         }
-            //                         ageChartOption.options.push(item);
-            //                     }
-            //                 }
-            //                 ageChartOption.timeline.data = yearList;
-            //                 ageChartTab_2.setOption(ageChartOption);
-            //             }
-            //         }
-            //     },
-            //     error: function (data) {
-            //         console.error("Error Happend" + data);
-            //     }
-            // });
             careerAjaxFunction(dataSource, careerChartTab_1, careerChartTab_2);
         });
     }
@@ -189,6 +99,20 @@ resizeChartArea();
 
 function sexSeriesItem() {
     return {
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {
+                    show: true,
+                    type: ['pie'],
+                },
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
         series: [{
             //动态赋值
             name: 'NoData',
@@ -203,9 +127,33 @@ function sexSeriesItem() {
 
 function seriesItem() {
     return {
+        //动态赋值
+        title: {
+            text: [],
+            subtext: []
+        },
         legend: {
+            show: false,
             data: ['NoData']
         },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {
+                    show: true,
+                    type: ['pie'],
+                },
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        calculable: true,
         series: [{
             //动态赋值
             name: 'NoData',
@@ -229,7 +177,7 @@ function initChartOption() {
                     return s.slice(0, 7);
                 }
             },
-            notMerge:true
+            notMerge: true
         },
         noDataLoadingOption: {
             text: '暂无数据',
@@ -257,17 +205,8 @@ function initChartOption() {
                     dataView: {show: true, readOnly: false},
                     magicType: {
                         show: true,
-//                            type: ['pie', 'funnel'],
                         type: ['pie'],
-//                            option: {
-//                                funnel: {
-//                                    x: '25%',
-//                                    width: '50%',
-//                                    funnelAlign: 'left',
-//                                    //动态数据
-//                                    max: 0
-//                                }
-//                            }
+
                     },
                     restore: {show: true},
                     saveAsImage: {show: true}
@@ -321,7 +260,9 @@ function sexAjaxFunction(dataSource, sexChartTab_1, sexChartTab_2) {
                                 name: sexCategory[1] + ''
                             });
                         } else {
-                            var item = sexSeriesItem();
+                            var item = seriesItem();
+                            item.title.text = '性别比例分析';
+                            item.title.subtext = '恶性疟患者';
                             item.series[0].name = yearList[i];
                             item.series[0].data.push({
                                 value: data[index].valuesList[i * sexCategory.length],
@@ -357,7 +298,9 @@ function sexAjaxFunction(dataSource, sexChartTab_1, sexChartTab_2) {
                                 name: sexCategory[1] + ''
                             });
                         } else {
-                            var item = sexSeriesItem();
+                            var item = seriesItem();
+                            item.title.text = '性别比例分析';
+                            item.title.subtext = '间日疟患者';
                             item.series[0].name = yearList[i];
                             item.series[0].data.push({
                                 value: data[index].valuesList[i * sexCategory.length],
@@ -415,6 +358,8 @@ function ageAjaxFunction(dataSource, ageChartTab_1, ageChartTab_2) {
                             console.log("ageChartOption.options[0]: " + ageChartOption);
                         } else {
                             var item = seriesItem();
+                            item.title.text = '年龄组比例分析';
+                            item.title.subtext = '恶性疟患者';
                             item.legend.data = [];
                             item.legend.data = data[dataIndex].ageGroupList[yearIndex];
                             item.series[0].name = yearList[yearIndex];
@@ -451,6 +396,8 @@ function ageAjaxFunction(dataSource, ageChartTab_1, ageChartTab_2) {
                             }
                         } else {
                             var item = seriesItem();
+                            item.title.text = '年龄组比例分析';
+                            item.title.subtext = '间日疟患者';
                             item.legend.data = [];
                             item.legend.data = data[dataIndex].ageGroupList[yearIndex];
                             item.series[0].name = yearList[yearIndex];
@@ -506,6 +453,8 @@ function careerAjaxFunction(dataSource, careerChartTab_1, careerChartTab_2) {
                             }
                         } else {
                             var item = seriesItem();
+                            item.title.text = '职业比例分析';
+                            item.title.subtext = '恶性疟患者';
                             item.legend.data = [];
                             item.legend.data = data[dataIndex].careerList[yearIndex];
                             item.series[0].name = yearList[yearIndex];
@@ -540,6 +489,8 @@ function careerAjaxFunction(dataSource, careerChartTab_1, careerChartTab_2) {
                             }
                         } else {
                             var item = seriesItem();
+                            item.title.text = '职业比例分析';
+                            item.title.subtext = '间日疟患者';
                             item.legend.data = [];
                             item.legend.data = data[dataIndex].careerList[yearIndex];
                             item.series[0].name = yearList[yearIndex];
@@ -563,5 +514,3 @@ function careerAjaxFunction(dataSource, careerChartTab_1, careerChartTab_2) {
         }
     });
 }
-    
-
