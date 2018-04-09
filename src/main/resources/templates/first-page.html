@@ -4,11 +4,12 @@
 <head th:fragment="header">
 		<meta charset="UTF-8"/>
 		<title>首页</title>
-		<link rel="shortcut icon" th:href="@{/static/pictures/malaria.ico}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" href="../static/pictures/malaria.ico" th:href="@{/static/pictures/malaria.ico}" />
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+		<link rel="stylesheet" type="text/css" href="../static/css/animate.css" th:href="@{/css/animate.css}" />
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}" />
+		<link rel="stylesheet" type="text/css" href="../static/css/mycss/thesis.css" th:href="@{}"/>
 
 	</head>
 	
@@ -42,7 +43,7 @@
 					
 					<div class="ibox-content">
 						<div style="height: 400px;">
-							<iframe class="J_iframe" name="iframe0" width="100%" height="100%" th:src="@{/home/locatedUserMap}" frameborder="0" data-id = "locatedUserMap.html" seamless="seamless"></iframe>
+							<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="../templates/locatedUserMap.html" th:src="@{/home/locatedUserMap}" frameborder="0" data-id = "locatedUserMap.html" seamless="seamless"></iframe>
 						</div>
 					</div>
 				</div>
@@ -51,29 +52,30 @@
 			<section class="col-sm-6">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h5>更新日志</h5>
+						<h5>论文专著</h5>
 					</div>
 					
 					<div class="ibox-content no-padding">
 						<div class="panel-body">
 							<div class="panel-group" id="version">
 								<div class="panel panel-default">
-									<div class="page-heading">
-
-										<h5 class="panel-title">
-											<a data-toggle = "collapse" data-parent = "#version" th:href="@{#v41}">v2.0</a>
-											<code class="pull-right">2018.01.01</code>
-											<!--找不到这几个样式的位置-->
-										</h5>
-									</div>
-									
 									<div id="v41" class="panel-collapse collapse in">
 										<div class="panel-body">
-											<div class="alert alert-warning">此版本是一个测试版本，主要是实现各种功能，让我们期待3.0的到来。</div>
+											<div class="alert alert-warning thesisqikan">
+												期刊论文
+												<code class="pull-right"><a href="../templates/thesis.html" target="-blank">more..</a></code>
+											</div>
 											<ol>
-												<li>首页修改地图大小，增加简介功能，让用户更直观了解该系统。</li>
+												<li><b>Benyun Shi</b>,&nbsp;&nbsp;Qi Tian,&nbsp;&nbsp;Xiao-Nong Zhou,&nbsp;&nbsp;Jiming Liu,&nbsp;&nbsp;,
+													<a href="https://www.scholarmate.com/AT/c9b13f422936006e771a0d47228dc2bb" target="_blank">Mining geographic variations of Plasmodium vivax for active surveillance : a case study in China</a>
+													, Malaria Journal, 2015.5.27, 14(216):216, SCIE, 第一标注
+												</li>
 												<br />
-                        <li>用户和管理员功能修改。</li>
+												<li>
+													<b>Benyun Shi</b>,&nbsp;&nbsp;Jiming Liu,&nbsp;&nbsp;
+													<a href="https://www.scholarmate.com/AT/e83a3160eef0106bc233207b1fdaa8aa" target="-blank">Decentralized control and fair load-shedding compensations to preventcascading failures in a smart grid</a>,
+													International Journal of Electrical Power & Energy Systems,&nbsp;2015.5.1，67（0）：582~590， SCIE 第一标注
+												</li>
 											</ol>
 										</div>
 									</div>
@@ -100,8 +102,9 @@
 					<br />
 					<p>项目名称：基于网络的建模、推理和优化方法及其在疟疾监控中的实证研究</p>
 				</div>
-				
+				<br/>
 				<div class="ibox-content" style="margin-top: -20px;">
+					<br/>
 					<p><i class="fa fa-send-o"></i>
 						邮箱：benyunshi@outlook.com, hongjunqiu@outlook.com
 					</p>

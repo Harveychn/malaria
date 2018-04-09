@@ -9,7 +9,7 @@
 		<title>热力图功能</title>
 		
 		<!--自定义css-->
-		<link rel="stylesheet" type="text/css" th:href="@{/css/mycss/hotMap.css}" />
+		<link rel="stylesheet" type="text/css" href="../static/css/mycss/hotMap.css" th:href="@{/css/mycss/hotMap.css}" />
 		
 	</head>
 	<body>
@@ -18,10 +18,10 @@
 		
 		<!--全局js-->
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=C1LOVvNRQHK32i52xzOFBkoNPetGDrxy"></script>
-		<script type="text/javascript" th:src="@{/js/plugins/baiduApi/Heatmap_min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+		<script type="text/javascript" src="../static/js/plugins/baiduApi/Heatmap_min.js" th:src="@{/js/plugins/baiduApi/Heatmap_min.js}"></script>
+		<script type="text/javascript" src="../static/js/jquery-3.2.1.js" th:src="@{/js/jquery-3.2.1.js}"></script>
 		
 		<!--自定义js-->
-		<script type="text/javascript" th:src="@{/js/myjs/hotMap.js}"></script>
+		<script type="text/javascript" src="../static/js/myjs/hotMap.js" th:src="@{/js/myjs/hotMap.js}"></script>
 	</body>
 </html>
