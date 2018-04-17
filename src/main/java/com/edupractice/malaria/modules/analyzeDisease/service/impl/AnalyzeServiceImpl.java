@@ -139,6 +139,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
         careerChartC1.setValuesList(valueList_1);
         careerChartC1.setCareerList(careerList_1);
         careerChartList.add(careerChartC1);
+
         List<List> valueList_2 = new ArrayList<>();
         List<List> careerList_2 = new ArrayList<>();
         for (int i = 0; i < yearListC2.size(); i++) {
