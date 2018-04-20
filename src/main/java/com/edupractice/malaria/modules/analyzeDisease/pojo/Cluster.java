@@ -2,10 +2,10 @@ package com.edupractice.malaria.modules.analyzeDisease.pojo;
 
 import java.util.List;
 
-public class CareerCluster {
+public class Cluster {
     private String diseaseName;
     private List<String> yearList;
-    private List<List<CareerClusterProv>> careerClusterProvList;
+    private List<List<ClusterProvince>> clusterProvinceLists;
 
     public String getDiseaseName() {
         return diseaseName;
@@ -23,17 +23,11 @@ public class CareerCluster {
         this.yearList = yearList;
     }
 
-    public List<List<CareerClusterProv>> getCareerClusterProvList() {
-        return careerClusterProvList;
+    public List<List<ClusterProvince>> getClusterProvinceLists() {
+        return clusterProvinceLists;
     }
 
-    public void setCareerClusterProvList(List<List<CareerClusterProv>> careerClusterProvList) {
-        this.careerClusterProvList = careerClusterProvList;
+    public void setClusterProvinceLists(List<List<ClusterProvince>> clusterProvinceLists) {
+        this.clusterProvinceLists = clusterProvinceLists;
     }
-
-    public String toString(){
-        return "疾病名:"+diseaseName
-                +"年份"+yearList;
-    }
-
 }

@@ -7,10 +7,10 @@
         WHERE diseaseName NOT LIKE '%未分型%'
     </select>
 
-    <resultMap id="analyzeBySexMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.SexAnalyzeRe">
+    <resultMap id="analyzeBySexMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AnalyzeRe">
         <result column="dataYear" property="year"/>
         <result column="disease" property="disease"/>
-        <result column="sex" property="sex"/>
+        <result column="sex" property="attitude"/>
         <result column="num" property="patientNum"/>
     </resultMap>
 
@@ -32,10 +32,10 @@
     </select>
 
 
-    <resultMap id="analyzeByCareerMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.CareerAnalyzeRe">
+    <resultMap id="analyzeByCareerMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AnalyzeRe">
         <result column="year" property="year"/>
         <result column="diseaseName" property="disease"/>
-        <result column="career" property="career"/>
+        <result column="career" property="attitude"/>
         <result column="patientNum" property="patientNum"/>
     </resultMap>
 
@@ -62,10 +62,10 @@
         ORDER BY cd.year, di.disease_name, ca.career
     </select>
 
-    <resultMap id="analyzeByAgeGroupMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AgeGroupAnalyzeRe">
+    <resultMap id="analyzeByAgeGroupMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AnalyzeRe">
         <result column="year" property="year"/>
         <result column="disease" property="disease"/>
-        <result column="ageGroup" property="ageGroup"/>
+        <result column="ageGroup" property="attitude"/>
         <result column="patientNum" property="patientNum"/>
     </resultMap>
 

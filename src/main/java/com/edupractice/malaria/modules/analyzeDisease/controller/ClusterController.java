@@ -1,6 +1,6 @@
 package com.edupractice.malaria.modules.analyzeDisease.controller;
 
-import com.edupractice.malaria.modules.analyzeDisease.pojo.CareerClusterProv;
+import com.edupractice.malaria.modules.analyzeDisease.pojo.ClusterProvince;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +17,7 @@ public class ClusterController {
     @ResponseBody
     List<List<String>> ClusterCareer(String year, String diseaseName) throws Exception {
         List<List<String>> ClusterPro = new ArrayList<>();
-        // List<ClusterCareer> clusterCareer = clusterService.clusterByCareer();
+        // List<ClusterCareer> clusterCareer = clusterService.cluster();
 
         return ClusterPro;
     }
@@ -30,7 +30,7 @@ public class ClusterController {
      * 3.计算每个聚类的平均数，并作为新的中心点
      * 4.重复2.3步骤，直到这K个中心点不再变化（收敛），或者执行了足够多的迭代
      */
-/*    private void kMeans(List<CareerClusterProv> dataSet, int k) {
+/*    private void kMeans(List<ClusterProv> dataSet, int k) {
         int dataLength = dataSet.size();
         //初始化
         if (dataSet.size() <= 0)
@@ -57,9 +57,9 @@ public class ClusterController {
             }
         }
     }*/
-    private List<CareerClusterProv> initCenters(List<CareerClusterProv> dataSet, int k) {
+    private List<ClusterProvince> initCenters(List<ClusterProvince> dataSet, int k) {
         //初始化中心数据链表
-        List<CareerClusterProv> centers = new ArrayList<>();
+        List<ClusterProvince> centers = new ArrayList<>();
         int[] randoms = new int[k];
         boolean flag = true;
         int temp = random.nextInt(dataSet.size());
@@ -87,16 +87,16 @@ public class ClusterController {
         return centers;
     }
 
-    private List<List<CareerClusterProv>> initClusters(int k) {
+    private List<List<ClusterProvince>> initClusters(int k) {
         //初始化簇集合
-        List<List<CareerClusterProv>> clusters = new ArrayList<>();
+        List<List<ClusterProvince>> clusters = new ArrayList<>();
         for (int i = 0; i < k; i++) {
             clusters.add(new ArrayList<>());
         }
         return clusters;
     }
 
-    private List<List<CareerClusterProv>> clusterSet(List<CareerClusterProv> dataSet, List<CareerClusterProv> centers, int k, List<List<CareerClusterProv>> clusters) {
+    private List<List<ClusterProvince>> clusterSet(List<ClusterProvince> dataSet, List<ClusterProvince> centers, int k, List<List<ClusterProvince>> clusters) {
         //将当前元素放到最小距离中心相关的簇中
         float[] distance = new float[k];
         for (int i = 0; i < dataSet.size(); i++) {
@@ -109,17 +109,17 @@ public class ClusterController {
         return clusters;
     }
 
-    private void setNewCenter(int k, List<List<CareerClusterProv>> clusters, List<CareerClusterProv> centers) {
+    private void setNewCenter(int k, List<List<ClusterProvince>> clusters, List<ClusterProvince> centers) {
         //设置新的簇中心
         for (int i = 0; i < k; i++) {
             int n = clusters.get(i).size();
-            int[] temp = new int[centers.get(i).getCareerValue().size()];
+            int[] temp = new int[centers.get(i).getPatientNum().size()];
             Map<String, Integer> tempMap = new HashMap<>();
             if (n != 0) {
                 for (int j = 0; j < n; j++) {
-                    for (String key : centers.get(i).getCareerValue().keySet()
+                    for (String key : centers.get(i).getPatientNum().keySet()
                             ) {
-                        temp[i] += clusters.get(i).get(j).getCareerValue().get(key);
+                        temp[i] += clusters.get(i).get(j).getPatientNum().get(key);
                     }
                 }
             }
@@ -132,13 +132,13 @@ public class ClusterController {
     private void countRule() {
     }
 
-    private float distance(CareerClusterProv element, CareerClusterProv center) {
+    private float distance(ClusterProvince element, ClusterProvince center) {
         //计算两点之间的欧氏距离
         float distance = 0.0f;
         float temp = 0.0f;
-        for (String key : element.getCareerValue().keySet()) {
-            temp += (element.getCareerValue().get(key) - center.getCareerValue().get(key))
-                    * (element.getCareerValue().get(key) - center.getCareerValue().get(key));
+        for (String key : element.getPatientNum().keySet()) {
+            temp += (element.getPatientNum().get(key) - center.getPatientNum().get(key))
+                    * (element.getPatientNum().get(key) - center.getPatientNum().get(key));
         }
         distance = (float) Math.sqrt(temp);
         return distance;
