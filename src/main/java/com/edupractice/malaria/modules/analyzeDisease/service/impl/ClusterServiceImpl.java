@@ -107,14 +107,14 @@ public class ClusterServiceImpl implements ClusterService {
                 }
             }
             System.out.println(clusterList);
-            clusterList = vancandyData(clusterList);
+            clusterList = vacantData(clusterList);
             System.out.println(clusterList);
         }
         return clusterList;
     }
 
     //空缺数据处理
-    private List<Cluster> vancandyData(List<Cluster> clusterList) throws Exception {
+    private List<Cluster> vacantData(List<Cluster> clusterList) throws Exception {
         //所有省份信息
         List<FourLevelLinkage> provinces = districtInfoMapper.selectProvinces();
 
@@ -244,25 +244,25 @@ public class ClusterServiceImpl implements ClusterService {
     //设置新的簇中心
     private void setNewCenter(int k, List<List<ClusterProvince>> clusters, List<ClusterProvince> centers) {
         for (int i = 0; i < k; i++) {
+            //每一簇
             ClusterProvince newCenter = new ClusterProvince();
-
             Map<String, Integer> newCenterMap = new HashMap<>();
-
             int n = clusters.get(i).size();
             int[] temp = new int[centers.get(i).getPatientNum().size()];
             Map<String, Integer> tempMap = new HashMap<>();
             if (n != 0) {
                 for (String key : centers.get(i).getPatientNum().keySet()) {
+                    int patientSum = 0;
                     for (int j = 0; j < n; j++) {
-                        //     temp[centers.get(i).getPatientNum()] += clusters.get(i).get(j).getPatientNum().get(key);
+                        //每个省份
+                        patientSum += clusters.get(i).get(j).getPatientNum().get(key);
                     }
-
+                    newCenterMap.put(key, patientSum / n);
                 }
             }
-            //设置平均值
-            for (int j = 0; j < temp.length; j++) {
-                temp[j] = temp[j] / n;
-            }
+
+            newCenter.setProvince("default");
+            newCenter.setPatientNum(newCenterMap);
             centers.set(i, newCenter);
         }
 
