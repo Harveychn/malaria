@@ -22,8 +22,8 @@ public class ClusterServiceImpl implements ClusterService {
 
     private Random random;
 
-    @Override
-    public List<Cluster> cluster(String type) throws Exception {
+    //聚类所需原数据处理
+    public List<Cluster> clusterDataSet(String type) throws Exception {
         //所有职业信息
         List<String> careers = clusterMapper.getAllCareer();
         //所有年龄区间
@@ -161,8 +161,12 @@ public class ClusterServiceImpl implements ClusterService {
      * 3.计算每个聚类的平均数，并作为新的中心点
      * 4.重复2.3步骤，直到这K个中心点不再变化（收敛），或者执行了足够多的迭代
      */
-/*    private void kMeans(List<ClusterProv> dataSet, int k) {
+    public List<List<ClusterProvince>> kMeans(List<ClusterProvince> dataSet, int k) {
+        List<ClusterProvince> centers = new ArrayList<>();
+        List<List<ClusterProvince>> clusters = new ArrayList<>();
+        List<Float> jc = new ArrayList<>();
         int dataLength = dataSet.size();
+        int iterativeNum = 0;
         //初始化
         if (dataSet.size() <= 0)
             System.out.println("数据为空");
@@ -171,23 +175,27 @@ public class ClusterServiceImpl implements ClusterService {
                 k = dataLength;
             }
             //初始化中心链表
-            initCenters();
+            centers = initCenters(dataSet, k);
             //初始化簇
-            initClusters();
+            clusters = initClusters(k);
             while (true) {
-                clusterSet();
-                countRule();
+                clusters = clusterSet(dataSet, centers, k, clusters);
+                jc.add(countRule(clusters, centers));
                 //迭代完成
-                if () {
-                    break;
+                if (iterativeNum != 0) {
+                    if (jc.get(iterativeNum) - jc.get(iterativeNum - 1) == 0) {
+                        break;
+                    }
                 }
-                setNewCenter();
-                m++;
-                cluster.clear();
-                cluster = initClusters();
+                centers = setNewCenter(k, clusters, centers);
+                iterativeNum++;
+                clusters.clear();
+                clusters = initClusters(k);
             }
         }
-    }*/
+        return clusters;
+    }
+
     private List<ClusterProvince> initCenters(List<ClusterProvince> dataSet, int k) {
         //初始化中心数据链表
         List<ClusterProvince> centers = new ArrayList<>();
@@ -220,7 +228,6 @@ public class ClusterServiceImpl implements ClusterService {
 
     //初始化簇集合
     private List<List<ClusterProvince>> initClusters(int k) {
-
         List<List<ClusterProvince>> clusters = new ArrayList<>();
         for (int i = 0; i < k; i++) {
             clusters.add(new ArrayList<>());
@@ -242,33 +249,47 @@ public class ClusterServiceImpl implements ClusterService {
     }
 
     //设置新的簇中心
-    private void setNewCenter(int k, List<List<ClusterProvince>> clusters, List<ClusterProvince> centers) {
+    private List<ClusterProvince> setNewCenter(int k, List<List<ClusterProvince>> clusters, List<ClusterProvince> centers) {
         for (int i = 0; i < k; i++) {
-            //每一簇
             ClusterProvince newCenter = new ClusterProvince();
             Map<String, Integer> newCenterMap = new HashMap<>();
             int n = clusters.get(i).size();
-            int[] temp = new int[centers.get(i).getPatientNum().size()];
-            Map<String, Integer> tempMap = new HashMap<>();
             if (n != 0) {
                 for (String key : centers.get(i).getPatientNum().keySet()) {
                     int patientSum = 0;
                     for (int j = 0; j < n; j++) {
-                        //每个省份
                         patientSum += clusters.get(i).get(j).getPatientNum().get(key);
                     }
                     newCenterMap.put(key, patientSum / n);
                 }
             }
-
             newCenter.setProvince("default");
             newCenter.setPatientNum(newCenterMap);
             centers.set(i, newCenter);
         }
-
+        return centers;
     }
 
-    private void countRule() {
+    //计算误差平方和准则函数方法
+    private float countRule(List<List<ClusterProvince>> clusters, List<ClusterProvince> centers) {
+        float jcF = 0.0f;
+        for (int i = 0; i < clusters.size(); i++) {
+            for (int j = 0; j < clusters.get(i).size(); j++) {
+                jcF += errorSquare(clusters.get(i).get(j), centers.get(i));
+            }
+        }
+        return jcF;
+    }
+
+    //求两点误差平方的方法
+    private float errorSquare(ClusterProvince element, ClusterProvince center) {
+        float temp = 0.0f;
+        for (String key : element.getPatientNum().keySet()) {
+            temp += (element.getPatientNum().get(key) - center.getPatientNum().get(key))
+                    * (element.getPatientNum().get(key) - center.getPatientNum().get(key));
+        }
+        float errSquare = temp;
+        return errSquare;
     }
 
     //计算两点之间的欧氏距离
