@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<div class="partDivide">
+    <form class="form-inline" style="margin-left: 50px;">
+        <label class="fieldName">疾病类型：</label>
+        <div class="form-group">
+            <select id="diseaseName" class="mySelect" style="width: 170px;margin-right: 10px;">
+                <option>间日疟</option>
+                <option>恶性疟</option>
+            </select>
+        </div>
+    </form>
+    <form class="form-inline" style="margin-left: 50px;">
+        <label class="fieldName">年份：</label>
+        <div class="form-group">
+            <select id="year" class="mySelect" style="width: 170px;margin-right: 10px;">
+                <option>默认</option>
+            </select>
+        </div>
+    </form>
+    <form class="form-inline" style="margin-left: 50px;">
+        <label class="fieldName">职业/年龄：</label>
+        <div class="form-group">
+            <select id="attribute" class="mySelect" style="width: 170px;margin-right: 10px;">
+                <option>职业</option>
+                <option>年龄</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div class="partDivide">
+    <button id="submitTerm" class="btn btn-primary pull-right" type="submit" style="margin-right: 50px;">开始下载</button>
+</div>
+
+<div id="allmap"></div>
+
+<script type="text/javascript" src="../static/js/myjs/cluster.js"
+        th:src="@{/js/myjs/cluster.js}"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=r7HZ9G3PvvzKqG7uhjLXRbRG99gfRGvO"
+        th:src="@{'http://api.map.baidu.com/api?v=2.0&ak=r7HZ9G3PvvzKqG7uhjLXRbRG99gfRGvO'}"></script>
+
+</body>
+</html>

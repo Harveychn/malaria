@@ -7,7 +7,9 @@ import java.util.List;
 
 @Repository
 public interface ClusterMapper {
-    List<String> getAllYear(String disease) throws Exception;
+    List<String> getAllYearByDisease(String disease) throws Exception;
+
+    List<String> getAllYear() throws Exception;
 
     List<String> getAllCareer() throws Exception;
 }

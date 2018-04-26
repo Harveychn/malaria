@@ -20,6 +20,11 @@ public class ClusterServiceImpl implements ClusterService {
     @Resource
     private ClusterMapper clusterMapper;
 
+    @Override
+    public List<String> getAllYear() throws Exception {
+        return clusterMapper.getAllYear();
+    }
+
     //聚类所需原数据处理
     public List<Cluster> clusterDataSet(String type) throws Exception {
         //所有职业信息
@@ -40,9 +45,9 @@ public class ClusterServiceImpl implements ClusterService {
         List<FourLevelLinkage> provinces = districtInfoMapper.selectProvinces();
 
         //恶性疟所有年份
-        List<String> yearList1 = clusterMapper.getAllYear("恶性疟");
+        List<String> yearList1 = clusterMapper.getAllYearByDisease("恶性疟");
         //间日疟所有年份
-        List<String> yearList2 = clusterMapper.getAllYear("间日疟");
+        List<String> yearList2 = clusterMapper.getAllYearByDisease("间日疟");
 
         List<List<String>> yearList = new ArrayList<>();
         yearList.add(yearList1);
@@ -119,9 +124,9 @@ public class ClusterServiceImpl implements ClusterService {
         List<FourLevelLinkage> provinces = districtInfoMapper.selectProvinces();
 
         //恶性疟所有年份
-        List<String> yearList1 = clusterMapper.getAllYear("恶性疟");
+        List<String> yearList1 = clusterMapper.getAllYearByDisease("恶性疟");
         //间日疟所有年份
-        List<String> yearList2 = clusterMapper.getAllYear("间日疟");
+        List<String> yearList2 = clusterMapper.getAllYearByDisease("间日疟");
 
         List<List<String>> yearList = new ArrayList<>();
         yearList.add(yearList1);
