@@ -94,14 +94,14 @@ public class ClusterServiceImpl implements ClusterService {
                 if ("恶性疟".equals(current.getDisease())) {
                     for (int k = 0; k < yearList.get(0).size(); k++) {
                         if (yearList.get(0).get(k).equals(Integer.toString(current.getYear()))) {
-                            clusterList.get(0).getClusterProvinceLists().get(k).get(i).getPatientNum().put(current.getAttitude(), current.getPatientNum());
+                            clusterList.get(0).getClusterProvinceLists().get(k).get(i).getPatientNum().put(current.getAttitude(), (float) current.getPatientNum());
                             break;
                         }
                     }
                 } else if ("间日疟".equals(current.getDisease())) {
                     for (int k = 0; k < yearList.get(1).size(); k++) {
                         if (yearList.get(1).get(k).equals(Integer.toString(current.getYear()))) {
-                            clusterList.get(1).getClusterProvinceLists().get(k).get(i).getPatientNum().put(current.getAttitude(), current.getPatientNum());
+                            clusterList.get(1).getClusterProvinceLists().get(k).get(i).getPatientNum().put(current.getAttitude(), (float) current.getPatientNum());
                             break;
                         }
                     }
@@ -133,9 +133,9 @@ public class ClusterServiceImpl implements ClusterService {
                     for (String key : clusterList.get(i).getClusterProvinceLists().get(k).get(j).getPatientNum().keySet()
                             ) {
                         if (clusterList.get(i).getClusterProvinceLists().get(k).get(j).getPatientNum().get(key) == 0) {
-                            int lastYearNum = clusterList.get(i).getClusterProvinceLists().get(k - 1).get(j).getPatientNum().get(key);
-                            int nextYearNum = clusterList.get(i).getClusterProvinceLists().get(k + 1).get(j).getPatientNum().get(key);
-                            clusterList.get(i).getClusterProvinceLists().get(k).get(j).getPatientNum().put(key, (lastYearNum + nextYearNum) / 2);
+                            float lastYearNum = clusterList.get(i).getClusterProvinceLists().get(k - 1).get(j).getPatientNum().get(key);
+                            float nextYearNum = clusterList.get(i).getClusterProvinceLists().get(k + 1).get(j).getPatientNum().get(key);
+                            clusterList.get(i).getClusterProvinceLists().get(k).get(j).getPatientNum().put(key, (float) ((int) (lastYearNum + nextYearNum) / 2));
                         }
                     }
                 }
@@ -144,11 +144,11 @@ public class ClusterServiceImpl implements ClusterService {
         return clusterList;
     }
 
-    private Map<String, Integer> initMapValue(List<String> attributeList) {
-        Map<String, Integer> stringIntegerMap = new HashMap<>();
+    private Map<String, Float> initMapValue(List<String> attributeList) {
+        Map<String, Float> stringIntegerMap = new HashMap<>();
         for (String attribute : attributeList
                 ) {
-            stringIntegerMap.put(attribute, 0);
+            stringIntegerMap.put(attribute, 0.0f);
         }
         return stringIntegerMap;
     }
@@ -254,11 +254,11 @@ public class ClusterServiceImpl implements ClusterService {
     private List<ClusterProvince> setNewCenter(int k, List<List<ClusterProvince>> clusters, List<ClusterProvince> centers) {
         for (int i = 0; i < k; i++) {
             ClusterProvince newCenter = new ClusterProvince();
-            Map<String, Integer> newCenterMap = new HashMap<>();
+            Map<String, Float> newCenterMap = new HashMap<>();
             int n = clusters.get(i).size();
             if (n != 0) {
                 for (String key : centers.get(i).getPatientNum().keySet()) {
-                    int patientSum = 0;
+                    float patientSum = 0;
                     for (int j = 0; j < n; j++) {
                         patientSum += clusters.get(i).get(j).getPatientNum().get(key);
                     }

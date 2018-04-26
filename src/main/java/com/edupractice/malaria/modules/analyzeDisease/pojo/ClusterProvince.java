@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class ClusterProvince {
     private String province;
-    private Map<String,Integer> patientNum;
+    private Map<String, Float> patientNum;
 
     public String getProvince() {
         return province;
@@ -14,11 +14,11 @@ public class ClusterProvince {
         this.province = province;
     }
 
-    public Map<String, Integer> getPatientNum() {
+    public Map<String, Float> getPatientNum() {
         return patientNum;
     }
 
-    public void setPatientNum(Map<String, Integer> patientNum) {
+    public void setPatientNum(Map<String, Float> patientNum) {
         this.patientNum = patientNum;
     }
 }
