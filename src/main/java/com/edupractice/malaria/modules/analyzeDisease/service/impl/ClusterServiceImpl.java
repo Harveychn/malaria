@@ -58,9 +58,10 @@ public class ClusterServiceImpl implements ClusterService {
             List<List<ClusterProvince>> clusterProvinceLists = new ArrayList<>();
             for (int j = 0; j < yearList.get(i).size(); j++) {
                 List<ClusterProvince> clusterProvinceList = new ArrayList<>();
-                for (int k = 0; k < provinces.size(); k++) {
+                for (FourLevelLinkage currentProvince : provinces
+                        ) {
                     ClusterProvince clusterProvince = new ClusterProvince();
-                    clusterProvince.setProvince(provinces.get(k).getName());
+                    clusterProvince.setProvince(currentProvince.getName());
                     clusterProvince.setPatientNum(initMapValue(attitude));
                     clusterProvinceList.add(clusterProvince);
                 }
@@ -88,8 +89,8 @@ public class ClusterServiceImpl implements ClusterService {
             if (analyzeReList.size() == 0) {
                 break;
             }
-            for (int j = 0; j < analyzeReList.size(); j++) {
-                AnalyzeRe current = analyzeReList.get(j);
+            for (AnalyzeRe current : analyzeReList
+                    ) {
                 if ("恶性疟".equals(current.getDisease())) {
                     for (int k = 0; k < yearList.get(0).size(); k++) {
                         if (yearList.get(0).get(k).equals(Integer.toString(current.getYear()))) {
@@ -143,10 +144,11 @@ public class ClusterServiceImpl implements ClusterService {
         return clusterList;
     }
 
-    private Map<String, Integer> initMapValue(List<String> careerList) {
+    private Map<String, Integer> initMapValue(List<String> attributeList) {
         Map<String, Integer> stringIntegerMap = new HashMap<>();
-        for (int i = 0; i < careerList.size(); i++) {
-            stringIntegerMap.put(careerList.get(i), 0);
+        for (String attribute : attributeList
+                ) {
+            stringIntegerMap.put(attribute, 0);
         }
         return stringIntegerMap;
     }
@@ -161,7 +163,7 @@ public class ClusterServiceImpl implements ClusterService {
      * 4.重复2.3步骤，直到这K个中心点不再变化（收敛），或者执行了足够多的迭代
      */
     public List<List<ClusterProvince>> kMeans(List<ClusterProvince> dataSet, int k) {
-        List<ClusterProvince> centers = new ArrayList<>();
+        List<ClusterProvince> centers;
         List<List<ClusterProvince>> clusters = new ArrayList<>();
         List<Float> jc = new ArrayList<>();
         int dataLength = dataSet.size();
@@ -174,7 +176,7 @@ public class ClusterServiceImpl implements ClusterService {
                 k = dataLength;
             }
             //初始化中心链表
-            centers = initCenters(dataSet, k);
+            centers = initCentersPro(dataSet, k);
             //初始化簇
             clusters = initClusters(k);
             while (true) {
@@ -200,7 +202,7 @@ public class ClusterServiceImpl implements ClusterService {
         Random random = new Random();
         List<ClusterProvince> centers = new ArrayList<>();
         int[] randoms = new int[k];
-        boolean flag = true;
+        boolean flag;
         int temp = random.nextInt(dataSet.size());
         randoms[0] = temp;
         for (int i = 1; i < k; i++) {
@@ -238,12 +240,12 @@ public class ClusterServiceImpl implements ClusterService {
     //将当前元素放到最小距离中心相关的簇中
     private List<List<ClusterProvince>> clusterSet(List<ClusterProvince> dataSet, List<ClusterProvince> centers, int k, List<List<ClusterProvince>> clusters) {
         float[] distance = new float[k];
-        for (int i = 0; i < dataSet.size(); i++) {
+        for (ClusterProvince dataSetProvince : dataSet) {
             for (int j = 0; j < k; j++) {
-                distance[j] = distance(dataSet.get(i), centers.get(j));
+                distance[j] = distance(dataSetProvince, centers.get(j));
             }
-            int minLocation = minDistance(distance);
-            clusters.get(minLocation).add(dataSet.get(i));
+            int minLocation = minDistanceLoc(distance);
+            clusters.get(minLocation).add(dataSetProvince);
         }
         return clusters;
     }
@@ -288,8 +290,7 @@ public class ClusterServiceImpl implements ClusterService {
             temp += (element.getPatientNum().get(key) - center.getPatientNum().get(key))
                     * (element.getPatientNum().get(key) - center.getPatientNum().get(key));
         }
-        float errSquare = temp;
-        return errSquare;
+        return temp;
     }
 
     //计算两点之间的欧氏距离
@@ -305,7 +306,7 @@ public class ClusterServiceImpl implements ClusterService {
     }
 
     //获取距离集合中最小距离的位置
-    private int minDistance(float[] distance) {
+    private int minDistanceLoc(float[] distance) {
         Random random = new Random();
         float minDistance = distance[0];
         int minLocation = 0;
@@ -321,5 +322,70 @@ public class ClusterServiceImpl implements ClusterService {
             }
         }
         return minLocation;
+    }
+
+    //获取距离集合中最小距离
+    private float minDistance(float[] distance) {
+        float minDistance = distance[0];
+        for (int i = 1; i < distance.length; i++) {
+            if (distance[i] < minDistance) {
+                minDistance = distance[i];
+            }
+        }
+        return minDistance;
+    }
+
+    private List<ClusterProvince> initCentersPro(List<ClusterProvince> dataSet, int k) {
+        //K-means++算法初始化中心数据链表
+        Random random = new Random();
+        List<ClusterProvince> centers = new ArrayList<>();
+
+        float[] minDistanceArray = new float[dataSet.size()];
+        int count = 1;
+        //第一个簇中心点
+        int firstCenter = random.nextInt(dataSet.size());
+        centers.add(dataSet.get(firstCenter));
+        for (int i = 1; i < k; i++) {
+
+            //找出每个样本与已知聚类中心之间的最短距离
+            for (int j = 0; j < dataSet.size(); j++) {
+
+                float[] distance = new float[count];
+                for (int l = 0; l < count; l++) {
+                    distance[l] = distance(dataSet.get(j), centers.get(l));
+                }
+                minDistanceArray[j] = minDistance(distance);
+            }
+
+            float[] probability = centerProbability(minDistanceArray);
+            int temp = random.nextInt(1);
+            for (int j = 1; j < probability.length; j++) {
+                if (((Math.abs(probability[j - 1] - temp) < 0.00000001) | (probability[j - 1] < temp)) && (temp < probability[j])) {
+                    centers.add(dataSet.get(j));
+                    count++;
+                    break;
+                }
+            }
+        }
+        return centers;
+    }
+
+    private float[] centerProbability(float[] distance) {
+        //可能成为聚类中心的概率
+        float[] probability = new float[distance.length + 1];
+        float sum = 0.0f;
+        for (float index : distance
+                ) {
+            sum += (index * index);
+        }
+        for (int i = 1; i < distance.length; i++) {
+            probability[i] = distance[i] * distance[i] / sum;
+        }
+        probability[0] = 0;
+        //轮转法
+        for (int i = 1; i < distance.length; i++) {
+            probability[i] += probability[i - 1];
+        }
+        return probability;
     }
 }

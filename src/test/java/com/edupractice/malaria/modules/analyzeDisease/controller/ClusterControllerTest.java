@@ -20,7 +20,7 @@ public class ClusterControllerTest {
 
     @Test
     public void clusterToGroup() throws Exception {
-        String diseaseName = "恶性疟";
+        String diseaseName = "间日疟";
         String year = "2007";
         String attribute = "Career";
         List<Cluster> clusters = clusterService.clusterDataSet(attribute);
