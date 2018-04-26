@@ -20,8 +20,6 @@ public class ClusterServiceImpl implements ClusterService {
     @Resource
     private ClusterMapper clusterMapper;
 
-    private Random random;
-
     //聚类所需原数据处理
     public List<Cluster> clusterDataSet(String type) throws Exception {
         //所有职业信息
@@ -78,7 +76,9 @@ public class ClusterServiceImpl implements ClusterService {
             clusterList.add(cluster);
         }
 
+        //数据填充
         for (int i = 0; i < provinces.size(); i++) {
+            System.out.println(provinces.get(i).getName());
             List<AnalyzeRe> analyzeReList = new ArrayList<>();
             if (type.equals("Career")) {
                 analyzeReList = analyzeMapper.analyzeByCareer(provinces.get(i).getName());
@@ -86,7 +86,7 @@ public class ClusterServiceImpl implements ClusterService {
                 analyzeReList = analyzeMapper.analyzeByAgeGroup(provinces.get(i).getName());
             }
             if (analyzeReList.size() == 0) {
-                return null;
+                break;
             }
             for (int j = 0; j < analyzeReList.size(); j++) {
                 AnalyzeRe current = analyzeReList.get(j);
@@ -107,9 +107,8 @@ public class ClusterServiceImpl implements ClusterService {
                 }
             }
             System.out.println(clusterList);
-            clusterList = vacantData(clusterList);
-            System.out.println(clusterList);
         }
+        clusterList = vacantData(clusterList);
         return clusterList;
     }
 
@@ -198,6 +197,7 @@ public class ClusterServiceImpl implements ClusterService {
 
     private List<ClusterProvince> initCenters(List<ClusterProvince> dataSet, int k) {
         //初始化中心数据链表
+        Random random = new Random();
         List<ClusterProvince> centers = new ArrayList<>();
         int[] randoms = new int[k];
         boolean flag = true;
@@ -221,7 +221,7 @@ public class ClusterServiceImpl implements ClusterService {
             randoms[i] = temp;
         }
         for (int i = 0; i < k; i++) {
-            centers.add(dataSet.get(i));
+            centers.add(dataSet.get(randoms[i]));
         }
         return centers;
     }
@@ -306,6 +306,7 @@ public class ClusterServiceImpl implements ClusterService {
 
     //获取距离集合中最小距离的位置
     private int minDistance(float[] distance) {
+        Random random = new Random();
         float minDistance = distance[0];
         int minLocation = 0;
         for (int i = 1; i < distance.length; i++) {
