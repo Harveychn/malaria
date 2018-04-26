@@ -5,6 +5,7 @@ import com.edupractice.malaria.modules.analyzeDisease.pojo.ClusterProvince;
 import com.edupractice.malaria.modules.analyzeDisease.service.ClusterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,12 +18,16 @@ public class ClusterController {
     @Resource
     private ClusterService clusterservice;
 
-    @RequestMapping("/kMeans")
+    @RequestMapping(value = "/kMeans", method = RequestMethod.POST)
     public
     @ResponseBody
     List<List<ClusterProvince>> Cluster(String diseaseName, String year, String attribute) throws Exception {
-        List<Cluster> clusters = new ArrayList<>();
-        clusterservice.clusterDataSet(attribute);
+        if (attribute.equals("职业")) {
+            attribute = "Career";
+        } else if (attribute.equals("年龄")) {
+            attribute = "AgeGroup";
+        }
+        List<Cluster> clusters = clusterservice.clusterDataSet(attribute);
         int k = 4;
         int index = 0;
         if (diseaseName.equals("恶性疟")) {
