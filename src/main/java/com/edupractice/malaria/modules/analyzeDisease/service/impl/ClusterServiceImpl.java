@@ -49,9 +49,13 @@ public class ClusterServiceImpl implements ClusterService {
         //间日疟所有年份
         List<String> yearList2 = clusterMapper.getAllYearByDisease("间日疟");
 
+
         List<List<String>> yearList = new ArrayList<>();
         yearList.add(yearList1);
         yearList.add(yearList2);
+
+        yearList.get(0).add("全部年份");
+        yearList.get(1).add("全部年份");
 
         List<Cluster> clusterList = new ArrayList<>();
 
@@ -63,8 +67,7 @@ public class ClusterServiceImpl implements ClusterService {
             List<List<ClusterProvince>> clusterProvinceLists = new ArrayList<>();
             for (int j = 0; j < yearList.get(i).size(); j++) {
                 List<ClusterProvince> clusterProvinceList = new ArrayList<>();
-                for (FourLevelLinkage currentProvince : provinces
-                        ) {
+                for (FourLevelLinkage currentProvince : provinces) {
                     ClusterProvince clusterProvince = new ClusterProvince();
                     clusterProvince.setProvince(currentProvince.getName());
                     clusterProvince.setPatientNum(initMapValue(attitude));
@@ -72,7 +75,7 @@ public class ClusterServiceImpl implements ClusterService {
                 }
                 clusterProvinceLists.add(clusterProvinceList);
             }
-            cluster.setYearList(yearList1);
+            cluster.setYearList(yearList.get(i));
             cluster.setClusterProvinceLists(clusterProvinceLists);
             if (i == 0) {
                 cluster.setDiseaseName("恶性疟");
@@ -81,6 +84,10 @@ public class ClusterServiceImpl implements ClusterService {
             }
             clusterList.add(cluster);
         }
+        Map flag1=new HashMap();
+        Map flag2=new HashMap();
+        flag1=initMapValue(attitude);
+        flag2=initMapValue(attitude);
 
         //数据填充
         for (int i = 0; i < provinces.size(); i++) {
@@ -94,24 +101,34 @@ public class ClusterServiceImpl implements ClusterService {
             if (analyzeReList.size() == 0) {
                 break;
             }
-            for (AnalyzeRe current : analyzeReList
-                    ) {
+            for (AnalyzeRe current : analyzeReList) {
                 if ("恶性疟".equals(current.getDisease())) {
                     for (int k = 0; k < yearList.get(0).size(); k++) {
-                        if (yearList.get(0).get(k).equals(Integer.toString(current.getYear()))) {
+                        if (yearList.get(0).get(k).equals("全部年份")) {
+                            clusterList.get(0).getClusterProvinceLists().get(k).get(i).setPatientNum(flag1);
+                        } else if (yearList.get(0).get(k).equals(Integer.toString(current.getYear()))) {
                             clusterList.get(0).getClusterProvinceLists().get(k).get(i).getPatientNum().put(current.getAttitude(), (float) current.getPatientNum());
-                            break;
+                            float f1=(float) flag1.get(current.getAttitude());
+                            f1+=(float)current.getPatientNum();
+                            flag1.put(current.getAttitude(),f1);
                         }
                     }
                 } else if ("间日疟".equals(current.getDisease())) {
                     for (int k = 0; k < yearList.get(1).size(); k++) {
-                        if (yearList.get(1).get(k).equals(Integer.toString(current.getYear()))) {
+                        if (yearList.get(1).get(k).equals("全部年份")) {
+                            clusterList.get(1).getClusterProvinceLists().get(k).get(i).setPatientNum(flag2);
+                        } else if (yearList.get(1).get(k).equals(Integer.toString(current.getYear()))) {
                             clusterList.get(1).getClusterProvinceLists().get(k).get(i).getPatientNum().put(current.getAttitude(), (float) current.getPatientNum());
-                            break;
+                            float f2= (float) flag2.get(current.getAttitude());
+                            f2+=(float)current.getPatientNum();
+                            flag2.put(current.getAttitude(),f2);
                         }
                     }
                 }
+
             }
+            flag1=initMapValue(attitude);
+            flag2=initMapValue(attitude);
             System.out.println(clusterList);
         }
         clusterList = vacantData(clusterList);
@@ -134,7 +151,7 @@ public class ClusterServiceImpl implements ClusterService {
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < provinces.size(); j++) {
-                for (int k = 1; k < yearList.get(i).size() - 1; k++) {
+                for (int k = 1; k < yearList.get(i).size() - 2; k++) {
                     for (String key : clusterList.get(i).getClusterProvinceLists().get(k).get(j).getPatientNum().keySet()
                             ) {
                         if (clusterList.get(i).getClusterProvinceLists().get(k).get(j).getPatientNum().get(key) == 0) {
@@ -151,8 +168,7 @@ public class ClusterServiceImpl implements ClusterService {
 
     private Map<String, Float> initMapValue(List<String> attributeList) {
         Map<String, Float> stringIntegerMap = new HashMap<>();
-        for (String attribute : attributeList
-                ) {
+        for (String attribute : attributeList) {
             stringIntegerMap.put(attribute, 0.0f);
         }
         return stringIntegerMap;

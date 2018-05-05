@@ -21,8 +21,8 @@ public class ClusterControllerTest {
     @Test
     public void clusterToGroup() throws Exception {
         String diseaseName = "间日疟";
-        String year = "2005";
-        String attribute = "AgeGroup";
+        String year = "全部年份";
+        String attribute = "Career";
         List<Cluster> clusters = clusterService.clusterDataSet(attribute);
         int k = 4;
         int index = 0;
