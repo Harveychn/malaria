@@ -84,10 +84,10 @@ public class ClusterServiceImpl implements ClusterService {
             }
             clusterList.add(cluster);
         }
-        Map flag1=new HashMap();
-        Map flag2=new HashMap();
-        flag1=initMapValue(attitude);
-        flag2=initMapValue(attitude);
+        Map flag1 = new HashMap();
+        Map flag2 = new HashMap();
+        flag1 = initMapValue(attitude);
+        flag2 = initMapValue(attitude);
 
         //数据填充
         for (int i = 0; i < provinces.size(); i++) {
@@ -108,9 +108,9 @@ public class ClusterServiceImpl implements ClusterService {
                             clusterList.get(0).getClusterProvinceLists().get(k).get(i).setPatientNum(flag1);
                         } else if (yearList.get(0).get(k).equals(Integer.toString(current.getYear()))) {
                             clusterList.get(0).getClusterProvinceLists().get(k).get(i).getPatientNum().put(current.getAttitude(), (float) current.getPatientNum());
-                            float f1=(float) flag1.get(current.getAttitude());
-                            f1+=(float)current.getPatientNum();
-                            flag1.put(current.getAttitude(),f1);
+                            float f1 = (float) flag1.get(current.getAttitude());
+                            f1 += (float) current.getPatientNum();
+                            flag1.put(current.getAttitude(), f1);
                         }
                     }
                 } else if ("间日疟".equals(current.getDisease())) {
@@ -119,16 +119,15 @@ public class ClusterServiceImpl implements ClusterService {
                             clusterList.get(1).getClusterProvinceLists().get(k).get(i).setPatientNum(flag2);
                         } else if (yearList.get(1).get(k).equals(Integer.toString(current.getYear()))) {
                             clusterList.get(1).getClusterProvinceLists().get(k).get(i).getPatientNum().put(current.getAttitude(), (float) current.getPatientNum());
-                            float f2= (float) flag2.get(current.getAttitude());
-                            f2+=(float)current.getPatientNum();
-                            flag2.put(current.getAttitude(),f2);
+                            float f2 = (float) flag2.get(current.getAttitude());
+                            f2 += (float) current.getPatientNum();
+                            flag2.put(current.getAttitude(), f2);
                         }
                     }
                 }
-
             }
-            flag1=initMapValue(attitude);
-            flag2=initMapValue(attitude);
+            flag1 = initMapValue(attitude);
+            flag2 = initMapValue(attitude);
             System.out.println(clusterList);
         }
         clusterList = vacantData(clusterList);

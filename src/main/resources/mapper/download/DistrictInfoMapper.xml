@@ -5,15 +5,15 @@
         SELECT * FROM four_level_linkage WHERE `level` = 1
     </select>
 
-    <select id="selectCities" parameterType="Integer" resultType="com.edupractice.malaria.modules.common.pojo.FourLevelLinkage">
+    <select id="selectCities" parameterType="java.lang.Integer" resultType="com.edupractice.malaria.modules.common.pojo.FourLevelLinkage">
         SELECT * FROM four_level_linkage WHERE upId =#{upId} AND `level` =2;
     </select>
 
-    <select id="selectCounties" parameterType="Integer" resultType="com.edupractice.malaria.modules.common.pojo.FourLevelLinkage">
+    <select id="selectCounties" parameterType="java.lang.Integer" resultType="com.edupractice.malaria.modules.common.pojo.FourLevelLinkage">
         SELECT * FROM four_level_linkage WHERE upId =#{upId} AND `level` =3;
     </select>
 
-    <select id="selectVillages" parameterType="Integer" resultType="com.edupractice.malaria.modules.common.pojo.FourLevelLinkage">
+    <select id="selectVillages" parameterType="java.lang.Integer" resultType="com.edupractice.malaria.modules.common.pojo.FourLevelLinkage">
         SELECT * FROM four_level_linkage WHERE upId =#{upId} AND `level` =4;
     </select>
 </mapper>

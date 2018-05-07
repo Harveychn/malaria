@@ -15,6 +15,7 @@ $(function () {
     });
 });
 
+
 $('#submitTerm').on('click', function (event) {
     var year = $('#year option:selected').val();
     var attribute = $('#attribute option:selected').val();
@@ -44,7 +45,6 @@ $('#submitTerm').on('click', function (event) {
                             getBoundary(data[i][j].province, color[i]);
                         }
                     }
-
                 },
             error: function (data) {
                 console.error("出错了，返回的data：" + data);
