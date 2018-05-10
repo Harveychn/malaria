@@ -101,18 +101,18 @@
   </delete>
   <insert id="insert" parameterType="com.edupractice.malaria.modules.common.pojo.Disease" useGeneratedKeys="true" keyProperty="diseaseId" >
     insert into disease (disease_name)
-    values (#{diseaseName,jdbcType=VARCHAR})
+    values (#{disease,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.edupractice.malaria.modules.common.pojo.Disease" useGeneratedKeys="true" keyProperty="diseaseId" >
     insert into disease
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="diseaseName != null" >
+      <if test="disease != null" >
         disease_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="diseaseName != null" >
-        #{diseaseName,jdbcType=VARCHAR},
+      <if test="disease != null" >
+        #{disease,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -128,8 +128,8 @@
       <if test="record.diseaseId != null" >
         disease_id = #{record.diseaseId,jdbcType=INTEGER},
       </if>
-      <if test="record.diseaseName != null" >
-        disease_name = #{record.diseaseName,jdbcType=VARCHAR},
+      <if test="record.disease != null" >
+        disease_name = #{record.disease,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -139,7 +139,7 @@
   <update id="updateByExample" parameterType="map" >
     update disease
     set disease_id = #{record.diseaseId,jdbcType=INTEGER},
-      disease_name = #{record.diseaseName,jdbcType=VARCHAR}
+      disease_name = #{record.disease,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -147,15 +147,15 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.edupractice.malaria.modules.common.pojo.Disease" >
     update disease
     <set >
-      <if test="diseaseName != null" >
-        disease_name = #{diseaseName,jdbcType=VARCHAR},
+      <if test="disease != null" >
+        disease_name = #{disease,jdbcType=VARCHAR},
       </if>
     </set>
     where disease_id = #{diseaseId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.edupractice.malaria.modules.common.pojo.Disease" >
     update disease
-    set disease_name = #{diseaseName,jdbcType=VARCHAR}
+    set disease_name = #{disease,jdbcType=VARCHAR}
     where disease_id = #{diseaseId,jdbcType=INTEGER}
   </update>
 </mapper>

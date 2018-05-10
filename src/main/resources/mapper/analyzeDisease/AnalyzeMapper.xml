@@ -3,8 +3,8 @@
 <mapper namespace="com.edupractice.malaria.modules.analyzeDisease.dao.AnalyzeMapper">
     <cache eviction="LRU" flushInterval="100000" size="1024" readOnly="true"/>
     <select id="selectDisease" resultType="java.lang.String">
-        SELECT DISTINCT(diseaseName) FROM disease
-        WHERE diseaseName NOT LIKE '%未分型%'
+        SELECT DISTINCT(disease) FROM disease
+        WHERE disease NOT LIKE '%未分型%'
     </select>
 
     <resultMap id="analyzeBySexMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AnalyzeRe">
@@ -34,7 +34,7 @@
 
     <resultMap id="analyzeByCareerMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AnalyzeRe">
         <result column="year" property="year"/>
-        <result column="diseaseName" property="disease"/>
+        <result column="disease" property="disease"/>
         <result column="career" property="attitude"/>
         <result column="patientNum" property="patientNum"/>
     </resultMap>
@@ -43,7 +43,7 @@
             resultMap="analyzeByCareerMap">
         SELECT
         cd.year AS year,
-        di.disease_name AS diseaseName,
+        di.disease_name AS disease,
         ca.career AS career,
         COUNT(ca.career) AS patientNum
         FROM card cd, disease di, career ca, patient pi, address_geocode ag

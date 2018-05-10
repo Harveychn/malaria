@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edupractice.malaria.modules.forecast.dao.ForecastMapper">
+    <cache eviction="LRU" flushInterval="100000" size="1024" readOnly="true"/>
+    <resultMap id="forecastPatientNumMap" type="com.edupractice.malaria.modules.forecast.pojo.ForecastRe">
+        <result column="year" property="year"/>
+        <result column="disease" property="disease"/>
+        <result column="patientNum" property="patientNum"/>
+    </resultMap>
+
+    <select id="forecastPatientNum" parameterType="java.lang.String"
+            resultMap="forecastPatientNumMap">
+        SELECT
+        cd.year AS year,
+        di.disease_name AS disease,
+        COUNT(ca.career) AS patientNum
+        FROM card cd, disease di, career ca, patient pi, address_geocode ag
+        <where>
+            AND cd.patient_id=pi.patient_id
+            AND cd.disease_id=di.disease_id
+            AND pi.career_id = ca.career_id
+            AND pi.address_id = ag.address_id
+            AND di.disease_name NOT LIKE '疟疾（未分型）'
+            <if test="'default'!=_parameter and ''!=_parameter">
+                AND ag.address LIKE '${_parameter}%'
+            </if>
+        </where>
+        GROUP BY cd.year, di.disease_name
+        ORDER BY cd.year, di.disease_name;
+    </select>
+</mapper>
