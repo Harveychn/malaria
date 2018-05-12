@@ -13,7 +13,6 @@ import java.util.List;
 public class RegressionServiceImpl implements RegressionService {
     @Resource
     private ForecastMapper forecastMapper;
-
     @Override
     public List<List<Integer>> regressionDataSet(String dataSource) throws Exception {
         List<ForecastRe> forecastReList = forecastMapper.forecastPatientNum(dataSource);
@@ -90,7 +89,7 @@ public class RegressionServiceImpl implements RegressionService {
         return equation;
     }
 
-    //y的取值
+    //函数值
     public double hypothesis(double theta0, double theta1, int xParameter) {
         return theta0 + theta1 * xParameter;
     }
