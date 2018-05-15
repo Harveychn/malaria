@@ -52,6 +52,7 @@ public class RegressionServiceImpl implements RegressionService {
         return dataSet;
     }
 
+    //线性回归
     // Linear Regression Algorithm
     // h = theta0 + theta1 * xParameter
     public List<Double> linearRegression(List<Integer> xAxis, List<Integer> yAxis) {

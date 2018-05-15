@@ -68,15 +68,17 @@ public class AddressResolveServiceImpl implements AddressResolveService {
     public void updateAddress() throws Exception {
 //        List<AddressGeocode> addressGeocodeList = addressResolveMapper.selectAddress();
 //        for(AddressGeocode addressGeocode:addressGeocodeList){
-        for (int i=859;i<10000;i++) {
+        for (int i=1;i<145968;i++) {
             AddressGeocode addressGeocode = addressResolveMapper.selectAddress(i);
+            if (addressGeocode==null)
+                continue;
             String address = addressGeocode.getAddress();
             Map<String, String> json = addressResolveService.getGeocoderLatitude(address);
             addressGeocode.setLng(json.get("lng"));
             addressGeocode.setLat(json.get("lat"));
             addressResolveMapper.updateAddress(addressGeocode);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(300);
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
