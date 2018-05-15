@@ -22,6 +22,10 @@ public class ClusterController {
     public
     @ResponseBody
     List<List<ClusterProvince>> Cluster(String diseaseName, String year, String attribute) throws Exception {
+
+        System.out.println(
+                diseaseName
+        );
         if (attribute.equals("职业")) {
             attribute = "Career";
         } else if (attribute.equals("年龄")) {

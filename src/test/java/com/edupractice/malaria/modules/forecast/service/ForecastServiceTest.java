@@ -19,8 +19,7 @@ public class ForecastServiceTest {
     @Test
     public void forecastTest() throws Exception {
         List<List<Integer>> listList = regressionService.regressionDataSet("云南");
-        regressionService.javaPython(listList);
-
+        List<List<Double>> param = regressionService.javaPython(listList);
         List<List<Double>> data = regressionService.getAxisByEquation(regressionService.javaPython(listList));
     }
 }
