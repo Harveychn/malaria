@@ -1,18 +1,27 @@
 package com.edupractice.malaria.modules.forecast.service.impl;
 
+import com.edupractice.malaria.modules.analyzeDisease.dao.ClusterMapper;
 import com.edupractice.malaria.modules.forecast.dao.ForecastMapper;
 import com.edupractice.malaria.modules.forecast.pojo.ForecastRe;
 import com.edupractice.malaria.modules.forecast.service.RegressionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RegressionServiceImpl implements RegressionService {
     @Resource
     private ForecastMapper forecastMapper;
+    @Resource
+    private ClusterMapper clusterMapper;
+
     @Override
     public List<List<Integer>> regressionDataSet(String dataSource) throws Exception {
         List<ForecastRe> forecastReList = forecastMapper.forecastPatientNum(dataSource);
@@ -92,5 +101,54 @@ public class RegressionServiceImpl implements RegressionService {
     //函数值
     public double hypothesis(double theta0, double theta1, int xParameter) {
         return theta0 + theta1 * xParameter;
+    }
+
+    public List<List<Double>> javaPython(List<List<Integer>> dataSet) {
+        List<List<Double>> equations = new ArrayList<>();
+        for (int i = 0; i < 3; ) {
+            List<Double> equation = new ArrayList<>();
+            String paramA = StringUtils.join(dataSet.get(i), ",");
+            String paramB = StringUtils.join(dataSet.get(i + 1), ",");
+            String[] arguments = new String[]{"D:\\Program\\Python36\\python.exe", "D:\\Workplace\\malaria\\src\\main\\java\\com\\edupractice\\malaria\\modules\\forecast\\linear.py", paramA, paramB};
+            try {
+                Process process = Runtime.getRuntime().exec(arguments);
+                BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                LineNumberReader input = new LineNumberReader(in);
+                String line = input.readLine();
+                String[] temp = line.split(" ");
+                equation.add(Double.parseDouble(temp[0]));
+                equation.add(Double.parseDouble(temp[1]));
+                input.close();
+                in.close();
+                process.waitFor();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            equations.add(equation);
+            i += 2;
+        }
+        return equations;
+    }
+
+    public List<List<Double>> getAxisByEquation(List<List<Double>> equation) throws Exception {
+        List<List<Integer>> yearList = new ArrayList<>();
+        List<String> yearList1Temp = clusterMapper.getAllYearByDisease("间日疟");
+        List<String> yearList2Temp = clusterMapper.getAllYearByDisease("恶性疟");
+        List<Integer> yearList1 = yearList1Temp.stream().map(Integer::parseInt).collect(Collectors.toList());
+        List<Integer> yearList2 = yearList2Temp.stream().map(Integer::parseInt).collect(Collectors.toList());
+        yearList.add(yearList1);
+        yearList.add(yearList2);
+
+        List<Double> yAxis1 = new ArrayList<>();
+        List<Double> yAxis2 = new ArrayList<>();
+        List<List<Double>> yAxis = new ArrayList<>();
+        yAxis.add(yAxis1);
+        yAxis.add(yAxis2);
+        for (int i = 0; i < yearList.size(); i++) {
+            for (int j = 0; j < yearList.get(i).size(); j++) {
+                yAxis.get(i).add(hypothesis(equation.get(i).get(1), equation.get(i).get(0), yearList1.get(j)));
+            }
+        }
+        return yAxis;
     }
 }
