@@ -1,6 +1,6 @@
 package com.edupractice.malaria.modules.forecast.service;
 
-import com.edupractice.malaria.modules.analyzeDisease.service.ClusterService;
+import com.edupractice.malaria.modules.forecast.pojo.ForecastChart;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,12 @@ public class ForecastServiceTest {
 
     @Test
     public void forecastTest() throws Exception {
-        List<List<Integer>> listList = regressionService.regressionDataSet("云南");
-        List<List<Double>> param = regressionService.javaPython(listList);
-        List<List<Double>> data = regressionService.getAxisByEquation(regressionService.javaPython(listList));
+        ForecastChart forecastChart = new ForecastChart();
+        double[][][] dataSet = regressionService.regressionEChartsDataSet("云南");
+        double[][] theta = regressionService.OLS(dataSet);
+        double[][][] forecastDataSet = regressionService.forecastDataSet(theta);
+        forecastChart.setDataSet(dataSet);
+        forecastChart.setTheta(theta);
+        forecastChart.setForecastDataSet(forecastDataSet);
     }
 }
