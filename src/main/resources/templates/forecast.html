@@ -30,10 +30,11 @@
             <div>
                 <h4 style="font-weight: 300;">数据来源（地区）:</h4>
                 <select id="dataSource" class="form-control">
-                    <option selected="selected">云南</option>
+                    <option>云南</option>
                     <option>河南</option>
                     <option>安徽</option>
                 </select>
+
             </div>
         </div>
 
@@ -55,20 +56,20 @@
         <div class="col-sm-9">
             <div class="tabs-container">
 
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="col-sm-6 active">
-                        <a href="#tab-1" aria-controls="tab-1" role="tab" data-toggle="tab" style="margin-left: -15px;">
-                            <h2 align="center">恶性疟</h2>
-                        </a>
-                    </li>
+                <!--<ul class="nav nav-tabs" role="tablist">-->
+                <!--<li role="presentation" class="col-sm-6 active">-->
+                <!--<a href="#tab-1" aria-controls="tab-1" role="tab" data-toggle="tab" style="margin-left: -15px;">-->
+                <!--<h2 align="center">恶性疟</h2>-->
+                <!--</a>-->
+                <!--</li>-->
 
-                    <li role="presentation" class="col-sm-6">
-                        <a href="#tab-2" aria-controls="tab-2" role="tab" data-toggle="tab"
-                           style="margin-right: -15px;">
-                            <h2 align="center">间日疟</h2>
-                        </a>
-                    </li>
-                </ul>
+                <!--<li role="presentation" class="col-sm-6">-->
+                <!--<a href="#tab-2" aria-controls="tab-2" role="tab" data-toggle="tab"-->
+                <!--style="margin-right: -15px;">-->
+                <!--<h2 align="center">间日疟</h2>-->
+                <!--</a>-->
+                <!--</li>-->
+                <!--</ul>-->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active" id="tab-1">
                         <div class="panel-body">
@@ -77,29 +78,29 @@
                             </div>
 
                             <div class="col-sm-12">
-                                <div id="province2ChartTab_1" style="height: 300px;"></div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <div id="province3ChartTab_1" style="height: 400px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="tab-2">
-                        <div class="panel-body">
-                            <div class="col-sm-12">
                                 <div id="province1ChartTab_2" style="height: 300px;"></div>
                             </div>
 
-                            <div class="col-sm-12">
-                                <div id="province2ChartTab_2" style="height: 300px;"></div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <div id="province3ChartTab_2" style="height: 400px;"></div>
-                            </div>
+                            <!--<div class="col-sm-12">-->
+                            <!--<div id="province3ChartTab_1" style="height: 400px;"></div>-->
+                            <!--</div>-->
                         </div>
                     </div>
+                    <!--<div role="tabpanel" class="tab-pane fade" id="tab-2">-->
+                    <!--<div class="panel-body">-->
+                    <!--<div class="col-sm-12">-->
+                    <!--<div id="province1ChartTab_2" style="height: 300px;"></div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-12">-->
+                    <!--<div id="province2ChartTab_2" style="height: 300px;"></div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-12">-->
+                    <!--<div id="province3ChartTab_2" style="height: 400px;"></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>
@@ -109,7 +110,7 @@
 <!--全局js-->
 <script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-<script type="text/javascript" src="../static/js/build/dist/echarts.js" th:src="@{/js/build/dist/echarts.js}"></script>
+<script type="text/javascript" src="../static/js/echarts.js" th:src="@{/js/echarts.js}"></script>
 <!--自定义js-->
 <script type="text/javascript" src="../static/js/myjs/forecastChart.js"
         th:src="@{/js/myjs/forecastChart.js}"></script>

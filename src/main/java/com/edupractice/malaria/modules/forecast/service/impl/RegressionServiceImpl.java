@@ -68,8 +68,9 @@ public class RegressionServiceImpl implements RegressionService {
     public double[][][] forecastDataSet(double[][] hypothesis) throws Exception {
         List<String> allYear = clusterMapper.getAllYear();
         //dataSet[0] 恶性疟, dataSet[1] 间日疟
-        double[][][] dataSet = new double[2][allYear.size()][2];
-        for (int i = 0; i < allYear.size(); i++) {
+        int len = allYear.size() + 5;
+        double[][][] dataSet = new double[2][len][2];
+        for (int i = 0; i < len; i++) {
             dataSet[0][i][0] = 2005 + i;
             dataSet[1][i][0] = 2005 + i;
             dataSet[0][i][1] = hypothesis(hypothesis[0][0], hypothesis[0][1], dataSet[0][i][0]);
