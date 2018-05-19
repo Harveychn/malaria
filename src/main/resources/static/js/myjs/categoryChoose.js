@@ -1,6 +1,3 @@
-/**
- * Created by 郑晓辉 on 2016/10/23.
- // */
 function handleClick1() {
     var category = $("#disease").text();
     console.log(category);
