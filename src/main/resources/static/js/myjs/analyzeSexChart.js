@@ -1,4 +1,4 @@
-并$(function () {
+$(function () {
     $.ajax({
         type: "get",
         url: "../district/getProvinces.do",
