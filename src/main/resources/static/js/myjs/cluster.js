@@ -21,9 +21,11 @@ $('#submitTerm').on('click', function (event) {
     var attribute = $('#attribute option:selected').val();
     var diseaseName = $('#diseaseName option:selected').val();
 
-
+    //创建Map实例
     var map = new BMap.Map("allMap");
+    //设置地图中心点和缩放级别
     map.centerAndZoom(new BMap.Point(116.403765, 39.914850), 5);
+    //启动鼠标滚轮操作
     map.enableScrollWheelZoom();
 
     $(function () {
