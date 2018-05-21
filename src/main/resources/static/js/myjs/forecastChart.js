@@ -28,14 +28,6 @@ $(function () {
 function markLineOption() {
     return {
         animation: false,
-        label: {
-            normal: {
-                formatter: 'y = 0.5 * x + 3',
-                textStyle: {
-                    align: 'right'
-                }
-            }
-        },
         lineStyle: {
             normal: {
                 type: 'solid'
@@ -54,12 +46,11 @@ function initChartOption() {
     return {
         title: {
             text: '',
+            subtext: '',
             x: 'Year',
             y: 'Patient Number'
         },
-        tooltip: {
-            formatter: '{c}'
-        },
+        tooltip: {},
         xAxis: [{
             gridIndex: 0,
             min: 2005,
@@ -123,13 +114,16 @@ function forecastAjaxFunction(dataSource, provinceChartTab_1, provinceChartTab_2
                 var minY = (dataSetMin < forecastDataSetMin) ? dataSetMin : forecastDataSetMin;
                 console.log(minY);
 
-                var equation = 'y = ' + theta[i][0] + '* x +' + theta[i][1];
+
+                var equation;
+                if (theta[i][1] >= 0) {
+                    equation = 'y = ' + theta[i][0] + '* x + ' + theta[i][1];
+                } else {
+                    equation = 'y = ' + theta[i][0] + '* x  ' + theta[i][1];
+
+                }
                 var eChartsOption = initChartOption();
                 var markLineOpt = markLineOption();
-                markLineOpt.label.normal.formatter = equation;
-                // markLineOpt.tooltip.formatter = equation;
-                // console.log(forecastDataSet[i][0]);
-                // console.log(forecastDataSet[i][forecastDataSet[i].length - 1]);
 
                 var temp = [[{
                     coord: forecastDataSet[i][0],
@@ -144,10 +138,11 @@ function forecastAjaxFunction(dataSource, provinceChartTab_1, provinceChartTab_2
 
                 forecastDataSet[i].push.apply(forecastDataSet[i], dataSet[i]);
 
+                eChartsOption.title.subtext = equation;
                 eChartsOption.series[0].data = forecastDataSet[i];
                 eChartsOption.series[0].markLine = markLineOpt;
-                eChartsOption.yAxis[0].max=Math.ceil(maxY);//向上取整
-                eChartsOption.yAxis[0].min=Math.floor(minY);//向下取整
+                eChartsOption.yAxis[0].max = Math.ceil(maxY);//向上取整
+                eChartsOption.yAxis[0].min = Math.floor(minY);//向下取整
 
                 if (i == 0) {
                     eChartsOption.title.text = "间日疟";
