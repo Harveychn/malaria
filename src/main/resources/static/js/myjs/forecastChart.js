@@ -28,14 +28,6 @@ $(function () {
 function markLineOption() {
     return {
         animation: false,
-        label: {
-            normal: {
-                formatter: 'y = 0.5 * x + 3',
-                textStyle: {
-                    align: 'right'
-                }
-            }
-        },
         lineStyle: {
             normal: {
                 type: 'solid'
@@ -54,12 +46,11 @@ function initChartOption() {
     return {
         title: {
             text: '',
+            subtext: '',
             x: 'Year',
             y: 'Patient Number'
         },
-        tooltip: {
-            formatter: '{c}'
-        },
+        tooltip: {},
         xAxis: [{
             gridIndex: 0,
             min: 2005,
@@ -100,7 +91,7 @@ function forecastAjaxFunction(dataSource, provinceChartTab_1, provinceChartTab_2
             var forecastDataSet = data.forecastDataSet;
             console.log(forecastDataSet);
             for (var i = 0; i < 2; i++) {
-                //求初始数据和预测数据的最大值和最小值
+
                 var dataSetMax = dataSet[i][0][1];
                 for (var j = 1; j < dataSet[i].length; j++) {
                     if (dataSetMax < dataSet[i][j][1]) dataSetMax = dataSet[i][j][1];
@@ -122,16 +113,18 @@ function forecastAjaxFunction(dataSource, provinceChartTab_1, provinceChartTab_2
                 }
                 var minY = (dataSetMin < forecastDataSetMin) ? dataSetMin : forecastDataSetMin;
                 console.log(minY);
-                //初始化
-                var equation = 'y = ' + theta[i][0] + '* x +' + theta[i][1];
+
+
+                var equation;
+                if (theta[i][1] >= 0) {
+                    equation = 'y = ' + theta[i][0] + '* x + ' + theta[i][1];
+                } else {
+                    equation = 'y = ' + theta[i][0] + '* x  ' + theta[i][1];
+
+                }
                 var eChartsOption = initChartOption();
                 var markLineOpt = markLineOption();
-                markLineOpt.label.normal.formatter = equation;
-                // markLineOpt.tooltip.formatter = equation;
-                // console.log(forecastDataSet[i][0]);
-                // console.log(forecastDataSet[i][forecastDataSet[i].length - 1]);
 
-                //改变直线起始点
                 var temp = [[{
                     coord: forecastDataSet[i][0],
                     symbol: 'none'
@@ -139,17 +132,17 @@ function forecastAjaxFunction(dataSource, provinceChartTab_1, provinceChartTab_2
                     coord: forecastDataSet[i][forecastDataSet[i].length - 1],
                     symbol: 'none'
                 }]];
+
                 markLineOpt.data = temp;
 
-                //合并初始数据和预测数据
+
                 forecastDataSet[i].push.apply(forecastDataSet[i], dataSet[i]);
 
+                eChartsOption.title.subtext = equation;
                 eChartsOption.series[0].data = forecastDataSet[i];
                 eChartsOption.series[0].markLine = markLineOpt;
-                //向上取整
-                eChartsOption.yAxis[0].max=Math.ceil(maxY);
-                //向下取整
-                eChartsOption.yAxis[0].min=Math.floor(minY);
+                eChartsOption.yAxis[0].max = Math.ceil(maxY);//向上取整
+                eChartsOption.yAxis[0].min = Math.floor(minY);//向下取整
 
                 if (i == 0) {
                     eChartsOption.title.text = "间日疟";
@@ -160,6 +153,7 @@ function forecastAjaxFunction(dataSource, provinceChartTab_1, provinceChartTab_2
                     provinceChartTab_2.setOption(eChartsOption);
                 }
             }
+
         },
         error: function (data) {
             console.error(data);
