@@ -22,7 +22,7 @@ $(document).ready(function(){
         var disease = $("#diseaseKind").val();
         var work = $("#workKind").val();
         var year = $("#year").val();
-        showmap();
+        getpoint(disease,work,year);
     })
 })
 
@@ -52,8 +52,10 @@ var mapdata = {
         },
         ],
     }
-    //后端点数据传入
-    $.ajax({
+    function getpoint(disease,work,year)
+    {
+        //后端点数据传入
+        $.ajax({
         type: "post",
         url: "",
         dataType: "json",
@@ -64,6 +66,7 @@ var mapdata = {
             console.error("出错了，返回的data：" + data);
         }
     });
+    }
   
 require([
 
@@ -169,7 +172,7 @@ require([
             ]  
         };  
 
-        var featureSet = new FeatureSet(data);  
+        var featureSet = new FeatureSet(mapdata);  
         var featureCollection = {  
             layerDefinition: layerDefinition,  
             featureSet: featureSet  
