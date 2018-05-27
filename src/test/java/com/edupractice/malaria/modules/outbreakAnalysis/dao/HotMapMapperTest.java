@@ -1,7 +1,9 @@
 package com.edupractice.malaria.modules.outbreakAnalysis.dao;
 
+import com.edupractice.malaria.modules.outbreakAnalysis.controller.HotMapController;
 import com.edupractice.malaria.modules.outbreakAnalysis.pojo.HotMapDTO;
 import com.edupractice.malaria.modules.outbreakAnalysis.pojo.HotMapVO;
+import com.edupractice.malaria.modules.outbreakAnalysis.service.HotMapService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 public class HotMapMapperTest {
     @Autowired
-    HotMapMapper hotMapMapper;
+    HotMapController hotMapController;
 
         @Test
         public void selectAddress() throws Exception {
@@ -28,7 +30,7 @@ public class HotMapMapperTest {
             hotMapDTO.setCareer(career);
             hotMapDTO.setDiseaseName(diseaseName);
             hotMapDTO.setYear(year);
-            hotMapVOList=hotMapMapper.selectAddress(hotMapDTO);
+            hotMapVOList=hotMapController.selectAddress(diseaseName,year,career);
             System.out.println(hotMapVOList);
         }
 

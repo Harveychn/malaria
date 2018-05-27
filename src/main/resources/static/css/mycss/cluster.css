@@ -1,0 +1,40 @@
+ul,li
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+html
+{
+    height: 100%;
+}
+
+body
+{
+    height: 100%;
+    margin: 0;
+    padding: 0px;
+    font-family: "微软雅黑";
+}
+
+#allMap
+{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+}
+.floatBox
+{
+    width: 12%;
+    height: auto;
+    border-radius: 5px;
+    position: fixed;
+    float: right;
+    top: 20%;
+    right: 30px;
+    z-index: 900;
+}
