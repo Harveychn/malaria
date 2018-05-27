@@ -8,7 +8,7 @@
         <result column="patientNum" property="patientNum"/>
     </resultMap>
 
-    <select id="forecastPatientNum" parameterType="java.lang.String"
+    <select id="forecastPatientNum" parameterType="String"
             resultMap="forecastPatientNumMap">
         SELECT
         cd.year AS year,

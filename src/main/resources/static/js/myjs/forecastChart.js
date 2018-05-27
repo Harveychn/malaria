@@ -138,18 +138,18 @@ function forecastAjaxFunction(dataSource, provinceChartTab_1, provinceChartTab_2
 
                 forecastDataSet[i].push.apply(forecastDataSet[i], dataSet[i]);
 
-                eChartsOption.title.subtext = equation;
+                // eChartsOption.title.subtext = equation;
                 eChartsOption.series[0].data = forecastDataSet[i];
                 eChartsOption.series[0].markLine = markLineOpt;
                 eChartsOption.yAxis[0].max = Math.ceil(maxY);//向上取整
                 eChartsOption.yAxis[0].min = Math.floor(minY);//向下取整
 
                 if (i == 0) {
-                    eChartsOption.title.text = "间日疟";
+                    eChartsOption.title.text = "间日疟"+"   "+equation;
                     provinceChartTab_1.setOption(eChartsOption);
                 }
                 else if (i == 1) {
-                    eChartsOption.title.text = "恶性疟";
+                    eChartsOption.title.text = "恶性疟"+"   "+equation;
                     provinceChartTab_2.setOption(eChartsOption);
                 }
             }
