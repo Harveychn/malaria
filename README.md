@@ -212,7 +212,7 @@
 
 	患者病例信息（数据信息年份【PK】、卡片ID【PK】、病例分类、病例分类2、发病日期、诊断时间、死亡日期、疾病名称、填卡医生、医生填卡日期、备注）
 
-		patient_cases_information(year【int】,cardID【int】,caseCategory1,caseCategory2,illDate,confirmDate,deathDate,diseaseName,fillCardDoc,fillCardDate,notes)--11
+		patient_cases_information(year【int】,cardID【int】,caseCategory1,caseCategory2,illDate,confirmDate,deathDate,disease,fillCardDoc,fillCardDate,notes)--11
 
 	病例报告信息（数据信息年份【PK】、卡片ID【PK】、报告单位地区编码、报告单位、单位类型、报告卡录入时间、录卡用户、录卡用户所属单位）
 

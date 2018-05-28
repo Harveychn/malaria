@@ -43,6 +43,7 @@ public class DownloadDBDataServiceImpl implements DownloadDBDataService {
     public HSSFWorkbook downloadData(DownloadParamVo downloadParamVo) throws Exception {
         List<Map<String, Object>> totalData = new ArrayList<>();
         List<String> selectedFields = downloadParamVo.getSelectedName();
+        //创建excel工作簿
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
         HSSFCellStyle cellStyle = hssfWorkbook.createCellStyle();
         if (downloadParamVo.getCategory().trim().equals("Disease")) {

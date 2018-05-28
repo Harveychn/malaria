@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.edupractice.malaria.modules.analyzeDisease.dao.AnalyzeMapper">
-
-    <select id="selectDisease" resultType="java.lang.String">
-        SELECT DISTINCT(diseaseName) FROM disease
-        WHERE diseaseName NOT LIKE '%未分型%'
+    <cache eviction="LRU" flushInterval="100000" size="1024" readOnly="true"/>
+    <select id="selectDisease" resultType="String">
+        SELECT DISTINCT(disease_name) FROM disease
+        WHERE disease_name NOT LIKE '%未分型%'
     </select>
 
-    <resultMap id="analyzeBySexMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.SexAnalyzeRe">
+    <resultMap id="analyzeBySexMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AnalyzeRe">
         <result column="dataYear" property="year"/>
-        <result column="disease" property="disease"/>
-        <result column="sex" property="sex"/>
+        <result column="diseaseName" property="disease"/>
+        <result column="sex" property="attitude"/>
         <result column="num" property="patientNum"/>
     </resultMap>
 
     <select id="analyzeBySex" parameterType="String"
             resultMap="analyzeBySexMap">
-        SELECT cd.year AS dataYear,di.disease_name AS disease,pi.sex AS sex,COUNT(pi.sex) AS num FROM card cd ,patient
+        SELECT cd.year AS dataYear,di.disease_name AS diseaseName,pi.sex AS sex,COUNT(pi.sex) AS num FROM card cd ,patient
         pi,disease di ,address_geocode ag
         <where>
             AND cd.patient_id=pi.patient_id
@@ -32,10 +32,10 @@
     </select>
 
 
-    <resultMap id="analyzeByCareerMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.CareerAnalyzeRe">
+    <resultMap id="analyzeByCareerMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AnalyzeRe">
         <result column="year" property="year"/>
         <result column="diseaseName" property="disease"/>
-        <result column="career" property="career"/>
+        <result column="career" property="attitude"/>
         <result column="patientNum" property="patientNum"/>
     </resultMap>
 
@@ -62,17 +62,17 @@
         ORDER BY cd.year, di.disease_name, ca.career
     </select>
 
-    <resultMap id="analyzeByAgeGroupMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AgeGroupAnalyzeRe">
+    <resultMap id="analyzeByAgeGroupMap" type="com.edupractice.malaria.modules.analyzeDisease.pojo.AnalyzeRe">
         <result column="year" property="year"/>
-        <result column="disease" property="disease"/>
-        <result column="ageGroup" property="ageGroup"/>
+        <result column="diseaseName" property="disease"/>
+        <result column="ageGroup" property="attitude"/>
         <result column="patientNum" property="patientNum"/>
     </resultMap>
 
     <select id="analyzeByAgeGroup" parameterType="String"
             resultMap="analyzeByAgeGroupMap">
         SELECT cd.year AS `year`,
-        di.disease_name AS disease,
+        di.disease_name AS diseaseName,
         CASE
         WHEN cd.year-YEAR(pi.birthday)+1 BETWEEN 0 and 9 THEN '0-9'
         WHEN cd.year-YEAR(pi.birthday)+1 BETWEEN 10 and 19 THEN '10-19'

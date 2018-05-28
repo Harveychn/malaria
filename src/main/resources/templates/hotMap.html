@@ -2,26 +2,96 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="header">
-	
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-		
-		<title>热力图功能</title>
-		
-		<!--自定义css-->
-		<link rel="stylesheet" type="text/css" href="../static/css/mycss/hotMap.css" th:href="@{/css/mycss/hotMap.css}" />
-		
-	</head>
-	<body>
-		
-		<section id="container"></section>
-		
-		<!--全局js-->
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=C1LOVvNRQHK32i52xzOFBkoNPetGDrxy"></script>
-		<script type="text/javascript" src="../static/js/plugins/baiduApi/Heatmap_min.js" th:src="@{/js/plugins/baiduApi/Heatmap_min.js}"></script>
-		<script type="text/javascript" src="../static/js/jquery-3.2.1.js" th:src="@{/js/jquery-3.2.1.js}"></script>
-		
-		<!--自定义js-->
-		<script type="text/javascript" src="../static/js/myjs/hotMap.js" th:src="@{/js/myjs/hotMap.js}"></script>
-	</body>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+	<title>热力图功能</title>
+
+	<!-- 图标引入 -->
+	<!--<link rel="shortcut icon" href="../static/pictures/malaria.ico" th:href="@{/static/pictures/malaria.ico}"/>-->
+
+	<!--引用css-->
+	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.23/esri/css/esri.css"/>
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="../static/css/font-awesome.min.css" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" href="../static/css/animate.css" type="text/css" th:href="@{/css/animate.css}"/>
+	<link rel="stylesheet" href="../static/css/style.css" type="text/css" th:href="@{/css/style.css}"/>
+	<!--自定义css-->
+	<link rel="stylesheet" type="text/css" href="../static/css/mycss/hotMap.css" th:href="@{/css/mycss/hotMap.css}" />
+</head>
+<body>
+
+<section id="fixDiv" class="floatBox">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div>
+				<h4 style="font-weight: 300;">疟疾类型:</h4>
+				<select id="diseaseName" class="form-control">
+					<option value="default" selected="selected"></option>
+					<!--<option value="diseaseKindAll">全部</option>-->
+					<option>间日疟</option>
+					<option>恶性疟</option>
+				</select>
+			</div>
+			<div>
+				<h4 style="font-weight: 300;">职业类型:</h4>
+				<select id="career" class="form-control">
+					<option value="default" selected="selected"></option>
+					<!--<option value="workKindAll">全部</option>-->
+					<option>民工</option>
+					<option>离退人员</option>
+					<option>农民</option>
+					<option>散居儿童</option>
+					<option>工人</option>
+					<option>商业服务</option>
+					<option>家务及待业</option>
+					<option>学生</option>
+					<option>干部职员</option>
+					<option>不详</option>
+					<option>其他</option>
+					<option>幼托儿童</option>
+					<option>餐饮食品业</option>
+					<option>公共场所服务员</option>
+					<option>牧民</option>
+					<option>教师</option>
+					<option>渔（船）民</option>
+					<option>海员及长途驾驶员</option>
+					<option>医务人员</option>
+					<option>保育员及保姆</option>
+					<option>其他：农民工</option>
+					<option>其他：外籍</option>
+					<option>其他：出国打工</option>
+					<option>其他：不详</option>
+					<option>其他：文化传媒</option>
+				</select>
+			</div>
+			<div>
+				<h4 style="font-weight: 300;">年份:</h4>
+				<select id="year" class="form-control">
+					<option value="default" selected="selected"></option>
+					<!--<option value="yearAll">全部</option>-->
+				</select>
+			</div>
+		</div>
+
+		<div class="panel-footer">
+			<div align="center">
+				<button id="searchBtn" class="btn-primary btn-lg">
+					查询
+				</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="map"></section>
+
+<!--全局js-->
+<script type="text/javascript" src="http://js.arcgis.com/3.23/"></script>
+<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+<!--自定义js-->
+<script type="text/javascript" src="../static/js/myjs/hotMap.js" th:src="@{/js/myjs/hotMap.js}"></script>
+</body>
 </html>

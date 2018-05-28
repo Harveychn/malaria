@@ -16,16 +16,16 @@ public class AnalyzeServiceImpl implements AnalyzeService {
 
     @Override
     public List<SexChart> analyzeBySex(String dataSource) throws Exception {
-        List<SexAnalyzeRe> sexAnalyzeReList = analyzeMapper.analyzeBySex(dataSource);
-        if (0 == sexAnalyzeReList.size()) {
+        List<AnalyzeRe> analyzeReList = analyzeMapper.analyzeBySex(dataSource);
+        if (0 == analyzeReList.size()) {
             return null;
         }
-        List<SexAnalyzeRe> diseaseC1 = new ArrayList<>();
+        List<AnalyzeRe> diseaseC1 = new ArrayList<>();
         List<String> yearListC1 = new ArrayList<>();
-        List<SexAnalyzeRe> diseaseC2 = new ArrayList<>();
+        List<AnalyzeRe> diseaseC2 = new ArrayList<>();
         List<String> yearListC2 = new ArrayList<>();
-        for (int count = 0; count < sexAnalyzeReList.size(); count++) {
-            SexAnalyzeRe current = sexAnalyzeReList.get(count);
+        for (int count = 0; count < analyzeReList.size(); count++) {
+            AnalyzeRe current = analyzeReList.get(count);
             if (current.getDisease().equals("恶性疟")) {
                 diseaseC1.add(current);
                 if (!yearListC1.contains(Integer.toString(current.getYear()))) {
@@ -47,12 +47,12 @@ public class AnalyzeServiceImpl implements AnalyzeService {
             valueListC1.add(i * sexList.size(), 0);
             valueListC1.add(i * sexList.size() + 1, 0);//valueList数值清零
             for (int j = 0; j < diseaseC1.size(); j++) {
-                SexAnalyzeRe current = diseaseC1.get(j);
+                AnalyzeRe current = diseaseC1.get(j);
                 if (yearListC1.get(i).equals(Integer.toString(current.getYear()))) {
-                    if (current.getSex().equals(sexList.get(0))) {
+                    if (current.getAttitude().equals(sexList.get(0))) {
                         valueListC1.set(i * sexList.size(), current.getPatientNum());
                     }
-                    if (current.getSex().equals(sexList.get(1))) {
+                    if (current.getAttitude().equals(sexList.get(1))) {
                         valueListC1.set(i * sexList.size() + 1, current.getPatientNum());
                     }
                 }//赋值对应年份患病男女数量
@@ -69,13 +69,13 @@ public class AnalyzeServiceImpl implements AnalyzeService {
             valueListC2.add(i * sexList.size(), 0);
             valueListC2.add(i * sexList.size() + 1, 0);//valueList数值清零
             for (int j = 0; j < diseaseC2.size(); j++) {
-                SexAnalyzeRe current = diseaseC2.get(j);
+                AnalyzeRe current = diseaseC2.get(j);
                 if (yearListC2.get(i).equals(Integer.toString(current.getYear()))) {
-                    if (current.getSex().equals(sexList.get(0))) {
+                    if (current.getAttitude().equals(sexList.get(0))) {
                         valueListC2.set(i * sexList.size(), current.getPatientNum());
                         continue;
                     }
-                    if (current.getSex().equals(sexList.get(1))) {
+                    if (current.getAttitude().equals(sexList.get(1))) {
                         valueListC2.set(i * sexList.size() + 1, current.getPatientNum());
                     }
                 }//赋值对应年份患病男女数量
@@ -95,17 +95,17 @@ public class AnalyzeServiceImpl implements AnalyzeService {
 
     @Override
     public List<CareerChart> analyzeByCareer(String dataSource) throws Exception {
-        List<CareerAnalyzeRe> careerAnalyzeReList = analyzeMapper.analyzeByCareer(dataSource);
+        List<AnalyzeRe> careerAnalyzeReList = analyzeMapper.analyzeByCareer(dataSource);
         if (0 >= careerAnalyzeReList.size()) {
             return null;
         }
         List<CareerChart> careerChartList = new ArrayList<>();
-        List<CareerAnalyzeRe> diseaseC1 = new ArrayList<>();
-        List<CareerAnalyzeRe> diseaseC2 = new ArrayList<>();
+        List<AnalyzeRe> diseaseC1 = new ArrayList<>();
+        List<AnalyzeRe> diseaseC2 = new ArrayList<>();
         List<String> yearListC1 = new ArrayList<>();
         List<String> yearListC2 = new ArrayList<>();
         for (int i = 0; i < careerAnalyzeReList.size(); i++) {
-            CareerAnalyzeRe current = careerAnalyzeReList.get(i);
+            AnalyzeRe current = careerAnalyzeReList.get(i);
             if ("恶性疟".equals(current.getDisease().trim())) {
                 diseaseC1.add(current);
                 if (!yearListC1.contains(Integer.toString(current.getYear()))) {
@@ -127,7 +127,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
             for (int j = 0; j < diseaseC1.size(); j++) {
                 if (yearListC1.get(i).equals(Integer.toString(diseaseC1.get(j).getYear()))) {
                     valueCurrent.add(diseaseC1.get(j).getPatientNum());
-                    careerCurrent.add(diseaseC1.get(j).getCareer());
+                    careerCurrent.add(diseaseC1.get(j).getAttitude());
                 }
             }
             careerList_1.add(careerCurrent);
@@ -139,6 +139,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
         careerChartC1.setValuesList(valueList_1);
         careerChartC1.setCareerList(careerList_1);
         careerChartList.add(careerChartC1);
+
         List<List> valueList_2 = new ArrayList<>();
         List<List> careerList_2 = new ArrayList<>();
         for (int i = 0; i < yearListC2.size(); i++) {
@@ -146,7 +147,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
             List<Integer> valueCurrent = new ArrayList<>();
             for (int j = 0; j < diseaseC2.size(); j++) {
                 if (yearListC2.get(i).equals(Integer.toString(diseaseC2.get(j).getYear()))) {
-                    careerCurrent.add(diseaseC2.get(j).getCareer());
+                    careerCurrent.add(diseaseC2.get(j).getAttitude());
                     valueCurrent.add(diseaseC2.get(j).getPatientNum());
                     continue;
                 }
@@ -165,17 +166,17 @@ public class AnalyzeServiceImpl implements AnalyzeService {
 
     @Override
     public List<AgeGroupChart> analyzeByAgeGroup(String dataSource) throws Exception {
-        List<AgeGroupAnalyzeRe> ageGroupAnalyzeReList = analyzeMapper.analyzeByAgeGroup(dataSource);
+        List<AnalyzeRe> ageGroupAnalyzeReList = analyzeMapper.analyzeByAgeGroup(dataSource);
         if (0 >= ageGroupAnalyzeReList.size()) {
             return null;
         }
         List<AgeGroupChart> ageGroupChartList = new ArrayList<>();
-        List<AgeGroupAnalyzeRe> diseaseC1 = new ArrayList<>();
-        List<AgeGroupAnalyzeRe> diseaseC2 = new ArrayList<>();
+        List<AnalyzeRe> diseaseC1 = new ArrayList<>();
+        List<AnalyzeRe> diseaseC2 = new ArrayList<>();
         List<String> yearListC1 = new ArrayList<>();
         List<String> yearListC2 = new ArrayList<>();
         for (int i = 0; i < ageGroupAnalyzeReList.size(); i++) {
-            AgeGroupAnalyzeRe current = ageGroupAnalyzeReList.get(i);
+            AnalyzeRe current = ageGroupAnalyzeReList.get(i);
             if ("恶性疟".equals(current.getDisease().trim())) {
                 diseaseC1.add(current);
                 if (!yearListC1.contains(Integer.toString(current.getYear()))) {
@@ -197,7 +198,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
             for (int j = 0; j < diseaseC1.size(); j++) {
                 if (yearListC1.get(i).equals(Integer.toString(diseaseC1.get(j).getYear()))) {
                     valueCurrent.add(diseaseC1.get(j).getPatientNum());
-                    ageGroupCurrent.add(diseaseC1.get(j).getAgeGroup());
+                    ageGroupCurrent.add(diseaseC1.get(j).getAttitude());
                 }
             }
             ageGroupList_1.add(ageGroupCurrent);
@@ -217,7 +218,7 @@ public class AnalyzeServiceImpl implements AnalyzeService {
             List<Integer> valueCurrent = new ArrayList<>();
             for (int j = 0; j < diseaseC2.size(); j++) {
                 if (yearListC2.get(i).equals(Integer.toString(diseaseC2.get(j).getYear()))) {
-                    ageGroupCurrent.add(diseaseC2.get(j).getAgeGroup());
+                    ageGroupCurrent.add(diseaseC2.get(j).getAttitude());
                     valueCurrent.add(diseaseC2.get(j).getPatientNum());
                     continue;
                 }
@@ -235,48 +236,3 @@ public class AnalyzeServiceImpl implements AnalyzeService {
     }
 
 }
-//        List<Map<SexViewKey,Integer>> sexChartData = new ArrayList<>();
-//        SexViewKey sexViewKey = null;
-//        SexAnalyzeRe current = null;
-//        Map<SexViewKey,Integer> sexViewKeyMap = null;
-//        for (int index = 0; index < sexAnalyzeReList.size(); index++) {
-//            sexViewKey = new SexViewKey();
-//            current = sexAnalyzeReList.get(index);
-//            sexViewKeyMap= new HashMap<>();
-//            sexViewKey.setDisease(current.getDisease());
-//            sexViewKey.setDataYear(Integer.toBinaryString(current.getYear()));
-//            sexViewKey.setSex(current.getSex());
-//            sexViewKeyMap.put(sexViewKey,current.getPatientNum());
-//            sexChartData.add(index,sexViewKeyMap);
-//        }
-//        return sexChartData;
-
-
-//        Map<String, List<CareerAnalyzeRe>> careerResultMap = new HashMap<>();
-//        //此处已经去掉“不详”的职业类别数据
-//        Set<String> diseaseNames = analyzeMapper.selectDisease();
-//        for (String s : diseaseNames) {
-//            analyzeVo.setDiseaseName(s);
-////            careerAnalyzeReList = analyzeMapper.analyzeByCareer(analyzeVo);
-////            careerResultMap.put(s, careerAnalyzeReList);
-//        }
-//        return careerResultMap;
-
-
-//        List<Integer> ageGroupPop = new ArrayList<Integer>();
-//        for (int i = 0; i < 10; i++) {
-//            analyzeVo.setVirtualAgeDownLimit(i * 10);
-//            ageGroupPop.add(i, analyzeMapper.analyzeByAgeGroup(analyzeVo));
-//        }
-//        AgeGroupAnalyzeRe ageGroupAnalyzeRe = new AgeGroupAnalyzeRe();
-//        ageGroupAnalyzeRe.setAgeGroup0_9Pop(ageGroupPop.get(0));
-//        ageGroupAnalyzeRe.setAgeGroup10_19Pop(ageGroupPop.get(1));
-//        ageGroupAnalyzeRe.setAgeGroup20_29Pop(ageGroupPop.get(2));
-//        ageGroupAnalyzeRe.setAgeGroup30_39Pop(ageGroupPop.get(3));
-//        ageGroupAnalyzeRe.setAgeGroup40_49Pop(ageGroupPop.get(4));
-//        ageGroupAnalyzeRe.setAgeGroup50_59Pop(ageGroupPop.get(5));
-//        ageGroupAnalyzeRe.setAgeGroup60_69Pop(ageGroupPop.get(6));
-//        ageGroupAnalyzeRe.setAgeGroup70_79Pop(ageGroupPop.get(7));
-//        ageGroupAnalyzeRe.setAgeGroup80_89Pop(ageGroupPop.get(8));
-//        ageGroupAnalyzeRe.setAgeGroup90_99Pop(ageGroupPop.get(9));
-//        return ageGroupAnalyzeRe;

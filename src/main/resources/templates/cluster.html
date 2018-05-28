@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--引用css-->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" href="../static/css/animate.css" type="text/css" th:href="@{/css/animate.css}"/>
+    <link rel="stylesheet" href="../static/css/style.css" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/mycss/cluster.css" th:href="@{/css/mycss/cluster.css}" />
+</head>
+<body>
+<section id="fixDiv" class="floatBox">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div>
+                <h4 style="font-weight: 300;">疟疾类型:</h4>
+                <select id="diseaseName" class="form-control">
+                    <option value="default" selected="selected"></option>
+                    <!--<option value="diseaseKindAll">全部</option>-->
+                    <option>间日疟</option>
+                    <option>恶性疟</option>
+                </select>
+            </div>
+            <div>
+                <h4 style="font-weight: 300;">年份:</h4>
+                <select id="year" class="form-control">
+                    <option value="default" selected="selected"></option>
+                    <!--<option value="yearAll">全部</option>-->
+                </select>
+            </div>
+            <div>
+                <h4 style="font-weight: 300;">聚类条件:</h4>
+                <select id="attribute" class="form-control">
+                    <option value="default" selected="selected"></option>
+                    <!--<option value="workKindAll">全部</option>-->
+                    <option>职业</option>
+                    <option>年龄</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <div align="center">
+                <button id="submitTerm" class="btn-primary btn-lg">
+                    查询
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="allMap"></div>
+
+<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=r7HZ9G3PvvzKqG7uhjLXRbRG99gfRGvO"
+        th:src="@{'http://api.map.baidu.com/api?v=2.0&ak=r7HZ9G3PvvzKqG7uhjLXRbRG99gfRGvO'}"></script>
+<script type="text/javascript" src="../static/js/myjs/cluster.js"
+        th:src="@{/js/myjs/cluster.js}"></script>
+
+</body>
+</html>

@@ -19,13 +19,13 @@
     user_id, user_name, user_password, user_real_name, user_email, user_phone, user_unit, 
     user_role, is_checked, join_date
   </sql>
-  <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByEmail" resultMap="BaseResultMap" parameterType="String" >
     select 
     <include refid="Base_Column_List" />
     from user
     where user_email = #{userEmail,jdbcType=CHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="Integer" >
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>

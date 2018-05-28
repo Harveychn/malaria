@@ -1,25 +1,16 @@
-package com.edupractice.malaria.modules.analyzeDisease.pojo;
+package com.edupractice.malaria.modules.forecast.pojo;
 
-public class SexAnalyzeRe {
-    private int year;
-    private String sex;
+public class ForecastRe {
+    private String year;
     private String disease;
     private int patientNum;
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
     }
 
     public String getDisease() {

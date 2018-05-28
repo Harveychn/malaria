@@ -1,9 +1,9 @@
 package com.edupractice.malaria.modules.analyzeDisease.pojo;
 
-public class AgeGroupAnalyzeRe {
+public class AnalyzeRe {
     private int year;
     private String disease;
-    private String ageGroup;
+    private String attitude;
     private int patientNum;
 
     public int getYear() {
@@ -22,12 +22,12 @@ public class AgeGroupAnalyzeRe {
         this.disease = disease;
     }
 
-    public String getAgeGroup() {
-        return ageGroup;
+    public String getAttitude() {
+        return attitude;
     }
 
-    public void setAgeGroup(String ageGroup) {
-        this.ageGroup = ageGroup;
+    public void setAttitude(String attitude) {
+        this.attitude = attitude;
     }
 
     public int getPatientNum() {

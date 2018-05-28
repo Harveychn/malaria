@@ -21,7 +21,7 @@
         user_role, is_checked, join_date
     </sql>
 
-    <select id="selectCheckUser" resultMap="BaseResultMapExpand" parameterType="java.lang.String">
+    <select id="selectCheckUser" resultMap="BaseResultMapExpand" parameterType="String">
         select
         <include refid="Base_Column_List_expand" />
         from user

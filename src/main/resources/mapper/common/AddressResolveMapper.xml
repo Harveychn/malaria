@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edupractice.malaria.modules.common.dao.AddressResolveMapper">
+    <select id="selectAddress" parameterType="java.lang.Integer" resultType="com.edupractice.malaria.modules.common.pojo.AddressGeocode">
+        SELECT address_id,address FROM address_geocode where address_id=#{_parameter}
+        AND address LIKE '贵州省%';
+    </select>
+    <update id="updateAddress" parameterType="com.edupractice.malaria.modules.common.pojo.AddressGeocode">
+        UPDATE address_geocode set lng=#{lng},lat=#{lat} where address_id=#{addressId};
+    </update>
+</mapper>

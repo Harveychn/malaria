@@ -75,7 +75,7 @@
                     </a>
                 </li>
 
-                <!--<li>
+                <li>
                     <a th:href="@{#}">
                         <i class="fa fa fa-area-chart"></i>
                         <span class="nav-label">统计预测</span>
@@ -83,16 +83,19 @@
                     </a>
 
                     <ul class="nav nav-second-level">
-                        <li></li>
+                        <li>
+                            <a th:href="@{/cluster/clusterView}" class="J_menuItem">聚类展示</a>
+                            <a th:href="@{/forecast/forecastView}" class="J_menuItem">预测分析</a>
+                        </li>
                     </ul>
                 </li>
 
-                <li>
-                    <a class="J_menuItem" href="">
-                        <i class="fa fa fa-calculator"></i>
-                        <span class="nav-label">执行计算</span>
-                    </a>
-                </li>-->
+                <!--<li>-->
+                    <!--<a class="J_menuItem" href="">-->
+                        <!--<i class="fa fa fa-calculator"></i>-->
+                        <!--<span class="nav-label">执行计算</span>-->
+                    <!--</a>-->
+                <!--</li>&ndash;&gt;-->
 
             </ul>
         </div>
