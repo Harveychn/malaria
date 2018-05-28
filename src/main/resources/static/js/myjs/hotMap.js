@@ -1,7 +1,6 @@
 var map;
 var featurelayer;
 var count = 1;
-var layer;
 //获取后台年份数据
 $(function () {
     $.ajax({
