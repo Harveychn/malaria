@@ -1,7 +1,6 @@
 var map;
 var featurelayer;
 var count = 1;
-var layer;
 //获取后台年份数据
 $(function () {
     $.ajax({
@@ -101,15 +100,12 @@ function getMapLayer(esriBasemaps, Map, Color, HeatmapRenderer, FeatureLayer, Fe
         minPixelIntensity: 1
     });
 
-
-        if(count!=1){
-            map.removeLayer(featurelayer);
-        }
-        count++;
-        featurelayer.setRenderer(heatmaprenderer);
-        map.addLayer(featurelayer);
-
-
+    if (count != 1) {
+        map.removeLayer(featurelayer);
+    }
+    count++;
+    featurelayer.setRenderer(heatmaprenderer);
+    map.addLayer(featurelayer);
 }
 
 require(
