@@ -1,4 +1,7 @@
 var map;
+var featurelayer;
+var count = 1;
+var layer;
 //获取后台年份数据
 $(function () {
     $.ajax({
@@ -43,41 +46,10 @@ var mapdata = {
         },
     ],
     //所含有的集合要素集
-    "features": [
-        // {
-        //     "attributes": {
-        //         "FID": 2,
-        //         "COUNT": 1
-        //     },
-        //     "geometry": {
-        //         "x": 120.3420918,
-        //         "y": 30.3151956
-        //     }
-        // },
-        // {
-        //     "attributes": {
-        //         "FID": 10,
-        //         "COUNT": 10
-        //     },
-        //     "geometry": {
-        //         "x": 120.3420,
-        //         "y": 30.315
-        //     }
-        // },
-        // {
-        //     "attributes": {
-        //         "FID": 30,
-        //         "COUNT": 1
-        //     },
-        //     "geometry": {
-        //         "x": 120.34,
-        //         "y": 31.3
-        //     }
-        // }
-    ]
+    "features": []
 }
 
-function getAdd(esriBasemaps, Map, Color, HeatmapRenderer, FeatureLayer, FeatureSet) {
+function mapInit(esriBasemaps, Map) {
     esriBasemaps.delorme = {
         baseMapLayers: [
             //中国矢量地图服务
@@ -94,7 +66,9 @@ function getAdd(esriBasemaps, Map, Color, HeatmapRenderer, FeatureLayer, Feature
         zoom: 5,
         logo: false
     });
+}
 
+function getMapLayer(esriBasemaps, Map, Color, HeatmapRenderer, FeatureLayer, FeatureSet) {
     var layerDefinition = {
         "geometryType": "esriGeometryPoint",
         "fields": [
@@ -116,22 +90,26 @@ function getAdd(esriBasemaps, Map, Color, HeatmapRenderer, FeatureLayer, Feature
         layerDefinition: layerDefinition,
         featureSet: featureSet
     };
-    var featurelayer = new FeatureLayer(featureCollection);
+    featurelayer = new FeatureLayer(featureCollection);
+    featurelayer.id = "point";
 
     var heatmaprenderer = new HeatmapRenderer({
         field: "COUNT",
         colors: ["rgba(0, 0, 255, 0)", "rgb(255, 255, 0)", "rgb(255,110 ,0 )", "rgb(255, 0, 0)"],
-        blurRadius: 15,
+        blurRadius: 12,
         maxPixelIntensity: 75,
         minPixelIntensity: 1
     });
-    // featurelayer.setRenderer(heatmaprenderer);
-    // map.addLayer(featurelayer);
-    map.on("load", function () {
-            featurelayer.setRenderer(heatmaprenderer);
-            map.addLayer(featurelayer);
+
+
+        if(count!=1){
+            map.removeLayer(featurelayer);
         }
-    )
+        count++;
+        featurelayer.setRenderer(heatmaprenderer);
+        map.addLayer(featurelayer);
+
+
 }
 
 require(
@@ -144,13 +122,16 @@ require(
         "esri/tasks/FeatureSet"
     ],
     function (esriBasemaps, Map, Color, HeatmapRenderer, FeatureLayer, FeatureSet) {
+        mapInit(esriBasemaps, Map);
         $('#searchBtn').on('click', function () {
+
             var year = $('#year option:selected').val();
             var diseaseName = $('#diseaseName option:selected').val();
             var career = $('#career option:selected').val();
-
             getAddress(diseaseName, year, career);
-            setTimeout(function (){getAdd(esriBasemaps, Map, Color, HeatmapRenderer, FeatureLayer, FeatureSet);},5000);
+            setTimeout(function () {
+                getMapLayer(esriBasemaps, Map, Color, HeatmapRenderer, FeatureLayer, FeatureSet);
+            }, 5000);
         });
     }
 );
@@ -203,7 +184,7 @@ function getAddress(diseaseName, year, career) {
                             {
                                 "attributes": {
                                     "FID": parseInt(data[i].addressID),
-                                    "COUNT": 10
+                                    "COUNT": 3
                                 },
                                 "geometry": {
                                     "x": parseFloat(data[i].lng),
