@@ -1,34 +1,41 @@
-ul,li
-{
+ul, li {
     list-style: none;
     margin: 0;
     padding: 0;
     float: left;
 }
 
-html
-{
+html {
     height: 100%;
 }
 
-body
-{
+body {
     height: 100%;
     margin: 0;
     padding: 0px;
     font-family: "微软雅黑";
 }
+.career{
+    background-color: #FFFFFF;
+    z-index: 1;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    height: 300px;
+    width: 400px;
+    border: 1px solid #aaa;
+}
 
-#allMap
-{
+
+#allMap {
     height: 100%;
     width: 100%;
     border-radius: 10px;
     padding: 0;
     margin: 0;
 }
-.floatBox
-{
+
+.floatBox {
     width: 12%;
     height: auto;
     border-radius: 5px;
