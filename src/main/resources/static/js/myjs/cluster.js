@@ -15,6 +15,7 @@ $(function () {
     });
 });
 
+$(".attribute").hide();
 
 $('#submitTerm').on('click', function (event) {
     var year = $('#year option:selected').val();
@@ -26,6 +27,7 @@ $('#submitTerm').on('click', function (event) {
     map.centerAndZoom(new BMap.Point(116.403765, 39.914850), 5);
     map.enableScrollWheelZoom();
 
+    $(".attribute").show();
     $(function () {
         $.ajax({
             type: "post",
@@ -39,7 +41,7 @@ $('#submitTerm').on('click', function (event) {
             success:
                 function (data) {
                     for (var i = 0; i < data.length; i++) {
-                        var color = ["#8EE5EE", "#CDAD00", "#FF7F00", "#BF3EFF"];
+                        var color = ["#9951FF", "#FFD933", "#CEFC86", "#FF6666"];
                         console.log(data[i]);
                         for (var j = 0; j < data[i].length; j++) {
                             getBoundary(data[i][j], color[i]);
@@ -67,16 +69,18 @@ $('#submitTerm').on('click', function (event) {
                     fillColor: color
                 });//建立多边形覆盖物
                 ply.addEventListener("click",function () {
-                    var text=data.province+' \n ';
+                    var text1=data.province;
+                    document.getElementById("province").innerText = text1;
+                    var text2="";
                     var temp=0;
                     for(var key in data.patientNum){
-                        text+= key + ":" + data.patientNum[key]+" ";
+                        text2+= key + ":" + data.patientNum[key]+" ";
                         temp++;
                         if(temp%3==0){
-                            text+=' \n ';
+                            text2+=' \n ';
                         }
                     }
-                    document.getElementById("careerDisplay").innerText = text;
+                    document.getElementById("attributeDisplay").innerText = text2;
                 });
                 // ply.addEventListener("mouseout",function () {
                 //     var text="";
