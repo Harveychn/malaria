@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/home")
 public class PageController {
 
-    @RequestMapping("firstPage")
+    @RequestMapping("/firstPage")
     public ModelAndView firstPage(){
         return new ModelAndView("first-page");
     }

@@ -22,7 +22,6 @@ $('#submitTerm').on('click', function (event) {
     var attribute = $('#attribute option:selected').val();
     var diseaseName = $('#diseaseName option:selected').val();
 
-
     var map = new BMap.Map("allMap");
     map.centerAndZoom(new BMap.Point(116.403765, 39.914850), 5);
     map.enableScrollWheelZoom();
@@ -82,13 +81,8 @@ $('#submitTerm').on('click', function (event) {
                     }
                     document.getElementById("attributeDisplay").innerText = text2;
                 });
-                // ply.addEventListener("mouseout",function () {
-                //     var text="";
-                //     document.getElementById("careerDisplay").innerText = text;
-                // });
                 map.addOverlay(ply);  //添加覆盖物
             }
         });
-
     }
 });
